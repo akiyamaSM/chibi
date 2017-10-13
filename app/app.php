@@ -2,7 +2,9 @@
 
 namespace App;
 
-use HttpRouteNotFoundException;
+
+use App\Exceptions\ControllerNotFound;
+use App\Exceptions\ControllersMethodNotFound;
 
 class App{
 
@@ -49,15 +51,38 @@ class App{
     {
         $router = $this->container->router;
         $router->setPath($_SERVER['PATH_INFO'] ?$_SERVER['PATH_INFO']: '/');
-        if(!$router->has()){
-            throw new HttpRouteNotFoundException("Http Route Not found");
-        }
         $response = $router->getResponse();
         $this->process($response);
     }
 
+    /**
+     * Process the Handler
+     *
+     * @param $callable
+     * @return mixed
+     * @throws ControllerNotFound
+     * @throws ControllersMethodNotFound
+     */
     public function process($callable)
     {
-        return $callable();
+        if(is_callable($callable)){
+            return $callable();
+        }
+        if(is_string($callable)){
+            $array = explode('@', $callable);
+            $class = $array[0];
+
+            if(! class_exists($class)){
+                throw new ControllerNotFound("{$class} Controller Not Found");
+            }
+
+            $caller = new $class;
+            $method = $array[1];
+            if(!method_exists($caller, $method)){
+                throw new ControllersMethodNotFound("{$method} Not Found in the {$class} Controller");
+            }
+
+            call_user_func([$caller, $method]);
+        }
     }
 }

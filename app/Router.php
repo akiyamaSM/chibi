@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App;
 
-
-use HttpMethodNotAllowedException;
+use App\Exceptions\HttpMethodNotAllowedException;
+use App\Exceptions\HttpRouteNotFoundException;
 
 class Router {
 
@@ -19,6 +18,7 @@ class Router {
         $this->path = $path;
         return $this;
     }
+
     public function addRoute($uri, $handler, $methods = ['GET'])
     {
         $this->routes[$uri] = $handler;
@@ -27,6 +27,10 @@ class Router {
 
     public function getResponse()
     {
+        if(!$this->has()){
+            throw new HttpRouteNotFoundException("Http Route Not found");
+        }
+
         if(!in_array($_SERVER['REQUEST_METHOD'], $this->methods[$this->path])){
             throw new HttpMethodNotAllowedException("Method not allowed");
         }
