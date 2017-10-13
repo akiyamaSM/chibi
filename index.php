@@ -4,4 +4,24 @@ require 'vendor/autoload.php';
 
 $app = new App\App();
 
-var_dump($app);
+$container = $app->getContainer();
+
+$container['config']= function (){
+  return [
+      'db_driver' => 'mysql',
+      'db_host' => 'localhost',
+      'db_name' => 'chibi',
+      'db_user' => 'root',
+      'db_password' => '',
+  ];
+};
+
+$container['db']= function($container){
+    return new PDO(
+        $container->config['db_driver'].':dbname='.$container->config['db_name'].';host='.$container->config['db_host'],
+        $container->config['db_user'],
+        $container->config['db_password']
+    );
+};
+
+$container->db;
