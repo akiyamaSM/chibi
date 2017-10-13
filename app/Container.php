@@ -9,6 +9,13 @@ class Container implements ArrayAccess {
     protected $items = [];
     protected $cache = [];
 
+    public function __construct(array $items = [])
+    {
+        array_walk($items, function ($item, $key){
+            $this->offsetSet($key, $item);
+        }, array_keys($items));
+    }
+
     public function offsetGet($offset)
     {
         if(!$this->has($offset)){
@@ -45,8 +52,8 @@ class Container implements ArrayAccess {
         return $this->offsetExists($offset);
     }
 
-    public function __get($value)
+    public function __get($offset)
     {
-        return $this->offsetGet($value);
+        return $this->offsetGet($offset);
     }
 }

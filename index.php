@@ -24,4 +24,8 @@ $container['db']= function($container){
     );
 };
 
-$container->db;
+$app->get('/home', function(){
+    echo "Home";
+});
+
+$app->run();
