@@ -27,5 +27,12 @@ $container['db']= function($container){
 $app->get('/home', function(){
     echo "Home";
 });
+$app->post('/homes', function(){
+    echo "Homes";
+});
+$app->map('/users', function(){
+    echo "users";
+}, ['GET', 'POST']);
+
 
 $app->run();

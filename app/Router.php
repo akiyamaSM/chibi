@@ -4,9 +4,13 @@
 namespace App;
 
 
+use HttpMethodNotAllowedException;
+
 class Router {
 
     protected $routes = [];
+
+    protected $methods = [];
 
     protected $path;
 
@@ -15,13 +19,22 @@ class Router {
         $this->path = $path;
         return $this;
     }
-    public function addRoute($uri, $handler)
+    public function addRoute($uri, $handler, $methods = ['GET'])
     {
         $this->routes[$uri] = $handler;
+        $this->methods[$uri] = $methods;
     }
 
     public function getResponse()
     {
+        if(!in_array($_SERVER['REQUEST_METHOD'], $this->methods[$this->path])){
+            throw new HttpMethodNotAllowedException("Method not allowed");
+        }
         return $this->routes[$this->path];
+    }
+
+    public function has()
+    {
+        return isset($this->routes[$this->path]);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use HttpRouteNotFoundException;
+
 class App{
 
     protected $container;
@@ -30,13 +32,26 @@ class App{
 
     public function get($uri, $handler)
     {
-        $this->container->router->addRoute($uri, $handler);
+        $this->container->router->addRoute($uri, $handler, ['GET']);
+    }
+
+    public function post($uri, $handler)
+    {
+        $this->container->router->addRoute($uri, $handler, ['POST']);
+    }
+
+    public function map($uri, $handler, $methods = ['GET'])
+    {
+        $this->container->router->addRoute($uri, $handler, $methods);
     }
 
     public function run()
     {
         $router = $this->container->router;
         $router->setPath($_SERVER['PATH_INFO'] ?$_SERVER['PATH_INFO']: '/');
+        if(!$router->has()){
+            throw new HttpRouteNotFoundException("Http Route Not found");
+        }
         $response = $router->getResponse();
         $this->process($response);
     }
