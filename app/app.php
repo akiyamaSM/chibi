@@ -15,14 +15,17 @@ class App{
      */
     public function __construct()
     {
-        $this->container = new Container([
+        $this->container = new Container(array(
             'router' => function(){
                 return new Router;
             },
             'response' => function(){
                 return new Response();
+            },
+            'request' => function(){
+                return new Request();
             }
-        ]);
+        ));
     }
 
     /**
@@ -64,8 +67,9 @@ class App{
     public function process($callable)
     {
         $response = $this->container->response;
+        $request = $this->container->request;
         if(is_callable($callable)){
-            return $callable($response);
+            return $callable($request, $response);
         }
         if(is_string($callable)){
             $array = explode('@', $callable);
@@ -81,13 +85,13 @@ class App{
                 throw new ControllersMethodNotFound("{$method} Not Found in the {$class} Controller");
             }
 
-            return call_user_func([$caller, $method], $response);
+            return call_user_func([$caller, $method], $request, $response);
         }
     }
 
     /**
      * Echo out the response
-     * 
+     *
      * @param $response
      */
     public function respond($response)
@@ -96,6 +100,8 @@ class App{
             echo $response;
             return;
         }
+
+        $response->applyHeaders();
 
         echo $response->getBody();
     }
