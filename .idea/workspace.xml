@@ -24,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <file leaf-file-name="App.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/App.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23170732" vertical-offset="0" max-vertical-offset="656">
-              <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.24695122" vertical-offset="3144" max-vertical-offset="3990">
+              <caret line="89" column="7" selection-start-line="89" selection-start-column="7" selection-end-line="89" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -45,7 +45,6 @@
         <option value="$PROJECT_DIR$/app/Container.php" />
         <option value="$PROJECT_DIR$/app/Exceptions/HttpMethodNotAllowedException.php" />
         <option value="$PROJECT_DIR$/app/Exceptions/HttpRouteNotFoundException.php" />
-        <option value="$PROJECT_DIR$/app/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/app/Router.php" />
         <option value="$PROJECT_DIR$/app/Exceptions/ControllerNotFound.php" />
         <option value="$PROJECT_DIR$/app/Exceptions/ControllersMethodNotFound.php" />
@@ -53,8 +52,10 @@
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/app/Routing/RouteParser.php" />
         <option value="$PROJECT_DIR$/app/Routing/Router.php" />
-        <option value="$PROJECT_DIR$/app/App.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/app/Response.php" />
+        <option value="$PROJECT_DIR$/app/Controllers/HomeController.php" />
+        <option value="$PROJECT_DIR$/app/App.php" />
       </list>
     </option>
   </component>
@@ -242,26 +243,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2460" max-vertical-offset="3534">
           <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
-          <folding>
-            <marker date="1508063505945" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="  Construct ..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder=" Get container instance ..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder=" Run the App ..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder=" Process the Handler ..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -304,13 +286,6 @@
         <state vertical-scroll-proportion="0.17378049" vertical-offset="0" max-vertical-offset="656">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controllers/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46341464" vertical-offset="0" max-vertical-offset="656">
-          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -364,25 +339,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Routing/RouteParser.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3628049" vertical-offset="788" max-vertical-offset="1786">
-          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.23170732" vertical-offset="0" max-vertical-offset="656">
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
           <folding>
-            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder=" Make Get request ..." />
-            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder=" Make post request ..." />
-            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder=" Make requests with many methods ..." />
-            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1508063515120" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1508063515120" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Routing/Router.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27439025" vertical-offset="2062" max-vertical-offset="3268">
+        <state vertical-scroll-proportion="0.13109756" vertical-offset="2156" max-vertical-offset="3268">
           <caret line="60" column="25" selection-start-line="60" selection-start-column="25" selection-end-line="60" selection-end-column="25" />
           <folding>
             <marker date="1508063188312" expanded="false" signature="-1:-1" placeholder="..." />
@@ -405,37 +375,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/App.php">
+    <entry file="file://$PROJECT_DIR$/app/Routing/RouteParser.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33231708" vertical-offset="1454" max-vertical-offset="3268">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state vertical-scroll-proportion="-0.15853658" vertical-offset="1130" max-vertical-offset="1786">
+          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
           <folding>
-            <marker date="1508063505945" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="  Construct ..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder=" Get container instance ..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder=" Run the App ..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder=" Process the Handler ..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1508063505945" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder=" Make Get request ..." />
+            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder=" Make post request ..." />
+            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder=" Make requests with many methods ..." />
+            <marker date="1508060465866" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+    <entry file="file://$PROJECT_DIR$/app/Response.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23170732" vertical-offset="0" max-vertical-offset="656">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.47865853" vertical-offset="218" max-vertical-offset="1140">
+          <caret line="14" column="27" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="27" />
+          <folding>
+            <marker date="1508066743411" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1508066743411" expanded="true" signature="-1:-1" placeholder=" Set the body ..." />
+            <marker date="1508066743411" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1508066743411" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5365854" vertical-offset="28" max-vertical-offset="684">
+          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+          <folding>
+            <marker date="1508066745953" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1508066745953" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/App.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24695122" vertical-offset="3144" max-vertical-offset="3990">
+          <caret line="89" column="7" selection-start-line="89" selection-start-column="7" selection-end-line="89" selection-end-column="7" />
           <folding />
         </state>
       </provider>

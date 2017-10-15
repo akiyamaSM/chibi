@@ -18,6 +18,9 @@ class App{
         $this->container = new Container([
             'router' => function(){
                 return new Router;
+            },
+            'response' => function(){
+                return new Response();
             }
         ]);
     }
@@ -44,7 +47,7 @@ class App{
         $router->setPath($_SERVER['PATH_INFO'] ?$_SERVER['PATH_INFO']: '/');
         try{
             $response = $router->getResponse();
-            $this->process($response);
+            return $this->respond($this->process($response));
         }catch (\Exception $e){
             echo $e->getMessage();
         }
@@ -60,8 +63,9 @@ class App{
      */
     public function process($callable)
     {
+        $response = $this->container->response;
         if(is_callable($callable)){
-            return $callable();
+            return $callable($response);
         }
         if(is_string($callable)){
             $array = explode('@', $callable);
@@ -77,7 +81,22 @@ class App{
                 throw new ControllersMethodNotFound("{$method} Not Found in the {$class} Controller");
             }
 
-            call_user_func([$caller, $method]);
+            return call_user_func([$caller, $method], $response);
         }
+    }
+
+    /**
+     * Echo out the response
+     * 
+     * @param $response
+     */
+    public function respond($response)
+    {
+        if(!$response instanceof Response){
+            echo $response;
+            return;
+        }
+
+        echo $response->getBody();
     }
 }

@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Response;
+
 class HomeController {
 
-    public function index()
+    public function index(Response $response)
     {
-        echo "HomeController";
+        return $response->setBody("HomeController");
     }
 }
