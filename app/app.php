@@ -2,9 +2,9 @@
 
 namespace App;
 
-
-use App\Exceptions\ControllerNotFound;
 use App\Exceptions\ControllersMethodNotFound;
+use App\Exceptions\ControllerNotFound;
+use App\Routing\Router;
 
 class App{
 
@@ -32,21 +32,12 @@ class App{
         return $this->container;
     }
 
-    public function get($uri, $handler)
-    {
-        $this->container->router->addRoute($uri, $handler, ['GET']);
-    }
-
-    public function post($uri, $handler)
-    {
-        $this->container->router->addRoute($uri, $handler, ['POST']);
-    }
-
-    public function map($uri, $handler, $methods = ['GET'])
-    {
-        $this->container->router->addRoute($uri, $handler, $methods);
-    }
-
+    /**
+     * Run the App
+     *
+     * @throws ControllerNotFound
+     * @throws ControllersMethodNotFound
+     */
     public function run()
     {
         $router = $this->container->router;

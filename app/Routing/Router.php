@@ -1,11 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Routing;
 
 use App\Exceptions\HttpMethodNotAllowedException;
 use App\Exceptions\HttpRouteNotFoundException;
 
 class Router {
+    use RouteParser;
 
     protected $routes = [];
 
@@ -13,18 +14,38 @@ class Router {
 
     protected $path;
 
+    /**
+     * Set the current path
+     *
+     * @param string $path
+     * @return $this
+     */
     public function setPath($path = '/')
     {
         $this->path = $path;
         return $this;
     }
 
+    /**
+     * Register the route
+     *
+     * @param $uri
+     * @param $handler
+     * @param array $methods
+     */
     public function addRoute($uri, $handler, $methods = ['GET'])
     {
         $this->routes[$uri] = $handler;
         $this->methods[$uri] = $methods;
     }
 
+    /**
+     * Show the response
+     *
+     * @return mixed
+     * @throws HttpMethodNotAllowedException
+     * @throws HttpRouteNotFoundException
+     */
     public function getResponse()
     {
         if(!$this->has()){
@@ -37,6 +58,11 @@ class Router {
         return $this->routes[$this->path];
     }
 
+    /**
+     * Check if the current uri exists
+     *
+     * @return bool
+     */
     public function has()
     {
         return isset($this->routes[$this->path]);

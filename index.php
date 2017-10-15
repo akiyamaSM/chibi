@@ -23,6 +23,8 @@ $container['db']= function($container){
         $container->config['db_password']
     );
 };
+$router = $container->router;
 
-$app->get('/home', 'App\Controllers\HomeController@index');
+require_once 'app\Http\routes.php';
+
 $app->run();
