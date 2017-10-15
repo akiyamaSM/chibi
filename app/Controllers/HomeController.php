@@ -14,8 +14,9 @@ class HomeController {
 
     public function json(Request $request, Response $response)
     {
+        $name = $request->only('name');
         return $response->withJson([
-            'name' => 'Houssain'
+            'name' => $name
         ])->withStatus(200);
     }
 }

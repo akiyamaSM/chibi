@@ -10,11 +10,11 @@ class Request {
 
     public function __construct()
     {
-        if(!isset($_GET)){
+        if(!isset($_REQUEST)){
             return;
         }
 
-        array_walk($_GET, function($value, $key){
+        array_walk($_REQUEST, function($value, $key){
             $this->fields[$key] = $value;
         }, array_keys($_GET));
     }
