@@ -42,8 +42,12 @@ class App{
     {
         $router = $this->container->router;
         $router->setPath($_SERVER['PATH_INFO'] ?$_SERVER['PATH_INFO']: '/');
-        $response = $router->getResponse();
-        $this->process($response);
+        try{
+            $response = $router->getResponse();
+            $this->process($response);
+        }catch (\Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     /**

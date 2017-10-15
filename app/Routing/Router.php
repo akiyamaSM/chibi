@@ -27,6 +27,16 @@ class Router {
     }
 
     /**
+     * Get the current path
+     *
+     * @return mixed
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
      * Register the route
      *
      * @param $uri
@@ -42,7 +52,7 @@ class Router {
     }
 
     /**
-     * Show the response
+     * Return the handler
      *
      * @return mixed
      * @throws HttpMethodNotAllowedException
