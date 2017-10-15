@@ -35,8 +35,10 @@ class Router {
      */
     public function addRoute($uri, $handler, $methods = ['GET'])
     {
-        $this->routes[$uri] = $handler;
-        $this->methods[$uri] = $methods;
+        array_walk($methods, function($method) use ($handler, $uri){
+            $this->routes[$uri][$method] = $handler;
+            $this->methods[$uri][] = $method;
+        });
     }
 
     /**
@@ -55,7 +57,7 @@ class Router {
         if(!in_array($_SERVER['REQUEST_METHOD'], $this->methods[$this->path])){
             throw new HttpMethodNotAllowedException("Method not allowed");
         }
-        return $this->routes[$this->path];
+        return $this->routes[$this->path][$_SERVER['REQUEST_METHOD']];
     }
 
     /**
