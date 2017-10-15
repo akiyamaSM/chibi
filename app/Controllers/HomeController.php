@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Request;
 use App\Response;
 
-class HomeController {
+class HomeController extends Controller {
 
     public function index(Request $request, Response $response)
     {
@@ -18,5 +18,12 @@ class HomeController {
         return $response->withJson([
             'name' => $name
         ])->withStatus(200);
+    }
+
+    public function views()
+    {
+        return $this->view('hello', [
+            'name' => 'Houssain'
+        ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App;
 use App\Exceptions\ControllersMethodNotFound;
 use App\Exceptions\ControllerNotFound;
 use App\Routing\Router;
+use ViewHandler;
 
 class App{
 
