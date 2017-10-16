@@ -50,8 +50,10 @@ class App{
         $router = $this->container->router;
         $router->setPath($_SERVER['PATH_INFO'] ?$_SERVER['PATH_INFO']: '/');
         try{
-            $response = $router->getResponse();
-            return $this->respond($this->process($response));
+            $res =$router->getResponse();
+            $response = $res['response'];
+            $parames = $res['parames'];
+            return $this->respond($this->process($response, $parames));
         }catch (\Exception $e){
             echo $e->getMessage();
         }
@@ -61,16 +63,25 @@ class App{
      * Process the Handler
      *
      * @param $callable
+     * @param array $parames
      * @return mixed
      * @throws ControllerNotFound
      * @throws ControllersMethodNotFound
      */
-    public function process($callable)
+    public function process($callable, $parames = [])
     {
         $response = $this->container->response;
         $request = $this->container->request;
+
+        $parames_all = [$request, $response];
+
+        if(count($parames) > 0){
+            foreach($parames as $param){
+                array_unshift($parames_all, $param);
+            }
+        }
         if(is_callable($callable)){
-            return $callable($request, $response);
+            return $callable($request, $parames_all);
         }
         if(is_string($callable)){
             $array = explode('@', $callable);
@@ -85,8 +96,7 @@ class App{
             if(!method_exists($caller, $method)){
                 throw new ControllersMethodNotFound("{$method} Not Found in the {$class} Controller");
             }
-
-            return call_user_func([$caller, $method], $request, $response);
+            return call_user_func_array([$caller, $method], $parames_all);
         }
     }
 
