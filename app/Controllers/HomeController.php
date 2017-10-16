@@ -20,8 +20,9 @@ class HomeController extends Controller {
         ])->withStatus(200);
     }
 
-    public function views()
+    public function views($user, $name)
     {
+        var_dump($user, $name);
         return $this->view('hello', [
             'name' => 'Houssain'
         ]);

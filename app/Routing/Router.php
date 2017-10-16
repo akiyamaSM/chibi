@@ -12,6 +12,8 @@ class Router {
 
     protected $methods = [];
 
+    protected $parames = [];
+
     protected $path;
 
     /**
@@ -60,14 +62,17 @@ class Router {
      */
     public function getResponse()
     {
-        if(!$this->has()){
+        if(!($uri = $this->has())){
             throw new HttpRouteNotFoundException("Http Route Not found");
         }
 
-        if(!in_array($_SERVER['REQUEST_METHOD'], $this->methods[$this->path])){
+        if(!in_array($_SERVER['REQUEST_METHOD'], $this->methods[$uri])){
             throw new HttpMethodNotAllowedException("Method not allowed");
         }
-        return $this->routes[$this->path][$_SERVER['REQUEST_METHOD']];
+        return [
+           'response' => $this->routes[$uri][$_SERVER['REQUEST_METHOD']],
+           'parames' => $this->getParames()
+        ];
     }
 
     /**
@@ -77,6 +82,44 @@ class Router {
      */
     public function has()
     {
-        return isset($this->routes[$this->path]);
+        $current = explode('/', $this->path);
+        array_shift($current);
+
+        foreach($this->routes as $uri => $route){
+            $registred = explode('/', $uri);
+            array_shift($registred);
+
+            if(count($current)!= count($registred)){
+                return false;
+            }
+
+            if($this->hasParameters($current, $registred)){
+                return $uri;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasParameters(array $current, array $registred)
+    {
+        $parames =[];
+        for($index = 0; $index < count($current); $index++){
+            if(! preg_match('/^{(.*.)}$/', $registred[$index], $matches)){
+                if(! $current[$index] === $registred[$index]){
+                    return false;
+                }
+            }else{
+                $parames[$matches[1]] = $current[$index];
+            }
+        }
+
+        $this->parames = $parames;
+        return true;
+    }
+
+    public function getParames()
+    {
+        return $this->parames;
     }
 }
