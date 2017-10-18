@@ -106,14 +106,13 @@ class Router {
         $parames =[];
         for($index = 0; $index < count($current); $index++){
             if(! preg_match('/^{(.*.)}$/', $registred[$index], $matches)){
-                if(! $current[$index] === $registred[$index]){
+                if(! ($current[$index] === $registred[$index])){
                     return false;
                 }
             }else{
                 $parames[$matches[1]] = $current[$index];
             }
         }
-
         $this->parames = $parames;
         return true;
     }

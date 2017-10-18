@@ -38,4 +38,29 @@ class Request {
     {
         return $this->fields[$key];
     }
+
+    /**
+     * Get
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        if($this->has($key)){
+            return $this->fields[$key];
+        }
+        return;
+    }
+
+    /**
+     * Check if a key exists
+     *
+     * @param $key
+     * @return bool
+     */
+    public function has($key)
+    {
+        return isset($this->fields[$key]);
+    }
 }
