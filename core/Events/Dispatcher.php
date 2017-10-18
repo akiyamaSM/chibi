@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace Chibi\Events;
 
 
 class Dispatcher {
