@@ -29,6 +29,10 @@ class ComposerStaticInitf3c9310c840971d5f1108bb085300396
         array (
             'Javanile\\Moldable\\' => 18,
         ),
+        'C' => 
+        array (
+            'Chibi\\' => 6,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -55,6 +59,10 @@ class ComposerStaticInitf3c9310c840971d5f1108bb085300396
         'Javanile\\Moldable\\' => 
         array (
             0 => __DIR__ . '/..' . '/javanile/moldable/src',
+        ),
+        'Chibi\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/core',
         ),
         'App\\' => 
         array (

@@ -11,5 +11,6 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Javanile\\Moldable\\' => array($vendorDir . '/javanile/moldable/src'),
+    'Chibi\\' => array($baseDir . '/core'),
     'App\\' => array($baseDir . '/app'),
 );

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Chibi;
 
 class Response {
 

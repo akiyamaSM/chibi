@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace Chibi\Exceptions;
 
 class HttpRouteNotFoundException extends \Exception {
 

@@ -1,5 +1,5 @@
 <?php
-namespace App\Views;
+namespace Chibi\View;
 
 use App\Exceptions\ViewNotFoundException;
 

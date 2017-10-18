@@ -2,7 +2,7 @@
 
 require 'vendor/autoload.php';
 
-$app = new App\App();
+$app = new Chibi\App();
 
 $container = $app->getContainer();
 

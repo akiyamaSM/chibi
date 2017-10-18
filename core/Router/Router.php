@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Routing;
+namespace Chibi\Router;
 
-use App\Exceptions\HttpMethodNotAllowedException;
-use App\Exceptions\HttpRouteNotFoundException;
+
+
+use Chibi\Exceptions\HttpMethodNotAllowedException;
+use Chibi\Exceptions\HttpRouteNotFoundException;
 
 class Router {
     use RouteParser;

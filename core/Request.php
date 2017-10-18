@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace Chibi;
 
 
 class Request {

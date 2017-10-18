@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Routing;
+namespace Chibi\Router;
 
 
 trait RouteParser {

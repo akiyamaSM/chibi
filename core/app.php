@@ -1,11 +1,10 @@
 <?php
 
-namespace App;
+namespace Chibi;
 
-use App\Exceptions\ControllersMethodNotFound;
-use App\Exceptions\ControllerNotFound;
-use App\Routing\Router;
-use ViewHandler;
+use Chibi\Router\Router;
+use Chibi\Exceptions\ControllerNotFound;
+use Chibi\Exceptions\ControllersMethodNotFound;
 
 class App{
 
