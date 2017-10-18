@@ -6,7 +6,29 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitf3c9310c840971d5f1108bb085300396
 {
+    public static $files = array (
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '65fec9ebcfbb3cbb4fd0d519687aea01' => __DIR__ . '/..' . '/danielstjules/stringy/src/Create.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Stringy\\' => 8,
+        ),
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
+        ),
+        'J' => 
+        array (
+            'Javanile\\Moldable\\' => 18,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -14,6 +36,26 @@ class ComposerStaticInitf3c9310c840971d5f1108bb085300396
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Stringy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/danielstjules/stringy/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Javanile\\Moldable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/javanile/moldable/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
