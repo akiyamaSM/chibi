@@ -30,4 +30,5 @@ $router->post('/customers', function(Request $request, Response $respone){
 
 # Views
 
-#Simple ORM
+# Simple ORM
+The Chibi framework is using [Francesco Bianco](https://github.com/francescobianco)'s ORM([moldable](https://github.com/javanile/moldable)), take a look on it to know how to use it.
