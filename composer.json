@@ -3,5 +3,8 @@
       "psr-4": {
         "App\\": "app"
       }
+  },
+  "require": {
+    "javanile/moldable": "^0.0.47"
   }
 }
