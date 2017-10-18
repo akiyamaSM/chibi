@@ -84,15 +84,13 @@ class Router {
     {
         $current = explode('/', $this->path);
         array_shift($current);
-
         foreach($this->routes as $uri => $route){
             $registred = explode('/', $uri);
             array_shift($registred);
 
             if(count($current)!= count($registred)){
-                return false;
+                continue;
             }
-
             if($this->hasParameters($current, $registred)){
                 return $uri;
             }
