@@ -91,7 +91,7 @@ class App{
             }
         }
         if(is_callable($callable)){
-            return $callable($request, $parames_all);
+            return call_user_func_array($callable, $parames_all);
         }
         if(is_string($callable)){
             $array = explode('@', $callable);
