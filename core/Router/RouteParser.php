@@ -53,10 +53,11 @@ trait RouteParser {
     {
         if($this->isUriParsed()){
             $this->names[$this->parsedUri] = $name;
-
+            
             $this->parsedUri = false;
             return;
         }
+
         throw new BadMethodCallException(
             "Method Name can't be called Before setting the route"
         );

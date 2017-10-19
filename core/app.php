@@ -7,7 +7,7 @@ use Chibi\Exceptions\ControllerNotFound;
 use Chibi\Exceptions\ControllersMethodNotFound;
 
 class App{
-
+    static $instance;
     protected $container;
 
     /**
@@ -26,8 +26,17 @@ class App{
                 return new Request();
             }
         ));
+        $this->registerApp();
     }
 
+    public static function getInstance()
+    {
+        return static::$instance;
+    }
+    public function registerApp()
+    {
+        static::$instance = $this;
+    }
     /**
      * Get container instance
      *
