@@ -16,6 +16,8 @@ class Router {
 
     protected $parames = [];
 
+    protected $names =  [];
+
     protected $path;
 
     /**
@@ -46,6 +48,7 @@ class Router {
      * @param $uri
      * @param $handler
      * @param array $methods
+     * @return $this
      */
     public function addRoute($uri, $handler, $methods = ['GET'])
     {
@@ -53,6 +56,9 @@ class Router {
             $this->routes[$uri][$method] = $handler;
             $this->methods[$uri][] = $method;
         });
+
+        $this->parsedUri = $uri;
+        return $this;
     }
 
     /**

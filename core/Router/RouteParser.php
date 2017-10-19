@@ -4,7 +4,11 @@
 namespace Chibi\Router;
 
 
+use BadMethodCallException;
+
 trait RouteParser {
+
+    protected $parsedUri = false;
 
     /**
      * Make Get request
@@ -14,7 +18,7 @@ trait RouteParser {
      */
     public function get($uri, $handler)
     {
-        $this->addRoute($uri, $handler, ['GET']);
+        return $this->addRoute($uri, $handler, ['GET']);
     }
 
     /**
@@ -25,7 +29,7 @@ trait RouteParser {
      */
     public function post($uri, $handler)
     {
-        $this->addRoute($uri, $handler, ['POST']);
+        return $this->addRoute($uri, $handler, ['POST']);
     }
 
     /**
@@ -37,6 +41,29 @@ trait RouteParser {
      */
     public function map($uri, $handler, $methods = ['GET'])
     {
-        $this->addRoute($uri, $handler, $methods);
+        return $this->addRoute($uri, $handler, $methods);
+    }
+
+    /**
+     * Name a route
+     *
+     * @param $name
+     */
+    public function named($name)
+    {
+        if($this->isUriParsed()){
+            $this->names[$this->parsedUri] = $name;
+
+            $this->parsedUri = false;
+            return;
+        }
+        throw new BadMethodCallException(
+            "Method Name can't be called Before setting the route"
+        );
+    }
+
+    public function isUriParsed()
+    {
+        return $this->parsedUri != false;
     }
 }
