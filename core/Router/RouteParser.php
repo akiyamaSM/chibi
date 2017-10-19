@@ -52,8 +52,8 @@ trait RouteParser {
     public function named($name)
     {
         if($this->isUriParsed()){
-            $this->names[$this->parsedUri] = $name;
-            
+            $this->names[$name] = $this->parsedUri;
+
             $this->parsedUri = false;
             return;
         }

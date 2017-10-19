@@ -6,17 +6,15 @@ namespace Chibi\Router;
 
 use Chibi\Exceptions\HttpMethodNotAllowedException;
 use Chibi\Exceptions\HttpRouteNotFoundException;
+use Chibi\Exceptions\RouteNameArgumentInvalidException;
+use Chibi\Exceptions\RouteNameDoesntExistException;
 
 class Router {
-    use RouteParser;
+    use RouteParser, Nameable;
 
     protected $routes = [];
 
     protected $methods = [];
-
-    protected $parames = [];
-
-    protected $names =  [];
 
     protected $path;
 
@@ -107,6 +105,13 @@ class Router {
         return false;
     }
 
+    /**
+     * Compare the current Uri against an other one
+     *
+     * @param array $current
+     * @param array $registred
+     * @return bool
+     */
     public function hasParameters(array $current, array $registred)
     {
         $parames =[];
@@ -123,8 +128,4 @@ class Router {
         return true;
     }
 
-    public function getParames()
-    {
-        return $this->parames;
-    }
 }

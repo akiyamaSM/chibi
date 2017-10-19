@@ -7,7 +7,9 @@ use Chibi\Exceptions\ControllerNotFound;
 use Chibi\Exceptions\ControllersMethodNotFound;
 
 class App{
+
     static $instance;
+
     protected $container;
 
     /**
