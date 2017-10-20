@@ -3,6 +3,8 @@
 namespace Chibi;
 
 use ArrayAccess;
+use ReflectionClass;
+use Chibi\Exceptions\ClassIsNotInstantiableException;
 
 class Container implements ArrayAccess {
 
@@ -55,5 +57,42 @@ class Container implements ArrayAccess {
     public function __get($offset)
     {
         return $this->offsetGet($offset);
+    }
+
+    public function resolve($key, array $args = [] )
+    {
+        $class = $this->offsetGet($key);
+
+        if($class === null){
+            $class = $key;
+        }
+
+        return $this->constructIt($class, $args);
+    }
+
+    protected function constructIt($className, array $args = [])
+    {
+        $reflector = new ReflectionClass($className);
+
+        if(! $reflector->isInstantiable()){
+            throw new ClassIsNotInstantiableException("The {class} is not instantiable");
+        }
+
+        if( is_null(($constructor = $reflector->getConstructor()))){
+            return new $className;
+        }
+
+        $dependencies = $constructor->getParameters();
+        foreach($dependencies as $dependency){
+            if($dependency->isArray() || $dependency->isOptional()) continue;
+            if(($class = $dependency->getClass()) === null) continue;
+            if(get_class($this) === $class->name) {
+                array_unshift($args, $this);
+                continue;
+            }
+
+            array_unshift($args, $this->resolve($class->name));
+        }
+        return $reflector->newInstance($args);
     }
 }

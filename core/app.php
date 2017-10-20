@@ -101,7 +101,7 @@ class App{
                 throw new ControllerNotFound("{$class} Controller Not Found");
             }
 
-            $caller = new $class;
+            $caller = $this->getContainer()->resolve($class);
             $method = $array[1];
             if(!method_exists($caller, $method)){
                 throw new ControllersMethodNotFound("{$method} Not Found in the {$class} Controller");
