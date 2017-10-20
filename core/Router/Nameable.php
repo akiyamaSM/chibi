@@ -63,14 +63,10 @@ trait Nameable {
      */
     public function getNamedParams($uri)
     {
-        $params = [];
-
-        foreach($uri as $part){
-            if( preg_match('/^{.*.}$/', $part, $matches)){
-                $params[] = $matches[0];
-            }
-        }
-        return $params;
+        $params = array_filter($uri, function($part){
+            return preg_match('/^{.*.}$/', $part);
+        });
+        return array_values(array_filter($params)); // reorder index
     }
 
     /**
