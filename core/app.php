@@ -31,14 +31,24 @@ class App{
         $this->registerApp();
     }
 
+    /**
+     * Get the App instance
+     *
+     * @return mixed
+     */
     public static function getInstance()
     {
         return static::$instance;
     }
+
+    /**
+     * Register the App instance
+     */
     public function registerApp()
     {
         static::$instance = $this;
     }
+    
     /**
      * Get container instance
      *
