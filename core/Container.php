@@ -96,9 +96,21 @@ class Container implements ArrayAccess {
         return $reflector->newInstance($args);
     }
 
+    /**
+     * Instantiate the required Objects
+     * 
+     * @param $className
+     * @param $method
+     * @param $args
+     * @return array
+     */
     public function resolveMethod($className, $method, $args)
     {
-        $reflector = new \ReflectionMethod($className, $method);
+        if(is_callable($method)){
+            $reflector = new \ReflectionFunction($method);
+        } else{
+            $reflector = new \ReflectionMethod($className, $method);
+        }
         $params = $reflector->getParameters();
         $param = array_map(function($param) use (&$args){
             $class = $param->getClass();
