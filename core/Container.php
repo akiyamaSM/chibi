@@ -3,6 +3,7 @@
 namespace Chibi;
 
 use ArrayAccess;
+use Psr\Log\InvalidArgumentException;
 use ReflectionClass;
 use Chibi\Exceptions\ClassIsNotInstantiableException;
 
@@ -98,7 +99,7 @@ class Container implements ArrayAccess {
 
     /**
      * Instantiate the required Objects
-     * 
+     *
      * @param $className
      * @param $method
      * @param $args
@@ -106,21 +107,33 @@ class Container implements ArrayAccess {
      */
     public function resolveMethod($className, $method, $args)
     {
-        if(is_callable($method)){
-            $reflector = new \ReflectionFunction($method);
-        } else{
-            $reflector = new \ReflectionMethod($className, $method);
-        }
-        $params = $reflector->getParameters();
-        $param = array_map(function($param) use (&$args){
-            $class = $param->getClass();
-            if( is_null($class) ){
-                return array_shift($args);
+        $reflector = $this->createReflector($method, $className);
+
+        foreach($reflector->getParameters() as $param){
+            if( is_null($class = $param->getClass()) ){
+                if(count($args) == 0){
+                    throw new InvalidArgumentException("Invalid number of arguments provided");
+                }
+                $params[] = array_shift($args);
+                continue;
             }
-            return $this->constructIt($class->getName());
-        }, $params);
+            $params[] = $this->constructIt($class->getName());
+        }
+        return $params;
+    }
 
-        return $param;
-
+    /**
+     * Create a Reflector instance
+     * 
+     * @param $method
+     * @param null $className
+     * @return \ReflectionFunction|\ReflectionMethod
+     */
+    protected function createReflector($method, $className = null)
+    {
+        if(is_callable($method)) {
+            return new \ReflectionFunction($method);
+        }
+        return new \ReflectionMethod($className, $method);
     }
 }
