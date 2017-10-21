@@ -48,7 +48,7 @@ class App{
     {
         static::$instance = $this;
     }
-    
+
     /**
      * Get container instance
      *
@@ -116,7 +116,11 @@ class App{
             if(!method_exists($caller, $method)){
                 throw new ControllersMethodNotFound("{$method} Not Found in the {$class} Controller");
             }
-            return call_user_func_array([$caller, $method], $parames_all);
+
+            return call_user_func_array(
+                [$caller, $method],
+                $this->getContainer()->resolveMethod($class, $method, $parames_all)
+            );
         }
     }
 

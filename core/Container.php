@@ -95,4 +95,20 @@ class Container implements ArrayAccess {
         }
         return $reflector->newInstance($args);
     }
+
+    public function resolveMethod($className, $method, $args)
+    {
+        $reflector = new \ReflectionMethod($className, $method);
+        $params = $reflector->getParameters();
+        $param = array_map(function($param) use (&$args){
+            $class = $param->getClass();
+            if( is_null($class) ){
+                return array_shift($args);
+            }
+            return $this->constructIt($class->getName());
+        }, $params);
+
+        return $param;
+
+    }
 }
