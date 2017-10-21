@@ -1,5 +1,6 @@
 <?php
 use Chibi\App;
+use Chibi\Exceptions\ViewNotFoundException;
 
 if (! function_exists('route')) {
     function route($name, $params = [])
@@ -20,5 +21,23 @@ if (! function_exists('app')) {
     function app()
     {
         return App::getInstance();
+    }
+}
+
+if (! function_exists('view')) {
+    /**
+     * Pass data to the view
+     *
+     * @param $view
+     * @param array $variables
+     * @throws ViewNotFoundException
+     */
+    function view($view, $variables = [])
+    {
+        if(! file_exists("app/views/{$view}.chibi.php")){
+            throw new ViewNotFoundException("The {$view} view is not found");
+        }
+        extract($variables);
+        require_once("app/views/{$view}.chibi.php");
     }
 }

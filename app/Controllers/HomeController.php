@@ -44,7 +44,7 @@ class HomeController extends Controller {
     public function views($user, $name)
     {
         var_dump($user, $name);
-        return $this->view('hello', [
+        return view('hello', [
             'name' => 'Houssain'
         ]);
     }

@@ -124,7 +124,7 @@ class Container implements ArrayAccess {
 
     /**
      * Create a Reflector instance
-     * 
+     *
      * @param $method
      * @param null $className
      * @return \ReflectionFunction|\ReflectionMethod
