@@ -93,7 +93,7 @@ class App{
         $response = $this->container->response;
         $request = $this->container->request;
 
-        $parames_all = [$request, $response];
+        $parames_all = [];
 
         if(count($parames) > 0){
             foreach($parames as $param){
@@ -101,6 +101,7 @@ class App{
             }
         }
         if(is_callable($callable)){
+            array_push($parames_all, $response, $request);
             return call_user_func_array($callable, $parames_all);
         }
         if(is_string($callable)){
