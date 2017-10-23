@@ -5,6 +5,8 @@ namespace Chibi;
 use Chibi\Router\Router;
 use Chibi\Exceptions\ControllerNotFound;
 use Chibi\Exceptions\ControllersMethodNotFound;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 
 class App{
 
@@ -67,6 +69,7 @@ class App{
      */
     public function run()
     {
+        $this->runWhoops();
         $router = $this->container->router;
         $router->setPath($_SERVER['PATH_INFO'] ?$_SERVER['PATH_INFO']: '/');
         try{
@@ -77,6 +80,13 @@ class App{
         }catch (\Exception $e){
             echo $e->getMessage();
         }
+    }
+
+    public function runWhoops()
+    {
+        $whoops = new Run;
+        $whoops->pushHandler(new PrettyPageHandler);
+        $whoops->register();
     }
 
     /**
