@@ -3,6 +3,13 @@ use Chibi\App;
 use Chibi\Exceptions\ViewNotFoundException;
 
 if (! function_exists('route')) {
+    /**
+     * Get the route path
+     * 
+     * @param $name
+     * @param array $params
+     * @return mixed
+     */
     function route($name, $params = [])
     {
         $router = app()->getContainer()->router;
@@ -39,5 +46,16 @@ if (! function_exists('view')) {
         }
         extract($variables);
         require_once("app/views/{$view}.chibi.php");
+    }
+}
+if (! function_exists('redirect')) {
+    /**
+     * Redirect to a specific path
+     *
+     * @param $path
+     */
+    function redirect($path)
+    {
+        header("Location: /{$path}");
     }
 }
