@@ -100,7 +100,6 @@ class App{
      */
     public function process($callable, $parames = [])
     {
-
         $parames_all = $parames;
 
         if(is_callable($callable)){

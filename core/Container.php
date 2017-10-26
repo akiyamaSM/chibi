@@ -107,6 +107,7 @@ class Container implements ArrayAccess {
      */
     public function resolveMethod($className, $method, $args)
     {
+        $params = [];
         $reflector = $this->createReflector($method, $className);
 
         foreach($reflector->getParameters() as $param){

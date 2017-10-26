@@ -5,7 +5,7 @@ use Chibi\Exceptions\ViewNotFoundException;
 if (! function_exists('route')) {
     /**
      * Get the route path
-     * 
+     *
      * @param $name
      * @param array $params
      * @return mixed
