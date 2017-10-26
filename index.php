@@ -1,18 +1,19 @@
 <?php
 
 require 'vendor/autoload.php';
-
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__);
 $app = new Chibi\App();
 
 $container = $app->getContainer();
 
 $container['config'] = function () {
     return [
-        'db_driver' => 'mysql',
-        'db_host' => 'localhost',
-        'db_name' => 'market',
-        'db_user' => 'root',
-        'db_password' => '',
+        'db_driver' => getenv('DB_DRIVER'),
+        'db_host' => getenv('DB_HOST'),
+        'db_name' => getenv('DB_DATABASE'),
+        'db_user' => getenv('DB_USERNAME'),
+        'db_password' => getenv('DB_PASSWORD'),
     ];
 };
 

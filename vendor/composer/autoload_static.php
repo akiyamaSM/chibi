@@ -79,11 +79,22 @@ class ComposerStaticInitf3c9310c840971d5f1108bb085300396
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'D' => 
+        array (
+            'Dotenv' => 
+            array (
+                0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitf3c9310c840971d5f1108bb085300396::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitf3c9310c840971d5f1108bb085300396::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitf3c9310c840971d5f1108bb085300396::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

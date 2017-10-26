@@ -10,6 +10,7 @@
   },
   "require": {
     "javanile/moldable": "^0.0.47",
-    "filp/whoops": "^2.1"
+    "filp/whoops": "^2.1",
+    "vlucas/phpdotenv": "~1.0"
   }
 }
