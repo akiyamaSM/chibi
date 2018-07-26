@@ -7,7 +7,8 @@ use Chibi\Response;
 use App\Models\Customer;
 use Chibi\Controller\Controller;
 
-class HomeController extends Controller {
+class HomeController extends Controller
+{
 
     public function index(Request $request, Response $response)
     {
@@ -15,20 +16,20 @@ class HomeController extends Controller {
             . '<table border="1"><tr>';
 
         foreach (Customer::getModelFields() as $field) {
-            $html.= '<th>'.$field.'</th>';
+            $html .= '<th>' . $field . '</th>';
         }
 
-        $html.= '<th></th></tr>';
+        $html .= '<th></th></tr>';
 
         foreach (Customer::all() as $customer) {
-            $html.= '<tr>';
+            $html .= '<tr>';
             foreach (Customer::getModelFields() as $field) {
-                $html.= '<td>'.$customer->{$field}.'</td>';
+                $html .= '<td>' . $customer->{$field} . '</td>';
             }
-            $html.= '<td><a href="/customer/edit?id='.$customer->getPrimaryKeyValue().'">edit</a></td></tr>';
+            $html .= '<td><a href="/customer/edit?id=' . $customer->getPrimaryKeyValue() . '">edit</a></td></tr>';
         }
 
-        $html.= '</table>';
+        $html .= '</table>';
 
         return $response->setBody($html);
     }
@@ -37,8 +38,8 @@ class HomeController extends Controller {
     {
         $name = $request->only('name');
         return $response->withJson([
-            'name' => $name
-        ])->withStatus(200);
+                'name' => $name
+            ])->withStatus(200);
     }
 
     public function views($user, $name)

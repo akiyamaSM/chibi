@@ -2,6 +2,7 @@
 
 namespace Chibi\Exceptions;
 
-class RouteNameDoesntExistException extends \Exception {
-
+class RouteNameDoesntExistException extends \Exception
+{
+    
 }

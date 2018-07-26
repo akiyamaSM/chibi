@@ -1,8 +1,10 @@
 <?php
+
 use Chibi\App;
 use Chibi\Exceptions\ViewNotFoundException;
 
-if (! function_exists('route')) {
+if (!function_exists('route')) {
+
     /**
      * Get the route path
      *
@@ -19,7 +21,8 @@ if (! function_exists('route')) {
 }
 
 
-if (! function_exists('app')) {
+if (!function_exists('app')) {
+
     /**
      * Get The instance of the Application
      *
@@ -31,7 +34,8 @@ if (! function_exists('app')) {
     }
 }
 
-if (! function_exists('view')) {
+if (!function_exists('view')) {
+
     /**
      * Pass data to the view
      *
@@ -41,14 +45,15 @@ if (! function_exists('view')) {
      */
     function view($view, $variables = [])
     {
-        if(! file_exists("app/views/{$view}.chibi.php")){
+        if (!file_exists("app/views/{$view}.chibi.php")) {
             throw new ViewNotFoundException("The {$view} view is not found");
         }
         extract($variables);
         require_once("app/views/{$view}.chibi.php");
     }
 }
-if (! function_exists('redirect')) {
+if (!function_exists('redirect')) {
+
     /**
      * Redirect to a specific path
      *

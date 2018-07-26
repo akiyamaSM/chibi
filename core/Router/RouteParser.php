@@ -1,12 +1,11 @@
 <?php
 
-
 namespace Chibi\Router;
-
 
 use BadMethodCallException;
 
-trait RouteParser {
+trait RouteParser
+{
 
     protected $parsedUri = false;
 
@@ -51,7 +50,7 @@ trait RouteParser {
      */
     public function named($name)
     {
-        if($this->isUriParsed()){
+        if ($this->isUriParsed()) {
             $this->names[$name] = $this->parsedUri;
 
             $this->parsedUri = false;
@@ -59,7 +58,7 @@ trait RouteParser {
         }
 
         throw new BadMethodCallException(
-            "Method Name can't be called Before setting the route"
+        "Method Name can't be called Before setting the route"
         );
     }
 

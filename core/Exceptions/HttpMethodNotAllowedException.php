@@ -2,6 +2,7 @@
 
 namespace Chibi\Exceptions;
 
-class HttpMethodNotAllowedException extends \Exception {
-
+class HttpMethodNotAllowedException extends \Exception
+{
+    
 }
