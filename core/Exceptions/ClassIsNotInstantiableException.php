@@ -2,6 +2,7 @@
 
 namespace Chibi\Exceptions;
 
-class ClassIsNotInstantiableException extends \Exception {
-
+class ClassIsNotInstantiableException extends \Exception
+{
+    
 }

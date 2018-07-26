@@ -1,8 +1,8 @@
 <?php
+
 namespace Chibi\View;
 
-
-class ViewHandler {
-
-
+class ViewHandler
+{
+    
 }

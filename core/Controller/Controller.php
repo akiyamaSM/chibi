@@ -2,7 +2,7 @@
 
 namespace Chibi\Controller;
 
-
-class Controller{
-
+class Controller
+{
+    
 }
