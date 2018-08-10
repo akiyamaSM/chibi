@@ -1,23 +1,23 @@
 <?php
 
-
 namespace Chibi;
 
-
-class Request {
+class Request
+{
 
     protected $fields = [];
 
     public function __construct()
     {
-        if(!isset($_REQUEST)){
+        if (!isset($_REQUEST)) {
             return;
         }
 
-        array_walk($_REQUEST, function($value, $key){
+        array_walk($_REQUEST, function($value, $key) {
             $this->fields[$key] = $value;
         }, array_keys($_GET));
     }
+
     /**
      * get all fields
      *
@@ -47,7 +47,7 @@ class Request {
      */
     public function __get($key)
     {
-        if($this->has($key)){
+        if ($this->has($key)) {
             return $this->fields[$key];
         }
         return;

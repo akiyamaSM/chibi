@@ -2,6 +2,7 @@
 
 namespace Chibi\Exceptions;
 
-class RouteNameArgumentInvalidException extends \Exception {
-
+class RouteNameArgumentInvalidException extends \Exception
+{
+    
 }

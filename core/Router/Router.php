@@ -2,20 +2,19 @@
 
 namespace Chibi\Router;
 
-
-
 use Chibi\Exceptions\HttpMethodNotAllowedException;
 use Chibi\Exceptions\HttpRouteNotFoundException;
 use Chibi\Exceptions\RouteNameArgumentInvalidException;
 use Chibi\Exceptions\RouteNameDoesntExistException;
 
-class Router {
-    use RouteParser, Nameable;
+class Router
+{
+
+    use RouteParser,
+        Nameable;
 
     protected $routes = [];
-
     protected $methods = [];
-
     protected $path;
 
     /**
@@ -50,7 +49,7 @@ class Router {
      */
     public function addRoute($uri, $handler, $methods = ['GET'])
     {
-        array_walk($methods, function($method) use ($handler, $uri){
+        array_walk($methods, function($method) use ($handler, $uri) {
             $this->routes[$uri][$method] = $handler;
             $this->methods[$uri][] = $method;
         });
@@ -68,16 +67,16 @@ class Router {
      */
     public function getResponse()
     {
-        if(!($uri = $this->has())){
+        if (!($uri = $this->has())) {
             throw new HttpRouteNotFoundException("Http Route Not found");
         }
 
-        if(!in_array($_SERVER['REQUEST_METHOD'], $this->methods[$uri])){
+        if (!in_array($_SERVER['REQUEST_METHOD'], $this->methods[$uri])) {
             throw new HttpMethodNotAllowedException("Method not allowed");
         }
         return [
-           'response' => $this->routes[$uri][$_SERVER['REQUEST_METHOD']],
-           'parames' => $this->getParames()
+            'response' => $this->routes[$uri][$_SERVER['REQUEST_METHOD']],
+            'parames' => $this->getParames()
         ];
     }
 
@@ -90,14 +89,14 @@ class Router {
     {
         $current = explode('/', $this->path);
         array_shift($current);
-        foreach($this->routes as $uri => $route){
+        foreach ($this->routes as $uri => $route) {
             $registred = explode('/', $uri);
             array_shift($registred);
 
-            if(count($current)!= count($registred)){
+            if (count($current) != count($registred)) {
                 continue;
             }
-            if($this->hasParameters($current, $registred)){
+            if ($this->hasParameters($current, $registred)) {
                 return $uri;
             }
         }
@@ -114,18 +113,17 @@ class Router {
      */
     public function hasParameters(array $current, array $registred)
     {
-        $parames =[];
-        for($index = 0; $index < count($current); $index++){
-            if(! preg_match('/^{(.*.)}$/', $registred[$index], $matches)){
-                if(! ($current[$index] === $registred[$index])){
+        $parames = [];
+        for ($index = 0; $index < count($current); $index++) {
+            if (!preg_match('/^{(.*.)}$/', $registred[$index], $matches)) {
+                if (!($current[$index] === $registred[$index])) {
                     return false;
                 }
-            }else{
+            } else {
                 $parames[$matches[1]] = $current[$index];
             }
         }
         $this->parames = $parames;
         return true;
     }
-
 }

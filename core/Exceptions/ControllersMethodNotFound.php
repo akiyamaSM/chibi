@@ -2,6 +2,7 @@
 
 namespace Chibi\Exceptions;
 
-class ControllersMethodNotFound extends \Exception {
-
+class ControllersMethodNotFound extends \Exception
+{
+    
 }

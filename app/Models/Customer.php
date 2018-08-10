@@ -6,7 +6,8 @@ use Javanile\Moldable\Storable;
 
 class Customer extends Storable
 {
-    public $id = self::PRIMARY_KEY;
 
+    public $id = self::PRIMARY_KEY;
     public $name = '';
+
 }
