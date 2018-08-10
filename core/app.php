@@ -71,7 +71,7 @@ class App{
     {
         $this->runWhoops();
         $router = $this->container->router;
-        $router->setPath($_SERVER['PATH_INFO'] ?$_SERVER['PATH_INFO']: '/');
+        $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
         try{
             $res =$router->getResponse();
             $response = $res['response'];
