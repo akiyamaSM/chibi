@@ -17,6 +17,7 @@ class Template {
     protected $compilers = [
         PrintCompiler::class,
         ConditionCompiler::class,
+        //LoopCompiler::class,
     ];
 
     /**

@@ -44,9 +44,14 @@ class HomeController extends Controller
 
     public function views()
     {
+        $array  = [
+            'one',
+            'two',
+            'three'
+        ];
         return view('hello', [
             'name' => 'Houssain',
-            'age' => 26
+            'age' => 26,
         ]);
     }
 }

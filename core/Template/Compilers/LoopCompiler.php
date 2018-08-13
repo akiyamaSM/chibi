@@ -3,7 +3,7 @@
 namespace Chibi\Template\Compilers;
 
 
-class ConditionCompiler implements compilable {
+class LoopCompiler implements compilable {
 
     /**
      * Construct
@@ -23,10 +23,10 @@ class ConditionCompiler implements compilable {
      */
     public function compile($content)
     {
-        $content = preg_replace('/@when\((.*)\)/', '<?php if($1) : ?>', $content);
-        $content = preg_replace('/@or\((.*)\)/', '<?php elseif($1) : ?>', $content);
-        $content = preg_replace('/@otherwise/', '<?php else: ?>', $content);
-        $content = preg_replace('/@end/', '<?php endif; ?>', $content);
+        $content = preg_replace('/@for\((.*)\)/', '<?php for($1) : ?>', $content);
+        $content = preg_replace('/@endfor/', '<?php endfor; ?>', $content);
+        $content = preg_replace('/@foreach\((.*)\)/', '<?php foreach($1): ?>', $content);
+        $content = preg_replace('/@endforeach\((.*)\)/', '<?php endforeach; ?>', $content);
 
         return $content;
     }
