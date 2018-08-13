@@ -3,7 +3,7 @@
 namespace Chibi\Template\Compilers;
 
 
-class LoopCompiler implements compilable {
+class LoopCompiler implements Compilable {
 
     /**
      * Construct

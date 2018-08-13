@@ -3,7 +3,7 @@
 namespace Chibi\Template\Compilers;
 
 
-class ConditionCompiler implements compilable {
+class ConditionCompiler implements Compilable {
 
     /**
      * Construct

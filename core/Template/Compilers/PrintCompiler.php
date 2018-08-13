@@ -3,7 +3,7 @@
 namespace Chibi\Template\Compilers;
 
 
-class PrintCompiler implements compilable {
+class PrintCompiler implements Compilable {
 
     /**
      * Construct
