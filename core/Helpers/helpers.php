@@ -4,8 +4,6 @@ use Chibi\App;
 use Chibi\Exceptions\ViewNotFoundException;
 use Chibi\Template\Template;
 
-use Chibi\Template\ChibiVarDumper;
-
 if (!function_exists('route')) {
 
     /**
