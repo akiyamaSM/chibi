@@ -2,6 +2,7 @@
 
 use Chibi\App;
 use Chibi\Exceptions\ViewNotFoundException;
+use Chibi\Template\Template;
 
 if (!function_exists('route')) {
 
@@ -45,13 +46,15 @@ if (!function_exists('view')) {
      */
     function view($view, $variables = [])
     {
-        if (!file_exists("app/views/{$view}.chibi.php")) {
+        $path = "app/Views/{$view}.chibi.php";
+        if (!(file_exists($path))) {
             throw new ViewNotFoundException("The {$view} view is not found");
         }
-        extract($variables);
-        require_once("app/views/{$view}.chibi.php");
+        $template = new Template($path);
+        $template->fill($variables)->compile()->render();
     }
 }
+
 if (!function_exists('redirect')) {
 
     /**
@@ -62,5 +65,23 @@ if (!function_exists('redirect')) {
     function redirect($path)
     {
         header("Location: /{$path}");
+    }
+}
+
+if (!function_exists('env')) {
+    function env($key,$default = '') {
+        return getenv($key) ? getenv($key) : $default;
+    }
+}
+
+if (!function_exists('bdump')) {
+    function bdump() {
+        $args = func_get_args();
+
+        foreach ($args as $key => $value) {
+            dump($value);
+        }
+        echo '<style>pre.sf-dump .sf-dump-str{color: #3A69DB;}pre.sf-dump, pre.sf-dump .sf-dump-default{background-color: #F3F3F3;border:1px dashed #cfcfcf}pre.sf-dump .sf-dump-public{color: #333;}</style>';
+        exit;
     }
 }
