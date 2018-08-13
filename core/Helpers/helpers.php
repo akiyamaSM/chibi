@@ -2,6 +2,7 @@
 
 use Chibi\App;
 use Chibi\Exceptions\ViewNotFoundException;
+use Chibi\Template\Template;
 
 if (!function_exists('route')) {
 
@@ -45,11 +46,12 @@ if (!function_exists('view')) {
      */
     function view($view, $variables = [])
     {
-        if (!file_exists("app/views/{$view}.chibi.php")) {
+        if (!(file_exists("app/views/{$view}.chibi.php"))) {
             throw new ViewNotFoundException("The {$view} view is not found");
         }
-        extract($variables);
-        require_once("app/views/{$view}.chibi.php");
+        $template = new Template("app/views/{$view}.chibi.php");
+        $template->fill($variables)->compileView()->render();
+        //require_once("app/views/{$view}.chibi.php");
     }
 }
 if (!function_exists('redirect')) {
