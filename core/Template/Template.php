@@ -45,7 +45,9 @@ class Template {
      */
     public function compileEcho()
     {
-
+        if ($this->checkUnassingedVariables($value)) {
+            throw new \Exception("variable <b>$".$value."</b> is undefined");
+        }
         foreach($this->vars as $key => $value){
             $this->contents = preg_replace('/\{\{\s*\$'. $key .'\s*\}\}/', $value , $this->contents);
             //$this->contents = preg_replace('/\$'. $key .'/', $value , $this->contents);
@@ -78,4 +80,22 @@ class Template {
         eval(' ?>' .$this->contents. '<?php ') ;
     }
 
+    /**
+     * [getTemplateVars description]
+     * @return [type] [description]
+     */
+    public function getTemplateVars() {
+        $matches = [];
+        preg_match_all('/{{\s*(\$(.*?))\s*}}/', $this->contents,$matches);
+        return isset($matches[2]) ? $matches[2] : [];
+    }
+
+    public function checkUnassingedVariables(&$value) {
+        $diff = array_diff($this->getTemplateVars(),array_keys($this->vars));
+        if (count($diff) > 0)  {
+
+            $value = array_values($diff)[0];
+        }
+        return count($diff) > 0;
+    }
 }

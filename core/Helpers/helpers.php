@@ -46,10 +46,11 @@ if (!function_exists('view')) {
      */
     function view($view, $variables = [])
     {
-        if (!(file_exists("app/views/{$view}.chibi.php"))) {
+        $path = "app/Views/{$view}.chibi.php";
+        if (!(file_exists($path))) {
             throw new ViewNotFoundException("The {$view} view is not found");
         }
-        $template = new Template("app/views/{$view}.chibi.php");
+        $template = new Template($path);
         $template->fill($variables)->compileView()->render();
         //require_once("app/views/{$view}.chibi.php");
     }
@@ -81,7 +82,7 @@ if (!function_exists('bdump')) {
         foreach ($args as $key => $value) {
             dump($value);
         }
-        echo '<style>pre.sf-dump .sf-dump-str{color: #3A69DB;}pre.sf-dump, pre.sf-dump .sf-dump-default{background-color: #F3F3F3;}pre.sf-dump .sf-dump-public{color: #333;}</style>';
+        echo '<style>pre.sf-dump .sf-dump-str{color: #3A69DB;}pre.sf-dump, pre.sf-dump .sf-dump-default{background-color: #F3F3F3;border:1px dashed #cfcfcf}pre.sf-dump .sf-dump-public{color: #333;}</style>';
         exit;
     }
 }
