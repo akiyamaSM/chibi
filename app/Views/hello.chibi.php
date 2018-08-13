@@ -1,6 +1,6 @@
 {{ $name }} is {{ $age }}
 
-@when(1 == 4)
+@when($age == 26)
    NO true
 @or(3 == 1)
     Should not Entre

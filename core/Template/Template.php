@@ -48,6 +48,7 @@ class Template {
 
         foreach($this->vars as $key => $value){
             $this->contents = preg_replace('/\{\{\s*\$'. $key .'\s*\}\}/', $value , $this->contents);
+            //$this->contents = preg_replace('/\$'. $key .'/', $value , $this->contents);
         }
         return $this;
     }
