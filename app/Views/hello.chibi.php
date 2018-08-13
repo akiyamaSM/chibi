@@ -1,2 +1,1 @@
-<?php
-echo "Hola " . $name;
+{{ $name }} is {{ $age }}

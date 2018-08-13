@@ -42,11 +42,11 @@ class HomeController extends Controller
             ])->withStatus(200);
     }
 
-    public function views($user, $name)
+    public function views()
     {
-        var_dump($user, $name);
         return view('hello', [
-            'name' => 'Houssain'
+            'name' => 'Houssain',
+            'age' => 26
         ]);
     }
 }
