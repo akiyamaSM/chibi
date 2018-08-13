@@ -7,8 +7,7 @@ $router->get('/customers', 'App\Controllers\HomeController@index');
 $router->get('/test', function() {
     $object = new StdClass();
     $object->name = "Houssain";
-    dump(getenv('NAME'));
-    dump($object);
+    bdump(env('NAME'),$object,env('NAME'),$object);
 });
 $router->get('/hola/{name}', function($name, $h) {
     echo route('customers', [
