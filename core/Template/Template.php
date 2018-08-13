@@ -43,16 +43,13 @@ class Template {
     }
 
     /**
-     *  Compile the echo
+     *  Parse the variables in the template
+     *
      */
-    public function compileEcho()
+    protected function parseVariables()
     {
         if ($this->checkUnassignedVariables($value)) {
             throw new \Exception("variable <b>$".$value."</b> is undefined");
-        }
-        foreach($this->vars as $key => $value){
-            $this->contents = preg_replace('/\{\{\s*\$'. $key .'\s*\}\}/', $value , $this->contents);
-            //$this->contents = preg_replace('/\$'. $key .'/', $value , $this->contents);
         }
         return $this;
     }
@@ -63,8 +60,9 @@ class Template {
      *
      * @return $this
      */
-    public function compileView()
+    public function compile()
     {
+        $this->parseVariables();
         $this->contents = file_get_contents($this->file);
         foreach($this->compilers as $compiler){
             $this->contents = (new $compiler($this->vars))->compile($this->contents);
@@ -86,7 +84,7 @@ class Template {
      *
      * @return array
      */
-    public function getTemplateVars() {
+    protected function getTemplateVars() {
         $matches = [];
         preg_match_all('/{{\s*(\$(.*?))\s*}}/', $this->contents,$matches);
         return isset($matches[2]) ? $matches[2] : [];
@@ -98,7 +96,7 @@ class Template {
      * @param $value
      * @return bool
      */
-    public function checkUnassignedVariables(&$value) {
+    protected function checkUnassignedVariables(&$value) {
         $diff = array_diff($this->getTemplateVars(),array_keys($this->vars));
         if (count($diff) > 0)  {
             $value = array_values($diff)[0];

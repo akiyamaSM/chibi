@@ -51,8 +51,7 @@ if (!function_exists('view')) {
             throw new ViewNotFoundException("The {$view} view is not found");
         }
         $template = new Template($path);
-        $template->fill($variables)->compileView()->render();
-        //require_once("app/views/{$view}.chibi.php");
+        $template->fill($variables)->compile()->render();
     }
 }
 
