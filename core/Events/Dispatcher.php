@@ -2,8 +2,8 @@
 
 namespace Chibi\Events;
 
-
-class Dispatcher {
+class Dispatcher
+{
 
     protected $listeners = [];
 
@@ -39,7 +39,7 @@ class Dispatcher {
      */
     public function getListenersByEventName($event)
     {
-        if(! $this->hasListeners($event)){
+        if (!$this->hasListeners($event)) {
             return [];
         }
 
@@ -53,9 +53,9 @@ class Dispatcher {
      */
     public function dispatch($event)
     {
-        foreach($this->getListenersByEventName($event->getName()) as $action){
+        foreach ($this->getListenersByEventName($event->getName()) as $action) {
             $continue = $action->handle($event);
-            if(!$continue){
+            if (!$continue) {
                 break;
             }
         }

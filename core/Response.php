@@ -2,12 +2,11 @@
 
 namespace Chibi;
 
-class Response {
+class Response
+{
 
     protected $body;
-
     protected $statusCode = 200;
-
     protected $headers = [];
 
     /**
@@ -42,10 +41,7 @@ class Response {
         $this->statusCode = $statusCode;
 
         header(sprintf(
-            'HTTP/%s %s %s',
-            '1.1',
-            $this->statusCode,
-            ''
+                'HTTP/%s %s %s', '1.1', $this->statusCode, ''
         ));
         return $this;
     }
@@ -104,7 +100,7 @@ class Response {
      */
     public function applyHeaders()
     {
-        array_walk($this->headers, function($header){
+        array_walk($this->headers, function($header) {
             header(
                 sprintf('%s: %s', $header['name'], $header['content'])
             );

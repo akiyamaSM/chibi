@@ -2,8 +2,9 @@
 
 namespace Chibi\Events;
 
+abstract class Listener
+{
 
-abstract class Listener {
     /**
      * @param Event $event
      * @return mixed

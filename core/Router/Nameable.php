@@ -1,15 +1,12 @@
 <?php
 
-
 namespace Chibi\Router;
 
-
-trait Nameable {
+trait Nameable
+{
 
     protected $parames = [];
-
-    protected $names =  [];
-
+    protected $names = [];
 
     /**
      * Get the list of Params
@@ -32,24 +29,24 @@ trait Nameable {
      */
     public function getUrlOfNamedRoute($name, $params)
     {
-        $params = is_array($params)?$params: [$params];
-        if(!$this->nameExists($name)){
+        $params = is_array($params) ? $params : [$params];
+        if (!$this->nameExists($name)) {
             throw new RouteNameDoesntExistException("Route '{$name}' doesn't exist");
         }
         $old_uri = $this->names[$name];
         $uri = explode('/', $old_uri);
         array_shift($uri);
 
-        if(count($uri) < count($params)){
+        if (count($uri) < count($params)) {
             throw new RouteNameArgumentInvalidException("Number of arguments is invalid");
         }
 
         $namedParams = $this->getNamedParams($uri);
-        if(count($namedParams) == 0){
+        if (count($namedParams) == 0) {
             return $old_uri;
         }
 
-        if(count($namedParams)!= count($params)){
+        if (count($namedParams) != count($params)) {
             throw new RouteNameArgumentInvalidException("Number of arguments is invalid");
         }
         return $this->buildUrlByRouteAndParams($old_uri, $namedParams, $params);
@@ -63,7 +60,7 @@ trait Nameable {
      */
     public function getNamedParams($uri)
     {
-        $params = array_filter($uri, function($part){
+        $params = array_filter($uri, function($part) {
             return preg_match('/^{.*.}$/', $part);
         });
         return array_values(array_filter($params)); // reorder index
@@ -79,11 +76,12 @@ trait Nameable {
      */
     public function buildUrlByRouteAndParams($uri, $namedParams, $params)
     {
-        for($i = 0; $i< count($namedParams); $i++){
+        for ($i = 0; $i < count($namedParams); $i++) {
             $uri = str_replace($namedParams[$i], $params[$i], $uri);
         }
         return $uri;
     }
+
     /**
      * Check if the route name exists
      *

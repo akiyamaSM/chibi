@@ -1,5 +1,4 @@
 <?php
-
 require 'vendor/autoload.php';
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__);
@@ -19,12 +18,12 @@ $container['config'] = function () {
 
 $container['db'] = function ($container) {
     return new Javanile\Moldable\Database([
-        'host'     => $container->config['db_host'],
-        'dbname'   => $container->config['db_name'],
+        'host' => $container->config['db_host'],
+        'dbname' => $container->config['db_name'],
         'username' => $container->config['db_user'],
         'password' => $container->config['db_password'],
-        'prefix'   => '',
-        'debug'    => false,
+        'prefix' => '',
+        'debug' => false,
     ]);
 };
 
