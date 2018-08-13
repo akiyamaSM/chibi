@@ -3,8 +3,7 @@
 namespace Chibi\Template\Compilers;
 
 
-class ConditionCompiler implements compilable {
-
+class PrintCompiler implements compilable {
 
     /**
      * Construct
@@ -24,11 +23,10 @@ class ConditionCompiler implements compilable {
      */
     public function compile($content)
     {
-        $content = preg_replace('/@when\((.*)\)/', '<?php if($1) : ?>', $content);
-        $content = preg_replace('/@or\((.*)\)/', '<?php elseif($1) : ?>', $content);
-        $content = preg_replace('/@otherwise/', '<?php else: ?>', $content);
-        $content = preg_replace('/@end/', '<?php endif; ?>', $content);
-
+        foreach($this->vars as $key => $value){
+            $content = preg_replace('/\{\{\s*\$'. $key .'\s*\}\}/', $value , $content);
+            $content = preg_replace('/\$'. $key .'/', $value , $content);
+        }
         return $content;
     }
 }
