@@ -4,6 +4,7 @@ namespace Chibi\Template;
 
 use Chibi\Template\Compilers\ConditionCompiler;
 use Chibi\Template\Compilers\PrintCompiler;
+use Chibi\Template\Compilers\LoopCompiler;
 
 class Template {
     use DoesntUseUnassignedVars;
@@ -15,9 +16,9 @@ class Template {
     protected $contents = "";
 
     protected $compilers = [
-        PrintCompiler::class,
         ConditionCompiler::class,
-        //LoopCompiler::class,
+        LoopCompiler::class,
+        PrintCompiler::class,
     ];
 
     /**
@@ -64,6 +65,7 @@ class Template {
      */
     public function render()
     {
+        extract($this->vars);
         eval(' ?>' .$this->contents. '<?php ') ;
     }
 }

@@ -23,10 +23,15 @@ class PrintCompiler implements Compilable {
      */
     public function compile($content)
     {
-        foreach($this->vars as $key => $value){
-            $content = preg_replace('/\{\{\s*\$'. $key .'\s*\}\}/', $value , $content);
-            $content = preg_replace('/\$'. $key .'/', $value , $content);
+
+        preg_match_all('/{{\s*(\$(.*?))\s*}}/', $content, $matches);
+
+        $echos = $matches[0];
+
+        foreach($echos as $key => $echo){
+                $content = str_replace($echo, "<?php echo {$matches[1][$key]}; ?>", $content);
         }
+        
         return $content;
     }
 }

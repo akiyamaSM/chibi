@@ -52,6 +52,7 @@ class HomeController extends Controller
         return view('hello', [
             'name' => 'Houssain',
             'age' => 26,
+            'array' => $array,
         ]);
     }
 }
