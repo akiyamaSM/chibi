@@ -52,6 +52,7 @@ if (!function_exists('view')) {
         require_once("app/views/{$view}.chibi.php");
     }
 }
+
 if (!function_exists('redirect')) {
 
     /**
@@ -62,5 +63,23 @@ if (!function_exists('redirect')) {
     function redirect($path)
     {
         header("Location: /{$path}");
+    }
+}
+
+if (!function_exists('env')) {
+    function env($key,$default = '') {
+        return getenv($key) ? getenv($key) : $default;
+    }
+}
+
+if (!function_exists('bdump')) {
+    function bdump() {
+        $args = func_get_args();
+
+        foreach ($args as $key => $value) {
+            dump($value);
+        }
+        echo '<style>pre.sf-dump .sf-dump-str{color: #3A69DB;}pre.sf-dump, pre.sf-dump .sf-dump-default{background-color: #F3F3F3;}pre.sf-dump .sf-dump-public{color: #333;}</style>';
+        exit;
     }
 }

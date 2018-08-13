@@ -8,11 +8,11 @@ $container = $app->getContainer();
 
 $container['config'] = function () {
     return [
-        'db_driver' => getenv('DB_DRIVER'),
-        'db_host' => getenv('DB_HOST'),
-        'db_name' => getenv('DB_DATABASE'),
-        'db_user' => getenv('DB_USERNAME'),
-        'db_password' => getenv('DB_PASSWORD'),
+        'db_driver' => env('DB_DRIVER'),
+        'db_host' => env('DB_HOST'),
+        'db_name' => env('DB_DATABASE'),
+        'db_user' => env('DB_USERNAME'),
+        'db_password' => env('DB_PASSWORD'),
     ];
 };
 
@@ -23,7 +23,7 @@ $container['db'] = function ($container) {
         'username' => $container->config['db_user'],
         'password' => $container->config['db_password'],
         'prefix' => '',
-        'debug' => false,
+        'debug' => env('DEBUG'),
     ]);
 };
 
@@ -31,6 +31,6 @@ Javanile\Moldable\Context::registerContainer($container);
 
 $router = $container->router;
 
-require_once 'app\Http\routes.php';
+require_once 'app/Http/routes.php';
 
 $app->run();
