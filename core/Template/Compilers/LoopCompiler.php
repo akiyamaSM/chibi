@@ -3,7 +3,7 @@
 namespace Chibi\Template\Compilers;
 
 
-class LoopCompiler implements compilable {
+class LoopCompiler implements Compilable {
 
     /**
      * Construct
@@ -23,11 +23,10 @@ class LoopCompiler implements compilable {
      */
     public function compile($content)
     {
-        $content = preg_replace('/@for\((.*)\)/', '<?php for($1) : ?>', $content);
-        $content = preg_replace('/@endfor/', '<?php endfor; ?>', $content);
         $content = preg_replace('/@foreach\((.*)\)/', '<?php foreach($1): ?>', $content);
-        $content = preg_replace('/@endforeach\((.*)\)/', '<?php endforeach; ?>', $content);
-
+        $content = preg_replace('/@for\((.*)\)/', '<?php for($1) : ?>', $content);
+        $content = preg_replace('/@endforeach/', '<?php endforeach; ?>', $content);
+        $content = preg_replace('/@endfor/', '<?php endfor; ?>', $content);
         return $content;
     }
 }

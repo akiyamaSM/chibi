@@ -3,7 +3,7 @@
 namespace Chibi\Template\Compilers;
 
 
-class ConditionCompiler implements compilable {
+class ConditionCompiler implements Compilable {
 
     /**
      * Construct
@@ -26,7 +26,7 @@ class ConditionCompiler implements compilable {
         $content = preg_replace('/@when\((.*)\)/', '<?php if($1) : ?>', $content);
         $content = preg_replace('/@or\((.*)\)/', '<?php elseif($1) : ?>', $content);
         $content = preg_replace('/@otherwise/', '<?php else: ?>', $content);
-        $content = preg_replace('/@end/', '<?php endif; ?>', $content);
+        $content = preg_replace('/@done/', '<?php endif; ?>', $content);
 
         return $content;
     }
