@@ -84,6 +84,17 @@ class App{
                     throw new \Exception("You don't have the rights to enter here", 1);
                 }
             }
+
+
+            // run specific Hurdles
+            $specificHurdles = $router->getHurdlesByPath();
+
+            foreach($specificHurdles as $specific){
+                $specificInstance = new $specific();
+                if(!$specificInstance->filter($request, $response)){
+                    throw new \Exception("You don't have the rights to enter here", 1);
+                }
+            }
             
             $res =$router->getResponse();
             $response = $res['response'];
