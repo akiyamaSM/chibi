@@ -2,7 +2,7 @@
 
 use Chibi\Request;
 
-$router->get('/user', 'App\Controllers\HomeController@views')->named('customers');
+$router->get('/user', 'App\Controllers\HomeController@views')->allow(App\Hurdles\YearIsCurrent::class)->named('customers');
 $router->get('/customers', 'App\Controllers\HomeController@index');
 $router->get('/test', function() {
     $object = new StdClass();

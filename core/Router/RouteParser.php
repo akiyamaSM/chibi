@@ -54,7 +54,7 @@ trait RouteParser
             $this->names[$name] = $this->parsedUri;
 
             $this->parsedUri = false;
-            return;
+            return $this;
         }
 
         throw new BadMethodCallException(

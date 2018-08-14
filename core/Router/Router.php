@@ -11,6 +11,7 @@ class Router
 {
 
     use RouteParser,
+        Filtrable,
         Nameable;
 
     protected $routes = [];
