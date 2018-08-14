@@ -71,8 +71,20 @@ class App{
     {
         $this->runWhoops();
         $router = $this->container->router;
+        $request = $this->container->request;
+        $response = $this->container->response;
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
         try{
+            // Get Hurdles that run on every request 
+            $hurdles = $this->getHurdles();
+
+            foreach($hurdles as $hurdle){
+                $instance = new $hurdle();
+                if(!$instance->filter($request, $response)){
+                    throw new \Exception("You don't have the rights to enter here", 1);
+                }
+            }
+            
             $res =$router->getResponse();
             $response = $res['response'];
             $parames = $res['parames'];
@@ -143,5 +155,10 @@ class App{
         $response->applyHeaders();
 
         echo $response->getBody();
+    }
+
+
+    protected function getHurdles(){
+        return require('app/hurdles/register.php');
     }
 }
