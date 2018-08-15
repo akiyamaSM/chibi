@@ -22,7 +22,7 @@ trait Filtrable
         try{
             $className = $this->getAliasFromConfig($alias);
             if (is_null($className)) {
-                throw new \Exception("No Hurdle with the Alias of {$className} exists");
+                throw new \Exception("No Hurdle with the Alias of {$alias} exists");
             }
             if ($this->isUriParsed()) {
                 $className = is_array($className) ? $className : [$className];

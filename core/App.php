@@ -2,6 +2,7 @@
 
 namespace Chibi;
 
+use Chibi\Hurdle\ShouldRedirect;
 use Chibi\Router\Router;
 use Chibi\Exceptions\ControllerNotFound;
 use Chibi\Exceptions\ControllersMethodNotFound;
@@ -81,6 +82,10 @@ class App{
             foreach($hurdles as $hurdle){
                 $instance = new $hurdle();
                 if(!$instance->filter($request, $response)){
+                    if($instance instanceof ShouldRedirect){
+                        // do some Magic in here
+                        return ;
+                    }
                     throw new \Exception("You don't have the rights to enter here", 1);
                 }
             }
@@ -92,6 +97,10 @@ class App{
             foreach($specificHurdles as $specific){
                 $specificInstance = new $specific();
                 if(!$specificInstance->filter($request, $response)){
+                    if($specificInstance instanceof ShouldRedirect){
+                        $specificInstance->redirectTo();
+                        return ;
+                    }
                     throw new \Exception("You don't have the rights to enter here", 1);
                 }
             }

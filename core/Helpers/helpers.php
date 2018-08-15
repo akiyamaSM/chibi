@@ -64,7 +64,7 @@ if (!function_exists('redirect')) {
      */
     function redirect($path)
     {
-        header("Location: /{$path}");
+        header("Location: " . base_url() . "/{$path}");
     }
 }
 
@@ -83,5 +83,29 @@ if (!function_exists('bdump')) {
         }
         echo '<style>pre.sf-dump .sf-dump-str{color: #3A69DB;}pre.sf-dump, pre.sf-dump .sf-dump-default{background-color: #F3F3F3;border:1px dashed #cfcfcf}pre.sf-dump .sf-dump-public{color: #333;}</style>';
         exit;
+    }
+}
+
+if (!function_exists('base_url')) {
+
+    /**
+     * Get the base url
+     */
+    function base_url()
+    {
+        // output: /myproject/index.php
+        $currentPath = $_SERVER['PHP_SELF'];
+
+        // output: Array ( [dirname] => /myproject [basename] => index.php [extension] => php [filename] => index )
+        $pathInfo = pathinfo($currentPath);
+
+        // output: localhost
+        $hostName = $_SERVER['HTTP_HOST'];
+
+        // output: http://
+        $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'?'https':'http';
+
+        // return: http://localhost/myproject/
+        return $protocol.'://'.$hostName.$pathInfo['dirname']."/";
     }
 }
