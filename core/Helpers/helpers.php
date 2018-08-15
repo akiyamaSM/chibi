@@ -78,7 +78,7 @@ if (!function_exists('bdump')) {
     function bdump() {
         $args = func_get_args();
         foreach ($args as $value) {
-            if (!function_exists('dump')) {
+            if (function_exists('dump')) {
                 dump($value);
             } else {
                 var_dump($value);

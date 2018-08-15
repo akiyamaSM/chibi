@@ -4,6 +4,9 @@ namespace Chibi\Events;
 
 use ReflectionClass;
 
+/**
+ * @abstract
+ */
 abstract class Event
 {
 

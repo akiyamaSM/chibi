@@ -4,26 +4,48 @@ namespace Chibi\Events;
 
 class Dispatcher
 {
-
+    /**
+     * Array of listeners
+     *
+     * @var array
+     */
     protected $listeners = [];
 
     /**
      * Push handler into list of listeners
      *
-     * @param $event
-     * @param $handler
+     * @param string $event
+     * @param Listener $handler
+     * @param int $priority
      * @return $this
      */
-    public function addListeners($event, $handler)
+    public function addListener($event, $handler, $priority = 0)
     {
-        $this->listeners[$event][] = $handler;
+        if ($handler instanceof Listener) {
+            $this->listeners[$event][$priority][] = $handler;
+        }
+        return $this;
+    }
+
+    /**
+     * Remove handler from list of listeners
+     *
+     * @param string $event
+     * @return $this
+     */
+    public function removeListener($event)
+    {
+        if (empty($this->listeners[$event])) {
+            return;
+        }
+        unset($this->listeners[$event]);
         return $this;
     }
 
     /**
      * Check if the event has listeners
      * 
-     * @param $event
+     * @param string $event
      * @return bool
      */
     public function hasListeners($event)
@@ -32,9 +54,9 @@ class Dispatcher
     }
 
     /**
-     * Get Listeners based on the name of Event
+     * Get Listeners based on the name of vent
      *
-     * @param $event
+     * @param string $event
      * @return array
      */
     public function getListenersByEventName($event)
@@ -43,13 +65,14 @@ class Dispatcher
             return [];
         }
 
-        return $this->listeners[$event];
+        return array_filter($this->listeners[$event]);
     }
 
     /**
      * Run the listeners
      *
-     * @param $event
+     * @param string $event
+     * @return $this
      */
     public function dispatch($event)
     {
@@ -59,5 +82,6 @@ class Dispatcher
                 break;
             }
         }
+        return $this;
     }
 }

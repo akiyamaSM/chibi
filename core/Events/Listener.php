@@ -2,6 +2,9 @@
 
 namespace Chibi\Events;
 
+/**
+ * @abstract
+ */
 abstract class Listener
 {
 
