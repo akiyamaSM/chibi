@@ -2,15 +2,17 @@
 
 namespace Chibi;
 
+use Chibi\Hurdle\ShouldRedirect;
 use Chibi\Router\Router;
 use Chibi\Exceptions\ControllerNotFound;
 use Chibi\Exceptions\ControllersMethodNotFound;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 
-class App{
+class App
+{
 
-    static $instance;
+    protected static $instance;
 
     protected $container;
 
@@ -82,24 +84,34 @@ class App{
         $om = $this->container->om;
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
         try {
-            // Get Hurdles that run on every request 
+            // Get Hurdles that run on every request
             $hurdles = $this->getHurdles();
 
             foreach ($hurdles as $hurdle) {
                 $instance = $om->resolve($hurdle);
                 if (!$instance->filter($request, $response)) {
+                    if ($instance instanceof ShouldRedirect) {
+                        // do some Magic in here
+                        return ;
+                    }
                     throw new \Exception("You don't have the rights to enter here", 1);
                 }
             }
 
             // run specific Hurdles
             $specificHurdles = $router->getHurdlesByPath();
-            foreach ($specificHurdles as $specific) {
+
+            foreach($specificHurdles as $specific){
                 $specificInstance = $om->resolve($specific);
-                if (!$specificInstance->filter($request, $response)) {
+                if(!$specificInstance->filter($request, $response)){
+                    if($specificInstance instanceof ShouldRedirect){
+                        $specificInstance->redirectTo();
+                        return ;
+                    }
                     throw new \Exception("You don't have the rights to enter here", 1);
                 }
             }
+
             $res =$router->getResponse();
             $response = $res['response'];
             $params = $res['parames'];
@@ -167,13 +179,15 @@ class App{
             echo $response;
             return;
         }
-
         $response->applyHeaders();
-
         echo $response->getBody();
     }
 
-
+    /**
+     * Get hurdles
+     *
+     * @return type
+     */
     protected function getHurdles(){
         return require('app/Hurdles/register.php');
     }
