@@ -18,7 +18,6 @@ $router->get('/hola/{name}', function($name, $h) {
 
 $router->get('/testa', function() {
     $om = App::getInstance()->getContainer()->om;
-    $homeController = $om->resolve(\App\Controllers\HomeController::class);
-    echo get_class($homeController);
+    $testClass = $om->resolve(\App\Test\Test::class);
 
 })->named('Hola');

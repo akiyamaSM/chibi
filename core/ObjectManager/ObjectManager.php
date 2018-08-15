@@ -12,15 +12,21 @@ class ObjectManager implements ObjectManagerInterface
     protected $instances = [];
 
     /**
+     * @var Factory
+     */
+    protected $factory = [];
+
+    /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Factory $factory)
     {
-        $this->instances[Chibi\ObjectManager\ObjectManager::class] = $this;
+        $this->factory = $factory;
+        $this->instances[Chibi\ObjectManager\ObjectManagerInterface::class] = $this;
     }
 
     /**
-     * Retrieve cached object instance
+     * Resolve object instance
      *
      * @param string $classname
      * @return mixed
@@ -32,7 +38,7 @@ class ObjectManager implements ObjectManagerInterface
         //$classname = $di[$classname];
         if (!isset($this->instances[$classname])) {
             if (class_exists($classname)) {
-                $this->instances[$classname] = new $classname();
+                $this->instances[$classname] = $this->factory->create($classname);
             }
         }
         return $this->instances[$classname];

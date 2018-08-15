@@ -21,16 +21,19 @@ class App{
     {
         $this->container = new Container(array(
             'router' => function(){
-                return new Router;
+                $om = AppObjectManager::getInstance();
+                return $om->resolve(Router::class);
             },
             'response' => function(){
-                return new Response();
+                $om = AppObjectManager::getInstance();
+                return $om->resolve(Response::class);
             },
             'request' => function(){
-                return new Request();
+                $om = AppObjectManager::getInstance();
+                return $om->resolve(Request::class);
             },
             'om' => function () {
-                return new \Chibi\ObjectManager\ObjectManager();
+                return AppObjectManager::getInstance();
             }
         ));
         $this->registerApp();
@@ -76,13 +79,14 @@ class App{
         $router = $this->container->router;
         $request = $this->container->request;
         $response = $this->container->response;
+        $om = $this->container->om;
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
         try {
             // Get Hurdles that run on every request 
             $hurdles = $this->getHurdles();
 
             foreach ($hurdles as $hurdle) {
-                $instance = new $hurdle();
+                $instance = $om->resolve($hurdle);
                 if (!$instance->filter($request, $response)) {
                     throw new \Exception("You don't have the rights to enter here", 1);
                 }
@@ -90,9 +94,8 @@ class App{
 
             // run specific Hurdles
             $specificHurdles = $router->getHurdlesByPath();
-
             foreach ($specificHurdles as $specific) {
-                $specificInstance = new $specific();
+                $specificInstance = $om->resolve($specific);
                 if (!$specificInstance->filter($request, $response)) {
                     throw new \Exception("You don't have the rights to enter here", 1);
                 }
@@ -108,8 +111,9 @@ class App{
 
     public function runWhoops()
     {
-        $whoops = new Run;
-        $whoops->pushHandler(new PrettyPageHandler);
+        $om = AppObjectManager::getInstance();
+        $whoops = $om->resolve(Run::class);
+        $whoops->pushHandler($om->resolve(PrettyPageHandler::class));
         $whoops->register();
     }
 
@@ -138,8 +142,8 @@ class App{
             if (!class_exists($class)) {
                 throw new ControllerNotFound("{$class} Controller Not Found");
             }
-
-            $caller = $this->getContainer()->resolve($class);
+            $om = AppObjectManager::getInstance();
+            $caller = $om->resolve($class);
             $method = $array[1];
             if (!method_exists($caller, $method)) {
                 throw new ControllersMethodNotFound("{$method} Not Found in the {$class} Controller");
