@@ -1,8 +1,12 @@
 <?php
 require 'vendor/autoload.php';
-$dotenv = new Dotenv();
+
+$om = Chibi\AppObjectManager::getInstance();
+
+$dotenv = $om->resolve('Dotenv');
 $dotenv->load(__DIR__);
-$app = new Chibi\App();
+
+$app = $om->resolve('Chibi\App');
 
 $container = $app->getContainer();
 

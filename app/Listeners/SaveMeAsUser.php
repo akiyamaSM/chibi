@@ -5,7 +5,8 @@ namespace App\Listeners;
 use Chibi\Events\Event;
 use Chibi\Events\Listener;
 
-class SaveMeAsUser extends Listener {
+class SaveMeAsUser extends Listener
+{
 
     /**
      * @param Event $event
