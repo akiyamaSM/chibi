@@ -75,7 +75,7 @@ class App{
         $response = $this->container->response;
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
         try{
-            // Get Hurdles that run on every request 
+            // Get Hurdles that run on every request
             $hurdles = $this->getHurdles();
 
             foreach($hurdles as $hurdle){
