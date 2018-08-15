@@ -170,6 +170,6 @@ class App{
 
 
     protected function getHurdles(){
-        return require('app/hurdles/register.php');
+        return require('app/Hurdles/register.php');
     }
 }
