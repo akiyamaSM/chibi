@@ -14,8 +14,13 @@ trait Filtrable
      *
      * @param $name
      */
-    public function allow($className)
+    public function allow($alias)
     {
+        $className = $this->getAliasFromConfig($alias);
+        if (is_null($classNames)) {
+            throw new \Exception("Error Processing Request", 1);
+            
+        }
         if ($this->isUriParsed()) {
             $className = is_array($className) ? $className : [$className];
             $this->filters[$this->parsedUri] = $className;
@@ -27,12 +32,16 @@ trait Filtrable
         );
     }
 
-
     public function getHurdlesByPath($path = null){
         if(is_null($path)){
             $path = $this->path;
         }
         
         return isset($this->filters[$path]) ? $this->filters[$path] : [];
+    }
+
+    public function getAliasFromConfig($alias) {
+        $config = include('config/Alias.php');
+        return $config['hurdles'][$alias];
     }
 }
