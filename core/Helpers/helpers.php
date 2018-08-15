@@ -77,11 +77,17 @@ if (!function_exists('env')) {
 if (!function_exists('bdump')) {
     function bdump() {
         $args = func_get_args();
-
-        foreach ($args as $key => $value) {
-            dump($value);
+        foreach ($args as $value) {
+            if (!function_exists('dump')) {
+                dump($value);
+            } else {
+                var_dump($value);
+            }
         }
-        echo '<style>pre.sf-dump .sf-dump-str{color: #3A69DB;}pre.sf-dump, pre.sf-dump .sf-dump-default{background-color: #F3F3F3;border:1px dashed #cfcfcf}pre.sf-dump .sf-dump-public{color: #333;}</style>';
+        if (!function_exists('dump')) {
+            echo '<style>pre.sf-dump .sf-dump-str{color: #3A69DB;}pre.sf-dump, pre.sf-dump .sf-dump-default{background-color: #F3F3F3;border:1px dashed #cfcfcf}pre.sf-dump .sf-dump-public{color: #333;}</style>';
+        }
         exit;
     }
 }
+
