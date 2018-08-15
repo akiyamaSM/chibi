@@ -8,10 +8,19 @@
         "Chibi\\": "core/"
       }
   },
+  "repositories": [
+      {
+          "type": "path",
+          "url": "packages/chibi/console"
+      }
+  ],
   "require": {
     "javanile/moldable": "^0.0.47",
     "filp/whoops": "^2.1",
     "vlucas/phpdotenv": "~1.0",
-    "symfony/var-dumper": "^4.1"
+    "symfony/var-dumper": "3.*"
+  },
+  "require-dev" :{
+    "chibi/console": "*"
   }
 }
