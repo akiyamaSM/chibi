@@ -12,6 +12,14 @@ class ObjectManager implements ObjectManagerInterface
     protected $instances = [];
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->instances[Chibi\ObjectManager\ObjectManager::class] = $this;
+    }
+
+    /**
      * Retrieve cached object instance
      *
      * @param string $classname
@@ -19,9 +27,9 @@ class ObjectManager implements ObjectManagerInterface
      */
     public function resolve($classname)
     {
-        $di = [];
+        $di = [];//@todo get all di from a config
         $classname = ltrim($classname, '\\');
-        //$type = @$di[$type];
+        //$classname = $di[$classname];
         if (!isset($this->instances[$classname])) {
             if (class_exists($classname)) {
                 $this->instances[$classname] = new $classname();
