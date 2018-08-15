@@ -2,11 +2,12 @@
 
 namespace App\Hurdles;
 
+use Chibi\Hurdle\ShouldRedirect;
 use Chibi\Hurdle\Wall;
 use Chibi\Request;
 use Chibi\Response;
 
-class YearIsCurrent implements Wall{
+class YearIsCurrent implements Wall, ShouldRedirect{
 
 	public function filter(Request $request, Response $response){
 
@@ -16,4 +17,14 @@ class YearIsCurrent implements Wall{
 
 		return false;
 	}
+
+    /**
+     * Redirect to a page
+     *
+     * @return mixed
+     */
+    public function redirectTo()
+    {
+        return redirect(route('test'));
+    }
 }
