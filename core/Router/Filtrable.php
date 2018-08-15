@@ -12,24 +12,31 @@ trait Filtrable
     /**
      * Name a route
      *
-     * @param $name
+     * @param $alias
+     * @return $this
+     * @throws \Exception
+     * @internal param $name
      */
     public function allow($alias)
     {
-        $className = $this->getAliasFromConfig($alias);
-        if (is_null($classNames)) {
-            throw new \Exception("Error Processing Request", 1);
-            
-        }
-        if ($this->isUriParsed()) {
-            $className = is_array($className) ? $className : [$className];
-            $this->filters[$this->parsedUri] = $className;
-            return $this;
-        }
+        try{
+            $className = $this->getAliasFromConfig($alias);
+            if (is_null($className)) {
+                throw new \Exception("No Hurdle with the Alias of {$alias} exists");
+            }
+            if ($this->isUriParsed()) {
+                $className = is_array($className) ? $className : [$className];
+                $this->filters[$this->parsedUri] = $className;
+                return $this;
+            }
 
-        throw new BadMethodCallException(
-        "Method allow can't be called Before setting the route"
-        );
+            throw new BadMethodCallException(
+            "Method allow can't be called Before setting the route"
+            );
+        }catch (\Exception $e){
+            echo $e->getMessage();
+            die();
+        }
     }
 
     public function getHurdlesByPath($path = null){
@@ -42,6 +49,6 @@ trait Filtrable
 
     public function getAliasFromConfig($alias) {
         $config = include('config/Alias.php');
-        return $config['hurdles'][$alias];
+        return isset($config['hurdles'][$alias])? $config['hurdles'][$alias] : null;
     }
 }

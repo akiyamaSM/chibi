@@ -1,5 +1,5 @@
-# chibi
-Chibi Is a mini PHP framework to work on small projects, containing the following elements.
+# Chibi
+Chibi is a mini PHP framework to work on small projects, containing the following elements.
 
 # Routing
 With Chibi its really easy to make your routes
@@ -33,7 +33,7 @@ $router->post('/customers', function(Request $request, Response $respone){
 # Hurdles
 
 
-Do you want to protect some routes? To be able to access to it only if some conditions is verified, sure you can do! Just use Hurdles for your routes
+Do you want to protect some routes? To be able to access to it only if some conditions are verified, sure you can do! Just use Hurdles for your routes
 ## Create a Hurdle
 A hurdle Object should implement the Wall Interface
 ```php
