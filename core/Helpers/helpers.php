@@ -114,3 +114,19 @@ if (!function_exists('base_url')) {
         return $protocol.'://'.$hostName.$pathInfo['dirname']."/";
     }
 }
+
+if (!function_exists('app')) {
+    /**
+     * Get the app
+     * @param null $key
+     * @return string
+     */
+    function app($key = null) {
+        $app = App::getInstance();
+        if(is_null($key)){
+            return $app;
+        }
+
+        return $app->getContainer()->{$key};
+    }
+}

@@ -3,6 +3,8 @@
 namespace Kolores\Router;
 
 use BadMethodCallException;
+use Chibi\Controller\Controller;
+use ReflectionClass;
 
 trait RouteParser
 {
@@ -17,6 +19,12 @@ trait RouteParser
      */
     public function get($uri, $handler)
     {
+        try{
+            $this->checkIfNotValideHandler($handler);
+
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
         return $this->addRoute($uri, $handler, ['GET']);
     }
 
@@ -65,5 +73,34 @@ trait RouteParser
     public function isUriParsed()
     {
         return $this->parsedUri != false;
+    }
+
+    public function checkIfNotValideHandler($handler)
+    {
+        if(is_callable($handler)){
+            return;
+        }
+
+        return $this->getClass($handler);
+
+    }
+
+    protected function getClass($handler)
+    {
+        $string = explode('@', $handler);
+
+        if(count($string) !== 2){
+            throw new \Exception("Not the Good Syntax");
+        }
+        $class = $string[0];
+        if(!class_exists($class)){
+            throw new \Exception("Class {$class} Not found");
+        }
+        $object = new ReflectionClass($class);
+        if(!$object->isSubclassOf (Controller::class)){
+            throw new \Exception("Class {$class} is not a controller");
+        }
+
+        return;
     }
 }
