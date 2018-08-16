@@ -2,7 +2,7 @@
 
 namespace Chibi\ObjectManager;
 
-class ObjectManager implements ObjectManagerInterface
+class ObjectManager implements ObjectManagerInterface, \ArrayAccess
 {
     /**
      * List of instances
@@ -50,11 +50,54 @@ class ObjectManager implements ObjectManagerInterface
         $di = [];//@todo get all di from a config
         $classname = ltrim($classname, '\\');
         //$classname = $di[$classname];
-        if (!isset($this->instances[$classname])) {
+        if (!$this->offsetExists($classname)) {
             if (class_exists($classname)) {
-                $this->instances[$classname] = $this->factory->create($classname);
+                $this->offsetSet($classname, $this->factory->create($classname));
             }
         }
-        return $this->instances[$classname];
+        return $this->offsetGet($classname);
+    }
+
+    /**
+     * Check if offset exists
+     *
+     * @param string $offset
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->instances[$offset]);
+    }
+
+    /**
+     * Get the offset
+     *
+     * @param string $offset
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->instances[$offset]) ? $this->instances[$offset] : null;
+    }
+
+    /**
+     * Set the offset
+     *
+     * @param string $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->instances[$offset] = $value;
+    }
+
+    /**
+     * Unset the offset
+     *
+     * @param type $offset
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->instances[$offset]);
     }
 }
