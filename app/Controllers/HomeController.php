@@ -12,6 +12,7 @@ class HomeController extends Controller
 
     public function index(Request $request, Response $response)
     {
+
         $html = '<a href="/">main menu</a> - <a href="/customer/edit">add new</a><hr/>'
             . '<table border="1"><tr>';
 
@@ -53,5 +54,11 @@ class HomeController extends Controller
             'age' => 26,
             'array' => $array,
         ]);
+    }
+
+    public function testConfig()
+    {
+        $config = \Kolores\App::getInstance()->getContainer()->config;
+        bdump($config);
     }
 }

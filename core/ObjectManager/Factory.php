@@ -39,7 +39,9 @@ class Factory implements FactoryInterface
                     }
                 }
             }
+        } catch (\ReflectionException $e) {
         } catch (\Exception $e) {
+            throw $e;
             
         }
         if ($args === []) {

@@ -86,8 +86,11 @@ class App
         $router = $this->container->router;
         $request = $this->container->request;
         $response = $this->container->response;
-        $om = $this->getContainer()->om;
+        $om = $this->container->om;
         /* @var $om Kolores\ObjectManager\ObjectManager */
+        $om->resolve(\Kolores\ConfigManager::class);
+        $config = $this->container->config;
+
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
         // Get Hurdles that run on every request
         $hurdles = $this->getHurdles();
@@ -97,14 +100,13 @@ class App
             if (!$instance->filter($request, $response)) {
                 if ($instance instanceof ShouldRedirect) {
                     // do some Magic in here
-                    return ;
+                    break ;
                 }
                 throw new \Exception("You don't have the rights to enter here", 1);
             }
         }
         // run specific Hurdles
         $specificHurdles = $router->getHurdlesByPath();
-
         foreach($specificHurdles as $specific){
             $specificInstance = $om->resolve($specific);
             if(!$specificInstance->filter($request, $response)){
@@ -115,6 +117,7 @@ class App
                 throw new \Exception("You don't have the rights to enter here", 1);
             }
         }
+
         $res =$router->getResponse();
         $response = $res['response'];
         $params = $res['parames'];

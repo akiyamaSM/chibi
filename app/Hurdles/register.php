@@ -1,5 +1,5 @@
 <?php
 
 return [
-	//App\Hurdles\AgeGreaterThan::class,
+	'YearIsCurrent' => App\Hurdles\YearIsCurrent::class
 ];
