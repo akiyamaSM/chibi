@@ -5,34 +5,38 @@ namespace Chibi\Console\Commands;
 class ChibiTestCommand extends ChibiCommand
 {
 	/**
-	 * [$name description]
+	 * Hold command name
 	 * @var string
 	 */
 	protected $name = "test";
+
 	/**
-	 * [$description description]
+	 * Hold command description
 	 * @var string
 	 */
 	protected $description = "test description";
+
 	/**
-	 * [$arguments description]
-	 * @var [type]
+	 * Hold command arguments
+	 * @var array
 	 */
 	protected $arguments = [
-		'name' => 'this is a --check description'
+		'name' => 'this test name argument'
 	];
+
 	/**
-	 * [$options description]
-	 * @var [type]
+	 * Hold command options
+	 * @var array
 	 */
 	protected $options = [
-		'check' => 'this is a --check-opt description'
+		'check' => 'this is a --check option'
 	];
+	
 	/**
-	 * [fire description]
-	 * @return [type] [description]
+	 * @inheritdoc
 	 */
-	public function fire() {
+	public function fire() 
+	{
 		$this->comment($this->name.'::command is fired');
 	}
 }

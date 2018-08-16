@@ -22,7 +22,6 @@ abstract class ChibiCommand extends Command implements CommandInterface {
 	{
 		$this->setName($this->name)
 			  ->setDescription($this->description);
-
 		$this->mapArguments();
 		$this->mapOptions();
 	}
