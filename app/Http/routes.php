@@ -1,5 +1,6 @@
 <?php
 
+use Chibi\App;
 use Chibi\Request;
 
 $router->get('/hola/{name}', function($name, $h) {
