@@ -11,9 +11,14 @@ use Whoops\Run;
 
 class App
 {
-
+    /**
+     * @var App 
+     */
     protected static $instance;
 
+    /**
+     * @var Container 
+     */
     protected $container;
 
     /**
@@ -44,7 +49,7 @@ class App
     /**
      * Get the App instance
      *
-     * @return mixed
+     * @return App
      */
     public static function getInstance()
     {
@@ -81,7 +86,8 @@ class App
         $router = $this->container->router;
         $request = $this->container->request;
         $response = $this->container->response;
-        $om = $this->container->om;
+        $om = $this->getContainer()->om;
+        /* @var $om Chibi\ObjectManager\ObjectManager */
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
         try {
             // Get Hurdles that run on every request
@@ -121,9 +127,13 @@ class App
         }
     }
 
-    public function runWhoops()
+    /**
+     * Run Whoops
+     */
+    protected function runWhoops()
     {
-        $om = AppObjectManager::getInstance();
+         $om = $this->getContainer()->om;
+        /* @var $om Chibi\ObjectManager\ObjectManager */
         $whoops = $om->resolve(Run::class);
         $whoops->pushHandler($om->resolve(PrettyPageHandler::class));
         $whoops->register();
@@ -140,8 +150,10 @@ class App
      */
     public function process($callable, $parames = [])
     {
+        $om = $this->getContainer()->om;
+        /* @var $om Chibi\ObjectManager\ObjectManager */
         $parames_all = $parames;
-
+        $om = AppObjectManager::getInstance();
         if (is_callable($callable)) {
             return call_user_func_array($callable,
                 $this->getContainer()->resolveMethod('', $callable, $parames_all)
@@ -150,17 +162,14 @@ class App
         if (is_string($callable)) {
             $array = explode('@', $callable);
             $class = $array[0];
-
             if (!class_exists($class)) {
                 throw new ControllerNotFound("{$class} Controller Not Found");
             }
-            $om = AppObjectManager::getInstance();
             $caller = $om->resolve($class);
             $method = $array[1];
             if (!method_exists($caller, $method)) {
                 throw new ControllersMethodNotFound("{$method} Not Found in the {$class} Controller");
             }
-
             return call_user_func_array(
                 [$caller, $method],
                 $this->getContainer()->resolveMethod($class, $method, $parames_all)

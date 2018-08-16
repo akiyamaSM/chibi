@@ -22,5 +22,6 @@ $router->get('/hola/{name}', function($name, $h) {
 
 $router->get('/testa', function() {
     $om = App::getInstance()->getContainer()->om;
+    /* @var $om Chibi\ObjectManager\ObjectManager */
     $testClass = $om->resolve(\App\Test\Test::class);
 })->named('testa');

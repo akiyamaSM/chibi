@@ -9,10 +9,21 @@ use Chibi\Exceptions\ClassIsNotInstantiableException;
 
 class Container implements ArrayAccess
 {
-
+    /**
+     * @var array 
+     */
     protected $items = [];
+
+    /**
+     * @var array 
+     */
     protected $cache = [];
 
+    /**
+     * Constructor
+     *
+     * @param array $items
+     */
     public function __construct(array $items = [])
     {
         array_walk($items, function ($item, $key) {
@@ -20,6 +31,12 @@ class Container implements ArrayAccess
         }, array_keys($items));
     }
 
+    /**
+     * Get the offset
+     *
+     * @param string $offset
+     * @return mixed
+     */
     public function offsetGet($offset)
     {
         if (!$this->has($offset)) {
@@ -34,11 +51,22 @@ class Container implements ArrayAccess
         return $item;
     }
 
+    /**
+     * Set the offset
+     *
+     * @param string $offset
+     * @param mixed $value
+     */
     public function offsetSet($offset, $value)
     {
         $this->items[$offset] = $value;
     }
 
+    /**
+     * Unset the offset
+     *
+     * @param string $offset
+     */
     public function offsetUnset($offset)
     {
         if ($this->has($offset)) {
@@ -46,21 +74,46 @@ class Container implements ArrayAccess
         }
     }
 
+    /**
+     * Check if offset exist
+     *
+     * @param string $offset
+     * @return boolean
+     */
     public function offsetExists($offset)
     {
         return isset($this->items[$offset]);
     }
 
+    /**
+     * Check if offset exist
+     *
+     * @param string $offset
+     * @return boolean
+     */
     public function has($offset)
     {
         return $this->offsetExists($offset);
     }
 
+    /**
+     * Magic getter
+     *
+     * @param string $offset
+     * @return mixed
+     */
     public function __get($offset)
     {
         return $this->offsetGet($offset);
     }
 
+    /**
+     * Resolver
+     *
+     * @param string $key
+     * @param array $args
+     * @return mixed
+     */
     public function resolve($key, array $args = [])
     {
         $class = $this->offsetGet($key);
@@ -72,6 +125,14 @@ class Container implements ArrayAccess
         return $this->constructIt($class, $args);
     }
 
+    /**
+     * Construct it
+     *
+     * @param string $className
+     * @param array $args
+     * @return \Chibi\className
+     * @throws ClassIsNotInstantiableException
+     */
     protected function constructIt($className, array $args = [])
     {
         $reflector = new ReflectionClass($className);
