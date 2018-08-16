@@ -6,7 +6,16 @@ interface ObjectManagerInterface
 {
 
     /**
-     * Retrieve loaded instance
+     * Create new object instance
+     *
+     * @param string $classname
+     * @param array $args
+     * @return mixed
+     */
+    public function create($classname, array $args = []);
+
+    /**
+     * Resolve object instance
      *
      * @param string $classname
      * @return mixed

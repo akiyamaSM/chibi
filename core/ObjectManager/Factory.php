@@ -4,6 +4,7 @@ namespace Chibi\ObjectManager;
 
 class Factory implements FactoryInterface
 {
+
     /**
      * Create instance with arguments
      *
@@ -26,7 +27,7 @@ class Factory implements FactoryInterface
                             if (!$param->isOptional()) {
                                 $args[] = null;
                             }
-                        }                        
+                        }
                     } else {
                         if ($param->isArray()) {
                             $args[] = ($param->isOptional()) ? $param->getDefaultValue() : array();
@@ -39,6 +40,7 @@ class Factory implements FactoryInterface
                 }
             }
         } catch (\Exception $e) {
+            
         }
         if ($args === []) {
             return new $className();

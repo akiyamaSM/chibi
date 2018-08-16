@@ -26,6 +26,20 @@ class ObjectManager implements ObjectManagerInterface
     }
 
     /**
+     * Create new object instance
+     *
+     * @param string $classname
+     * @param array $args
+     * @return mixed
+     */
+    public function create($classname, array $args = [])
+    {
+        $di = [];//@todo get all di from a config
+        $classname = ltrim($classname, '\\');
+        return $this->factory->create($classname, $args);
+    }
+
+    /**
      * Resolve object instance
      *
      * @param string $classname
