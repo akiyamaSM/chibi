@@ -1,4 +1,4 @@
-# Koloris
+# Kolores
 Kolores is a mini PHP framework to work on small projects, containing the following elements.
 
 # Routing
