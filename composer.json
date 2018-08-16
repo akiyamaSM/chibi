@@ -5,7 +5,7 @@
       ],
       "psr-4": {
         "App\\": "app/",
-        "Chibi\\": "core/"
+        "Kolores\\": "core/"
       }
   },
   "repositories": [

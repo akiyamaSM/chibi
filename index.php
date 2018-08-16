@@ -5,7 +5,7 @@ require  __DIR__ . '/vendor/autoload.php';
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__);
 
-$app = new \Chibi\App();
+$app = new \Kolores\App();
 
 $container = $app->getContainer();
 
