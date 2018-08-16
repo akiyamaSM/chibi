@@ -1,7 +1,6 @@
 <?php
 
 use Chibi\App;
-use Chibi\Request;
 
 $router->get('/hola/{name}', function($name, $h) {
     echo route('customers', [
@@ -23,7 +22,7 @@ $router->get('/test', function() {
 
 
 $router->get('/testa', function() {
-    $om = App::getInstance()->getContainer()->om;
+    $om = app('om');
     /* @var $om Chibi\ObjectManager\ObjectManager */
     $testClass = $om->resolve(\App\Test\Test::class);
 })->named('testa');
