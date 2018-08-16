@@ -20,7 +20,6 @@ class HomeController extends Controller
         }
 
         $html .= '<th></th></tr>';
-
         foreach (Customer::all() as $customer) {
             $html .= '<tr>';
             foreach (Customer::getModelFields() as $field) {
@@ -44,7 +43,7 @@ class HomeController extends Controller
 
     public function views()
     {
-        $array  = [
+        $array = [
             'one',
             'two',
             'three'

@@ -3,6 +3,7 @@
 namespace Chibi;
 
 use Chibi\ObjectManager\Factory;
+use Whoops\Run;
 
 class AppObjectManager extends ObjectManager\ObjectManager
 {
@@ -41,9 +42,8 @@ class AppObjectManager extends ObjectManager\ObjectManager
      *
      * @param Factory $factory
      */
-    public function __construct(
-        Factory $factory
-    ) {
+    public function __construct(Factory $factory) {
         parent::__construct($factory);
+        self::$instance = $this;
     }
 }

@@ -49,7 +49,9 @@ class ObjectManager implements ObjectManagerInterface, \ArrayAccess
     {
         $di = [];//@todo get all di from a config
         $classname = ltrim($classname, '\\');
-        //$classname = $di[$classname];
+        if(array_key_exists($classname, $di)) {
+            $classname = $di[$classname];
+        }
         if (!$this->offsetExists($classname)) {
             if (class_exists($classname)) {
                 $this->offsetSet($classname, $this->factory->create($classname));

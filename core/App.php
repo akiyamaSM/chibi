@@ -7,7 +7,7 @@ use Chibi\Router\Router;
 use Chibi\Exceptions\ControllerNotFound;
 use Chibi\Exceptions\ControllersMethodNotFound;
 use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run;
+use Whoops\Handler\JsonResponseHandler;
 
 class App
 {
@@ -26,6 +26,7 @@ class App
      */
     public function __construct()
     {
+        $this->runWhoops();
         $this->container = new Container(array(
             'router' => function(){
                 $om = AppObjectManager::getInstance();
@@ -82,49 +83,42 @@ class App
      */
     public function run()
     {
-        $this->runWhoops();
         $router = $this->container->router;
         $request = $this->container->request;
         $response = $this->container->response;
         $om = $this->getContainer()->om;
         /* @var $om Chibi\ObjectManager\ObjectManager */
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
-        try {
-            // Get Hurdles that run on every request
-            $hurdles = $this->getHurdles();
+        // Get Hurdles that run on every request
+        $hurdles = $this->getHurdles();
 
-            foreach ($hurdles as $hurdle) {
-                $instance = $om->resolve($hurdle);
-                if (!$instance->filter($request, $response)) {
-                    if ($instance instanceof ShouldRedirect) {
-                        // do some Magic in here
-                        return ;
-                    }
-                    throw new \Exception("You don't have the rights to enter here", 1);
+        foreach ($hurdles as $hurdle) {
+            $instance = $om->resolve($hurdle);
+            if (!$instance->filter($request, $response)) {
+                if ($instance instanceof ShouldRedirect) {
+                    // do some Magic in here
+                    return ;
                 }
+                throw new \Exception("You don't have the rights to enter here", 1);
             }
-
-            // run specific Hurdles
-            $specificHurdles = $router->getHurdlesByPath();
-
-            foreach($specificHurdles as $specific){
-                $specificInstance = $om->resolve($specific);
-                if(!$specificInstance->filter($request, $response)){
-                    if($specificInstance instanceof ShouldRedirect){
-                        $specificInstance->redirectTo();
-                        return ;
-                    }
-                    throw new \Exception("You don't have the rights to enter here", 1);
-                }
-            }
-
-            $res =$router->getResponse();
-            $response = $res['response'];
-            $params = $res['parames'];
-            return $this->respond($this->process($response, $params));
-        } catch (\Exception $e) {
-            echo $e->getMessage();
         }
+        // run specific Hurdles
+        $specificHurdles = $router->getHurdlesByPath();
+
+        foreach($specificHurdles as $specific){
+            $specificInstance = $om->resolve($specific);
+            if(!$specificInstance->filter($request, $response)){
+                if($specificInstance instanceof ShouldRedirect){
+                    $specificInstance->redirectTo();
+                    return ;
+                }
+                throw new \Exception("You don't have the rights to enter here", 1);
+            }
+        }
+        $res =$router->getResponse();
+        $response = $res['response'];
+        $params = $res['parames'];
+        return $this->respond($this->process($response, $params));
     }
 
     /**
@@ -132,11 +126,14 @@ class App
      */
     protected function runWhoops()
     {
-         $om = $this->getContainer()->om;
-        /* @var $om Chibi\ObjectManager\ObjectManager */
-        $whoops = $om->resolve(Run::class);
-        $whoops->pushHandler($om->resolve(PrettyPageHandler::class));
-        $whoops->register();
+        $run = new \Whoops\Run;
+        $handler = new PrettyPageHandler;
+        $handler->setPageTitle("There was a problem.");
+        $run->pushHandler($handler);
+        if (\Whoops\Util\Misc::isAjaxRequest()) {
+          $run->pushHandler(new JsonResponseHandler);
+        }
+        $run->register();
     }
 
     /**
