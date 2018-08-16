@@ -2,7 +2,7 @@
 
 namespace App\Test;
 
-use Chibi\Container;
+use Kolores\Container;
 
 class Pesta
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chibi\ObjectManager;
+namespace Kolores\ObjectManager;
 
 class ObjectManager implements ObjectManagerInterface, \ArrayAccess
 {
@@ -22,7 +22,7 @@ class ObjectManager implements ObjectManagerInterface, \ArrayAccess
     public function __construct(Factory $factory)
     {
         $this->factory = $factory;
-        $this->instances[Chibi\ObjectManager\ObjectManagerInterface::class] = $this;
+        $this->instances[Kolores\ObjectManager\ObjectManagerInterface::class] = $this;
     }
 
     /**

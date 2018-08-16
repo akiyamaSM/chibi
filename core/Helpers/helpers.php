@@ -1,8 +1,8 @@
 <?php
 
-use Chibi\App;
-use Chibi\Exceptions\ViewNotFoundException;
-use Chibi\Template\Template;
+use Kolores\App;
+use Kolores\Exceptions\ViewNotFoundException;
+use Kolores\Template\Template;
 
 if (!function_exists('route')) {
 
@@ -46,7 +46,7 @@ if (!function_exists('view')) {
      */
     function view($view, $variables = [])
     {
-        $path = "app/Views/{$view}.chibi.php";
+        $path = "app/Views/{$view}.Kolores.php";
         if (!(file_exists($path))) {
             throw new ViewNotFoundException("The {$view} view is not found");
         }

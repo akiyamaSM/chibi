@@ -1,9 +1,9 @@
 <?php
 
-namespace Chibi\Hurdle;
+namespace Kolores\Hurdle;
 
-use Chibi\Request;
-use Chibi\Response;
+use Kolores\Request;
+use Kolores\Response;
 
 
 interface Wall {

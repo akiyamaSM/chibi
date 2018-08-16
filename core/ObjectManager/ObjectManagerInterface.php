@@ -1,6 +1,6 @@
 <?php
 
-namespace Chibi\ObjectManager;
+namespace Kolores\ObjectManager;
 
 interface ObjectManagerInterface
 {

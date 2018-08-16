@@ -1,11 +1,11 @@
 <?php
 
-namespace Chibi;
+namespace Kolores;
 
 use ArrayAccess;
 use Psr\Log\InvalidArgumentException;
 use ReflectionClass;
-use Chibi\Exceptions\ClassIsNotInstantiableException;
+use Kolores\Exceptions\ClassIsNotInstantiableException;
 
 class Container implements ArrayAccess
 {
@@ -130,7 +130,7 @@ class Container implements ArrayAccess
      *
      * @param string $className
      * @param array $args
-     * @return \Chibi\className
+     * @return \Kolores\className
      * @throws ClassIsNotInstantiableException
      */
     protected function constructIt($className, array $args = [])

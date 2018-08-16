@@ -1,6 +1,6 @@
 <?php
 
-namespace Chibi\Events;
+namespace Kolores\Events;
 
 use ReflectionClass;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Chibi\Template;
+namespace Kolores\Template;
 
-use Chibi\Template\Compilers\ConditionCompiler;
-use Chibi\Template\Compilers\PrintCompiler;
-use Chibi\Template\Compilers\LoopCompiler;
+use Kolores\Template\Compilers\ConditionCompiler;
+use Kolores\Template\Compilers\PrintCompiler;
+use Kolores\Template\Compilers\LoopCompiler;
 
 class Template {
     use DoesntUseUnassignedVars;

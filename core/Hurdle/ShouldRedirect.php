@@ -1,5 +1,5 @@
 <?php
-namespace Chibi\Hurdle;
+namespace Kolores\Hurdle;
 
 interface ShouldRedirect{
     /**

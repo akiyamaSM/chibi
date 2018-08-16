@@ -1,8 +1,9 @@
-# Chibi
-Chibi is a mini PHP framework to work on small projects, containing the following elements.
+# Koloris
+Kolores is a mini PHP framework to work on small projects, containing the following elements.
 
 # Routing
-With Chibi its really easy to make your routes
+With Koloris its really easy to make your routes
+
 ## Route to Controller
 ```php
 $router->get('/users, 'App\Controllers\HomeController@views');
@@ -40,9 +41,9 @@ A hurdle Object should implement the Wall Interface
 
 namespace App\Hurdles;
 
-use Chibi\Hurdle\Wall;
-use Chibi\Request;
-use Chibi\Response;
+use Kolores\Hurdle\Wall;
+use Kolores\Request;
+use Kolores\Response;
 
 class YearIsCurrent implements Wall{
 
@@ -71,4 +72,4 @@ return [
 ```
 
 # Simple ORM
-The Chibi framework is using [Francesco Bianco](https://github.com/francescobianco)'s ORM([moldable](https://github.com/javanile/moldable)), take a look on it to know how to use it.
+The Kolores framework is using [Francesco Bianco](https://github.com/francescobianco)'s ORM([moldable](https://github.com/javanile/moldable)), take a look on it to know how to use it.

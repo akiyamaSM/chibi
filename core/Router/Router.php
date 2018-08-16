@@ -1,11 +1,11 @@
 <?php
 
-namespace Chibi\Router;
+namespace Kolores\Router;
 
-use Chibi\Exceptions\HttpMethodNotAllowedException;
-use Chibi\Exceptions\HttpRouteNotFoundException;
-use Chibi\Exceptions\RouteNameArgumentInvalidException;
-use Chibi\Exceptions\RouteNameDoesntExistException;
+use Kolores\Exceptions\HttpMethodNotAllowedException;
+use Kolores\Exceptions\HttpRouteNotFoundException;
+use Kolores\Exceptions\RouteNameArgumentInvalidException;
+use Kolores\Exceptions\RouteNameDoesntExistException;
 
 class Router
 {

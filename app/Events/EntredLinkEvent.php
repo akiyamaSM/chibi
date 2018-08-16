@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use Chibi\Events\Event;
+use Kolores\Events\Event;
 
 class EntredLinkEvent extends Event{
 

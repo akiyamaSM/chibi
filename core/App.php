@@ -1,11 +1,11 @@
 <?php
 
-namespace Chibi;
+namespace Kolores;
 
-use Chibi\Hurdle\ShouldRedirect;
-use Chibi\Router\Router;
-use Chibi\Exceptions\ControllerNotFound;
-use Chibi\Exceptions\ControllersMethodNotFound;
+use Kolores\Hurdle\ShouldRedirect;
+use Kolores\Router\Router;
+use Kolores\Exceptions\ControllerNotFound;
+use Kolores\Exceptions\ControllersMethodNotFound;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Handler\JsonResponseHandler;
 
@@ -87,7 +87,7 @@ class App
         $request = $this->container->request;
         $response = $this->container->response;
         $om = $this->getContainer()->om;
-        /* @var $om Chibi\ObjectManager\ObjectManager */
+        /* @var $om Kolores\ObjectManager\ObjectManager */
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
         // Get Hurdles that run on every request
         $hurdles = $this->getHurdles();
@@ -148,7 +148,7 @@ class App
     public function process($callable, $parames = [])
     {
         $om = $this->getContainer()->om;
-        /* @var $om Chibi\ObjectManager\ObjectManager */
+        /* @var $om Kolores\ObjectManager\ObjectManager */
         $parames_all = $parames;
         $om = AppObjectManager::getInstance();
         if (is_callable($callable)) {

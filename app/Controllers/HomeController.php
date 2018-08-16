@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use Chibi\Request;
-use Chibi\Response;
+use Kolores\Request;
+use Kolores\Response;
 use App\Models\Customer;
-use Chibi\Controller\Controller;
+use Kolores\Controller\Controller;
 
 class HomeController extends Controller
 {

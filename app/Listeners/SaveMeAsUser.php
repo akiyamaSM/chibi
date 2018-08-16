@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use Chibi\Events\Event;
-use Chibi\Events\Listener;
+use Kolores\Events\Event;
+use Kolores\Events\Listener;
 
 class SaveMeAsUser extends Listener
 {

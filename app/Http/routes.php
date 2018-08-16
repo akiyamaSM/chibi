@@ -1,14 +1,14 @@
 <?php
 
-use Chibi\Request;
-use Chibi\App;
+use Kolores\Request;
+use Kolores\App;
 
 $router->get('/user', 'App\Controllers\HomeController@views')->allow('YearIsCurrent')->named('customers');
 $router->get('/customers', 'App\Controllers\HomeController@index');
 $router->get('/test', function() {
     $om = App::getInstance()->getContainer()->om;
-    /* @var $om Chibi\ObjectManager\ObjectManager */
-    $dispatcher = $om->resolve(\Chibi\Events\Dispatcher::class);
+    /* @var $om Kolores\ObjectManager\ObjectManager */
+    $dispatcher = $om->resolve(\Kolores\Events\Dispatcher::class);
     $name = "Houssain";
     $dispatcher->addListeners("EntredLinkEvent", $om->resolve(\App\Listeners\SayHello::class));
     $dispatcher->addListeners("EntredLinkEvent", $om->resolve(\App\Listeners\SaveMeAsUser::class));
@@ -22,6 +22,6 @@ $router->get('/hola/{name}', function($name, $h) {
 
 $router->get('/testa', function() {
     $om = App::getInstance()->getContainer()->om;
-    /* @var $om Chibi\ObjectManager\ObjectManager */
+    /* @var $om Kolores\ObjectManager\ObjectManager */
     $testClass = $om->resolve(\App\Test\Test::class);
 })->named('testa');

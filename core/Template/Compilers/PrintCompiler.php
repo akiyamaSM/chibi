@@ -1,6 +1,6 @@
 <?php
 
-namespace Chibi\Template\Compilers;
+namespace Kolores\Template\Compilers;
 
 
 class PrintCompiler implements Compilable {

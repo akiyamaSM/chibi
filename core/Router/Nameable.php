@@ -1,6 +1,6 @@
 <?php
 
-namespace Chibi\Router;
+namespace Kolores\Router;
 
 trait Nameable
 {

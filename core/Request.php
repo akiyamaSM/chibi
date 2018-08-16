@@ -1,6 +1,6 @@
 <?php
 
-namespace Chibi;
+namespace Kolores;
 
 class Request
 {
