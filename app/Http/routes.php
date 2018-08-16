@@ -1,6 +1,7 @@
 <?php
 
 use Chibi\Request;
+
 $router->get('/hola/{name}', function($name, $h) {
     echo route('customers', [
         $name, 'two'
@@ -10,10 +11,18 @@ $router->get('/hola/{name}', function($name, $h) {
 $router->get('/user', 'App\Controllers\HomeController@views')->allow('YearIsCurrent')->named('customers');
 $router->get('/customers', 'App\Controllers\HomeController@index');
 $router->get('/test', function() {
-    $dispatcher = new \Chibi\Events\Dispatcher();
+    $om = App::getInstance()->getContainer()->om;
+    /* @var $om Chibi\ObjectManager\ObjectManager */
+    $dispatcher = $om->resolve(\Chibi\Events\Dispatcher::class);
     $name = "Houssain";
-    $dispatcher->addListeners("EntredLinkEvent", new App\Listeners\SayHello());
-    $dispatcher->addListeners("EntredLinkEvent", new App\Listeners\SaveMeAsUser());
-    $dispatcher->dispatch( new \App\Events\EntredLinkEvent($name));
+    $dispatcher->addListeners("EntredLinkEvent", $om->resolve(\App\Listeners\SayHello::class));
+    $dispatcher->addListeners("EntredLinkEvent", $om->resolve(\App\Listeners\SaveMeAsUser::class));
+    $dispatcher->dispatch($om->create(\App\Events\EntredLinkEvent::class, [$name]));
 })->named('test');
 
+
+$router->get('/testa', function() {
+    $om = App::getInstance()->getContainer()->om;
+    /* @var $om Chibi\ObjectManager\ObjectManager */
+    $testClass = $om->resolve(\App\Test\Test::class);
+})->named('testa');

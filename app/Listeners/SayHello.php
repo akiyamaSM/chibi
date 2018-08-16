@@ -5,7 +5,8 @@ namespace App\Listeners;
 use Chibi\Events\Event;
 use Chibi\Events\Listener;
 
-class SayHello extends Listener {
+class SayHello extends Listener
+{
 
     /**
      * @param Event $event
