@@ -29,7 +29,55 @@ $router->post('/customers', function(Request $request, Response $respone){
 
 # Controllers
 
+Every Controller used in the app should extends the Kolores\Controller\Controller Controller.
+
 # Views
+You can pass data from controllers to the view via the view method
+
+```php
+
+    public function views()
+    {
+        $array = [
+            'one',
+            'two',
+            'three'
+        ];
+        return view('hello', [
+            'name' => 'Houssain',
+            'age' => 26,
+            'array' => $array,
+        ]);
+    }
+
+```
+
+The views are in the View folder with a chibi.php extenstion.
+
+A simple templete engin is provided.
+
+```php
+
+{{ $name }} is {{ $age}}
+
+<?php $var = 30 ?> 
+
+@when( $age <= 10 )
+		You are a kid
+@or( $age > 10 )
+		You are growing!
+@done
+
+
+@foreach($array as $arr)
+		<h1>	{{ $arr }} </h1>
+@endforeach
+
+
+<h3> {{ $var }}</h3>
+
+
+```
 
 # Hurdles
 
