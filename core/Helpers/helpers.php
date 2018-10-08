@@ -21,20 +21,6 @@ if (!function_exists('route')) {
     }
 }
 
-
-if (!function_exists('app')) {
-
-    /**
-     * Get The instance of the Application
-     *
-     * @return mixed
-     */
-    function app()
-    {
-        return App::getInstance();
-    }
-}
-
 if (!function_exists('view')) {
 
     /**
