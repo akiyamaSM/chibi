@@ -1,5 +1,6 @@
 <?php
 
+use App\Post;
 use Kolores\Request;
 use Kolores\App;
 
@@ -26,3 +27,11 @@ $router->get('/testa', function() {
     /* @var $om Kolores\ObjectManager\ObjectManager */
     $testClass = $om->resolve(\App\Test\Test::class);
 })->named('testa');
+
+
+$router->get('/katana', function () {
+    $post = new Post();
+    $post->name = "Houssain";
+
+    echo $post->name;
+});
