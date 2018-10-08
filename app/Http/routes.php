@@ -30,8 +30,15 @@ $router->get('/testa', function() {
 
 
 $router->get('/katana', function () {
-    $post = new Post();
+    $post_id = Post::find(1);
+    foreach ($post_id as $post){
+        print_r($post);
+        die();
+    }
+    $post = new Post([
+        'last_name' => 'Inani'
+    ]);
     $post->name = "Houssain";
 
-    echo $post->name;
+    echo $post->last_name;
 });

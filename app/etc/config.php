@@ -3,6 +3,8 @@ return [
 	"debug" => true,
 	'hello' => [],
 	"database" => [
-		'username' => 'khobz'
+		'username' => 'root',
+		'password' => 'root',
+		'db_name' => 'kolores',
 	]
 ];
