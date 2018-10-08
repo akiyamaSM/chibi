@@ -2,7 +2,7 @@
 Kolores is a mini PHP framework to work on small projects, containing the following elements.
 
 # Routing
-With Koloris its really easy to make your routes
+With Kolores its really easy to make your routes
 
 ## Route to Controller
 ```php
