@@ -19,8 +19,6 @@ class Katana extends Connexion
      */
     public function __construct($fields = [])
     {
-        parent::connect();
-
         static::$table = static::getTableName();
 
         $this->assign($fields);
@@ -60,8 +58,16 @@ class Katana extends Connexion
     {
         parent::connect();
         $table = static::guessTableName();
+        $resut = static::$connexion->prepare("SELECT * FROM {$table} WHERE id={$id}");
+        $resut->execute();
+        $results = $resut->fetchAll(PDO::FETCH_ASSOC);
 
-        return static::$connexion->query("SELECT * FROM {$table} WHERE id={$id}", PDO::FETCH_ASSOC);
+        if(count($results) == 0){
+            return null;
+        }
+
+        return new static(
+            $results[0]
+        );
     }
-
 }
