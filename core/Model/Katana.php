@@ -58,8 +58,13 @@ class Katana extends Connexion
     {
         parent::connect();
         $table = static::guessTableName();
-        $resut = static::$connexion->prepare("SELECT * FROM {$table} WHERE id={$id}");
+
+        $resut = static::$connexion->prepare("SELECT * FROM :table WHERE id=:id");
+
+        $resut->bindParam(':table', $table , PDO::PARAM_STR);
+        $resut->bindParam(':id', $id, PDO::PARAM_INT);
         $resut->execute();
+
         $results = $resut->fetchAll(PDO::FETCH_ASSOC);
 
         if(count($results) == 0){
@@ -68,6 +73,67 @@ class Katana extends Connexion
 
         return new static(
             $results[0]
+        );
+    }
+
+    public function save()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
+    }
+
+    /**
+     *  Destroy a set of items
+     * @param $id
+     * @return string
+     */
+    public static function destroy($id)
+    {
+        $ids = is_array($id) ? $id : [$id];
+        try{
+            parent::connect();
+
+            $table = static::guessTableName();
+            $ids = implode(",",  array_values($ids)) ;
+            $resut = static::$connexion->prepare("DELETE FROM {$table} WHERE id in ($ids)");
+
+            return $resut->execute();
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Create a new instance and save it in the database
+     *
+     * @param array $fields
+     */
+    public function create($fields = [])
+    {
+        $instance = static::instantiate($fields);
+
+        return $instance->save();
+    }
+
+    /**
+     * Create a new instance of a model
+     *
+     * @param array $fields
+     * @return Katana
+     */
+    protected static function instantiate($fields = [])
+    {
+        return new static(
+            $fields
         );
     }
 }

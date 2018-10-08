@@ -9,6 +9,9 @@ class Connexion
 {
     static $connexion;
 
+    /**
+     *  Connect to the database
+     */
     public static function connect()
     {
             $db = app('config')['config']['database'];
