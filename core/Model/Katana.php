@@ -49,7 +49,7 @@ class Katana extends Connexion
     }
 
     /**
-     * find By ID
+     * Find By ID
      *
      * @param $id
      * @return mixed
@@ -57,15 +57,16 @@ class Katana extends Connexion
     public static function find($id)
     {
         parent::connect();
+
         $table = static::guessTableName();
 
-        $resut = static::$connexion->prepare("SELECT * FROM :table WHERE id=:id");
+        $query = static::$connexion->prepare("SELECT * FROM {$table} WHERE id=:id");
 
-        $resut->bindParam(':table', $table , PDO::PARAM_STR);
-        $resut->bindParam(':id', $id, PDO::PARAM_INT);
-        $resut->execute();
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
 
-        $results = $resut->fetchAll(PDO::FETCH_ASSOC);
+        $query->execute();
+
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
         if(count($results) == 0){
             return null;
@@ -76,9 +77,48 @@ class Katana extends Connexion
         );
     }
 
+    /**
+     *  Save the current instance
+     */
     public function save()
     {
+        $table = static::guessTableName();
 
+        if($this->isAdd()){
+            var_dump("Should Add");
+            return;
+        }
+
+        $sql = "UPDATE {$table} SET ";
+
+        $fields = $this->fields;
+
+        unset($fields[$this->getIdKey()]);
+
+        $keys = array_keys($fields);
+
+        $sql .= implode(',', array_map(function($key){
+                    return "{$key}=:{$key}";
+                }, $keys)
+        );
+
+        $query = static::$connexion->prepare($sql ." WHERE {$this->getIdKey()} = {$this->getIdValue()}");
+
+        array_walk($keys, function ($key, $value)  use ($query, $fields){
+            $query->bindParam(":{$key}", $fields[$key]);
+        });
+
+        return $query->execute();
+    }
+
+    /**
+     * Check if it should insert
+     *
+     * @return bool
+     */
+    protected function isAdd()
+    {
+        return is_null($this->getIdValue());
     }
 
     public function update()
