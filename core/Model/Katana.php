@@ -60,9 +60,11 @@ class Katana extends Connexion
 
         $table = static::guessTableName();
 
-        $query = static::$connexion->prepare("SELECT * FROM {$table} WHERE id=:id");
+        $idKey = self::getIdKey();
 
-        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query = static::$connexion->prepare("SELECT * FROM {$table} WHERE {$idKey}=:id");
+
+        $query->bindParam(":id", $id, PDO::PARAM_INT);
 
         $query->execute();
 
@@ -93,7 +95,7 @@ class Katana extends Connexion
 
         $fields = $this->fields;
 
-        unset($fields[$this->getIdKey()]);
+        unset($fields[static::getIdKey()]);
 
         $keys = array_keys($fields);
 
@@ -102,7 +104,7 @@ class Katana extends Connexion
                 }, $keys)
         );
 
-        $query = static::$connexion->prepare($sql ." WHERE {$this->getIdKey()} = {$this->getIdValue()}");
+        $query = static::$connexion->prepare($sql ." WHERE {static::getIdKey()} = {$this->getIdValue()}");
 
         array_walk($keys, function ($key, $value)  use ($query, $fields){
             $query->bindParam(":{$key}", $fields[$key]);

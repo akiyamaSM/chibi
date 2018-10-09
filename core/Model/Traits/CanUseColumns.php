@@ -7,7 +7,7 @@ use Exception;
 
 trait CanUseColumns
 {
-    protected $id = 'id';
+    static $id = 'id';
 
     protected $fields = [];
 
@@ -34,8 +34,9 @@ trait CanUseColumns
      *
      * @return string
      */
-    protected function getIdKey(){
-        return $this->id;
+    protected static function getIdKey()
+    {
+        return static::$id;
     }
 
     /**
@@ -45,7 +46,7 @@ trait CanUseColumns
      */
     public function getIdValue()
     {
-        return isset($this->fields[$this->getIdKey()]) ? $this->fields[$this->getIdKey()] : null;
+        return isset($this->fields[static::getIdKey()]) ? $this->fields[static::getIdKey()] : null;
     }
 
     /**
