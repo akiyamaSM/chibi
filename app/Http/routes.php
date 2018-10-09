@@ -30,7 +30,14 @@ $router->get('/testa', function() {
 
 
 $router->get('/katana', function () {
-    $post_id = Post::find(10);
+    $post = Post::find(1);
+    $post->name = "Bla Bla";
+    $post->save();
+
+    //var_dump(Post::destroy([4, 5]));
+    die();
+
+    $post_id = Post::find(1);
     if(!is_null($post_id)){
         echo $post_id->name;
         die;

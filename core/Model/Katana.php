@@ -49,7 +49,7 @@ class Katana extends Connexion
     }
 
     /**
-     * find By ID
+     * Find By ID
      *
      * @param $id
      * @return mixed
@@ -57,10 +57,16 @@ class Katana extends Connexion
     public static function find($id)
     {
         parent::connect();
+
         $table = static::guessTableName();
-        $resut = static::$connexion->prepare("SELECT * FROM {$table} WHERE id={$id}");
-        $resut->execute();
-        $results = $resut->fetchAll(PDO::FETCH_ASSOC);
+
+        $query = static::$connexion->prepare("SELECT * FROM {$table} WHERE id=:id");
+
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $query->execute();
+
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
         if(count($results) == 0){
             return null;
@@ -68,6 +74,106 @@ class Katana extends Connexion
 
         return new static(
             $results[0]
+        );
+    }
+
+    /**
+     *  Save the current instance
+     */
+    public function save()
+    {
+        $table = static::guessTableName();
+
+        if($this->isAdd()){
+            var_dump("Should Add");
+            return;
+        }
+
+        $sql = "UPDATE {$table} SET ";
+
+        $fields = $this->fields;
+
+        unset($fields[$this->getIdKey()]);
+
+        $keys = array_keys($fields);
+
+        $sql .= implode(',', array_map(function($key){
+                    return "{$key}=:{$key}";
+                }, $keys)
+        );
+
+        $query = static::$connexion->prepare($sql ." WHERE {$this->getIdKey()} = {$this->getIdValue()}");
+
+        array_walk($keys, function ($key, $value)  use ($query, $fields){
+            $query->bindParam(":{$key}", $fields[$key]);
+        });
+
+        return $query->execute();
+    }
+
+    /**
+     * Check if it should insert
+     *
+     * @return bool
+     */
+    protected function isAdd()
+    {
+        return is_null($this->getIdValue());
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
+    }
+
+    /**
+     *  Destroy a set of items
+     * @param $id
+     * @return string
+     */
+    public static function destroy($id)
+    {
+        $ids = is_array($id) ? $id : [$id];
+        try{
+            parent::connect();
+
+            $table = static::guessTableName();
+            $ids = implode(",",  array_values($ids)) ;
+            $resut = static::$connexion->prepare("DELETE FROM {$table} WHERE id in ($ids)");
+
+            return $resut->execute();
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Create a new instance and save it in the database
+     *
+     * @param array $fields
+     */
+    public function create($fields = [])
+    {
+        $instance = static::instantiate($fields);
+
+        return $instance->save();
+    }
+
+    /**
+     * Create a new instance of a model
+     *
+     * @param array $fields
+     * @return Katana
+     */
+    protected static function instantiate($fields = [])
+    {
+        return new static(
+            $fields
         );
     }
 }
