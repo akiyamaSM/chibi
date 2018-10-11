@@ -6,6 +6,7 @@ namespace Kolores\Model;
 use Kolores\Model\Exceptions\ModelNotFoundException;
 use Kolores\Model\Traits\CanUseColumns;
 use PDO;
+use ReflectionClass;
 
 class Katana extends Connexion
 {
@@ -39,6 +40,7 @@ class Katana extends Connexion
      * Guess the table name
      *
      * @return null|string
+     * @throws \ReflectionException
      */
     public static function guessTableName()
     {
@@ -46,7 +48,7 @@ class Katana extends Connexion
             return static::$table;
         }
 
-        return strtolower(get_class()). 's';
+        return strtolower(get_class_name(static::class)). 's';
     }
 
     /**
@@ -54,6 +56,7 @@ class Katana extends Connexion
      *
      * @param $id
      * @return mixed
+     * @throws \ReflectionException
      */
     public static function find($id)
     {
@@ -186,13 +189,14 @@ class Katana extends Connexion
      * @param $id
      * @return mixed
      * @throws ModelNotFoundException
+     * @throws \ReflectionException
      */
     public static function findOrFail($id)
     {
         $model = static::find($id);
 
         if(is_null($model)){
-            $class = get_class();
+            $class = get_class_name(static::class);
             throw new ModelNotFoundException("Record of the model {$class} not found");
         }
 
