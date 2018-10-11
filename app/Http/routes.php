@@ -32,7 +32,7 @@ $router->get('/testa', function() {
 $router->get('/katana', function () {
 
     $new_Friend = new \App\Friend();
-    $new_Friend->email = "inanielhoussain@gmail.com";
+    $new_Friend->blabla = "inanielhoussain@gmail.com";
 
     var_dump($new_Friend->save());
     die;
