@@ -3,6 +3,7 @@
 
 namespace Kolores\Model;
 
+use Kolores\Model\Exceptions\ModelNotFoundException;
 use Kolores\Model\Traits\CanUseColumns;
 use PDO;
 
@@ -177,5 +178,24 @@ class Katana extends Connexion
         return new static(
             $fields
         );
+    }
+
+    /**
+     * Find a Model or thrown an exception
+     *
+     * @param $id
+     * @return mixed
+     * @throws ModelNotFoundException
+     */
+    public static function findOrFail($id)
+    {
+        $model = static::find($id);
+
+        if(is_null($model)){
+            $class = get_class();
+            throw new ModelNotFoundException("Record of the model {$class} not found");
+        }
+
+        return $model;
     }
 }
