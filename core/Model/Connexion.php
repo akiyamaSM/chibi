@@ -17,6 +17,7 @@ class Connexion
             $db = app('config')['config']['database'];
             $dsn = "mysql:dbname={$db['db_name']};host={$db['host']}";
             $dbh = new PDO($dsn, $db['username'], $db['password']);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
             static::$connexion = $dbh;
     }
 }
