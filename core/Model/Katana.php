@@ -6,7 +6,6 @@ namespace Kolores\Model;
 use Kolores\Model\Exceptions\ModelNotFoundException;
 use Kolores\Model\Traits\CanUseColumns;
 use PDO;
-use ReflectionClass;
 
 class Katana extends Connexion
 {
@@ -85,17 +84,18 @@ class Katana extends Connexion
 
     /**
      *  Save the current instance
+     *
+     * @throws \ReflectionException
      */
     public function save()
     {
-        $table = static::guessTableName();
+        parent::connect();
 
-        if($this->isAdd()){
-            var_dump("Should Add");
-            return;
+        if(!$this->isAdd()){
+            return $this->update();
         }
 
-        $sql = "UPDATE {$table} SET ";
+        $table = static::guessTableName();
 
         $fields = $this->fields;
 
@@ -103,12 +103,11 @@ class Katana extends Connexion
 
         $keys = array_keys($fields);
 
-        $sql .= implode(',', array_map(function($key){
-                    return "{$key}=:{$key}";
-                }, $keys)
-        );
+        $sql = "INSERT INTO {$table} ";
 
-        $query = static::$connexion->prepare($sql ." WHERE {static::getIdKey()} = {$this->getIdValue()}");
+        $sql.= $this->getSqlForInsert($fields);
+
+        $query = static::$connexion->prepare($sql);
 
         array_walk($keys, function ($key, $value)  use ($query, $fields){
             $query->bindParam(":{$key}", $fields[$key]);
@@ -129,7 +128,28 @@ class Katana extends Connexion
 
     public function update()
     {
+        $table = static::guessTableName();
 
+        $sql = "UPDATE {$table} SET ";
+
+        $fields = $this->fields;
+
+        unset($fields[static::getIdKey()]);
+
+        $keys = array_keys($fields);
+
+        $sql .= implode(',', array_map(function($key){
+                return "{$key}=:{$key}";
+            }, $keys)
+        );
+
+        $query = static::$connexion->prepare($sql ." WHERE {static::getIdKey()} = {$this->getIdValue()}");
+
+        array_walk($keys, function ($key, $value)  use ($query, $fields){
+            $query->bindParam(":{$key}", $fields[$key]);
+        });
+
+        return $query->execute();
     }
 
     public function delete()
@@ -162,6 +182,7 @@ class Katana extends Connexion
      * Create a new instance and save it in the database
      *
      * @param array $fields
+     * @throws \ReflectionException
      */
     public function create($fields = [])
     {
@@ -201,5 +222,30 @@ class Katana extends Connexion
         }
 
         return $model;
+    }
+
+    /**
+     * Get the sql part for insert
+     *
+     * @param $fields
+     * @return string
+     */
+    protected function getSqlForInsert($fields)
+    {
+        $keys = array_keys($fields);
+        $columns = array_map(function($key){
+                return $key;
+            }, $keys
+        );
+
+        $paramas = array_map(function($key){
+                return ":{$key}";
+            }, $keys
+        );
+        $sqlColumns = implode(',', $columns);
+
+        $sqlparams = implode(',', $paramas);
+
+        return "({$sqlColumns}) VALUES ({$sqlparams})";
     }
 }

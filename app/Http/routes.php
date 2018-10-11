@@ -30,6 +30,12 @@ $router->get('/testa', function() {
 
 
 $router->get('/katana', function () {
+
+    $new_Friend = new \App\Friend();
+    $new_Friend->email = "inanielhoussain@gmail.com";
+
+    var_dump($new_Friend->save());
+    die;
     $friend = \App\Friend::findOrFail(10);
     echo $friend->email;
     die;
