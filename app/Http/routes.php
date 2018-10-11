@@ -30,7 +30,7 @@ $router->get('/testa', function() {
 
 
 $router->get('/katana', function () {
-    $friend = \App\Friend::find(1);
+    $friend = \App\Friend::findOrFail(10);
     echo $friend->email;
     die;
     Post::destroy(6);

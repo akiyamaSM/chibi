@@ -116,3 +116,17 @@ if (!function_exists('app')) {
         return $app->getContainer()->{$key};
     }
 }
+
+if (!function_exists('get_class_name')) {
+
+    /**
+     * Get the class Name without namespace
+     *
+     * @param $class
+     * @return string
+     * @throws ReflectionException
+     */
+    function get_class_name($class) {
+        return (new ReflectionClass($class))->getShortName();
+    }
+}
