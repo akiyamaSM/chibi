@@ -1,8 +1,8 @@
 <?php
 
-use Kolores\App;
 use Kolores\Exceptions\ViewNotFoundException;
 use Kolores\Template\Template;
+use Kolores\App;
 
 if (!function_exists('route')) {
 
