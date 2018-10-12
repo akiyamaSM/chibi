@@ -1,12 +1,10 @@
 <?php
 
 use App\Post;
-use Kolores\Request;
 use Kolores\App;
 
 $router->get('/user', 'App\Controllers\HomeController@views')->allow('YearIsCurrent')->named('customers');
 $router->get('/configs', 'App\Controllers\HomeController@testConfig');
-$router->get('/customers', 'App\Controllers\HomeController@index');
 $router->get('/test', function() {
     $om = App::getInstance()->getContainer()->om;
     /* @var $om Kolores\ObjectManager\ObjectManager */
@@ -30,7 +28,8 @@ $router->get('/testa', function() {
 
 
 $router->get('/katana', function () {
-
+    var_dump(\App\Friend::test());
+    die;
     $new_Friend = new \App\Friend();
     $new_Friend->blabla = "inanielhoussain@gmail.com";
 

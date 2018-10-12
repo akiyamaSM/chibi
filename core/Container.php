@@ -2,10 +2,12 @@
 
 namespace Kolores;
 
-use ArrayAccess;
-use Psr\Log\InvalidArgumentException;
-use ReflectionClass;
 use Kolores\Exceptions\ClassIsNotInstantiableException;
+use Psr\Log\InvalidArgumentException;
+use ReflectionFunction;
+use ReflectionMethod;
+use ReflectionClass;
+use ArrayAccess;
 
 class Container implements ArrayAccess
 {
@@ -40,8 +42,9 @@ class Container implements ArrayAccess
     public function offsetGet($offset)
     {
         if (!$this->has($offset)) {
-            return;
+            return null;
         }
+
         if (isset($this->cache[$offset])) {
             return $this->cache[$offset];
         }
@@ -113,6 +116,8 @@ class Container implements ArrayAccess
      * @param string $key
      * @param array $args
      * @return mixed
+     * @throws ClassIsNotInstantiableException
+     * @throws \ReflectionException
      */
     public function resolve($key, array $args = [])
     {
@@ -130,8 +135,9 @@ class Container implements ArrayAccess
      *
      * @param string $className
      * @param array $args
-     * @return \Kolores\className
+     * @return className|object
      * @throws ClassIsNotInstantiableException
+     * @throws \ReflectionException
      */
     protected function constructIt($className, array $args = [])
     {
@@ -168,6 +174,8 @@ class Container implements ArrayAccess
      * @param $method
      * @param $args
      * @return array
+     * @throws ClassIsNotInstantiableException
+     * @throws \ReflectionException
      */
     public function resolveMethod($className, $method, $args)
     {
@@ -192,13 +200,14 @@ class Container implements ArrayAccess
      *
      * @param $method
      * @param null $className
-     * @return \ReflectionFunction|\ReflectionMethod
+     * @return ReflectionFunction|ReflectionMethod
+     * @throws \ReflectionException
      */
     protected function createReflector($method, $className = null)
     {
         if (is_callable($method)) {
-            return new \ReflectionFunction($method);
+            return new ReflectionFunction($method);
         }
-        return new \ReflectionMethod($className, $method);
+        return new ReflectionMethod($className, $method);
     }
 }

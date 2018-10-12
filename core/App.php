@@ -2,12 +2,12 @@
 
 namespace Kolores;
 
+use Kolores\Exceptions\ControllersMethodNotFound;
+use Kolores\Exceptions\ControllerNotFound;
+use Whoops\Handler\JsonResponseHandler;
+use Whoops\Handler\PrettyPageHandler;
 use Kolores\Hurdle\ShouldRedirect;
 use Kolores\Router\Router;
-use Kolores\Exceptions\ControllerNotFound;
-use Kolores\Exceptions\ControllersMethodNotFound;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Handler\JsonResponseHandler;
 
 class App
 {
@@ -80,6 +80,7 @@ class App
      *
      * @throws ControllerNotFound
      * @throws ControllersMethodNotFound
+     * @throws \Exception
      */
     public function run()
     {
@@ -194,8 +195,6 @@ class App
 
     /**
      * Get hurdles
-     *
-     * @return type
      */
     protected function getHurdles(){
         return require('app/Hurdles/register.php');

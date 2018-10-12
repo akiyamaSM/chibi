@@ -50,7 +50,7 @@ class Request
         if ($this->has($key)) {
             return $this->fields[$key];
         }
-        return;
+        return null;
     }
 
     /**
