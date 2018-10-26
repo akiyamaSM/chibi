@@ -52,7 +52,7 @@ You can pass data from controllers to the view via the view method
 
 ```
 
-The views are in the View folder with a chibi.php extenstion.
+The views are in the View folder with a kolores.php extenstion.
 
 A simple templete engin is provided.
 
