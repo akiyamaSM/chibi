@@ -126,6 +126,13 @@ class Katana extends Connexion
         return is_null($this->getIdValue());
     }
 
+    /**
+     * Update the current instance
+     *
+     * @return mixed
+     *
+     * @throws \ReflectionException
+     */
     public function update()
     {
         $table = static::guessTableName();
@@ -152,13 +159,23 @@ class Katana extends Connexion
         return $query->execute();
     }
 
+    /**
+     * @return \BadMethodCallException|string
+     */
     public function delete()
     {
+        $idKey = self::getIdValue();
 
+        if( is_null($idKey) ){
+            return new \BadMethodCallException();
+        }
+
+        return static::destroy($idKey);
     }
 
     /**
      *  Destroy a set of items
+     *
      * @param $id
      * @return string
      */
@@ -169,26 +186,14 @@ class Katana extends Connexion
             parent::connect();
 
             $table = static::guessTableName();
+            $key = static::getIdKey();
             $ids = implode(",",  array_values($ids)) ;
-            $resut = static::$connexion->prepare("DELETE FROM {$table} WHERE id in ($ids)");
+            $resut = static::$connexion->prepare("DELETE FROM {$table} WHERE {$key} in ($ids)");
 
             return $resut->execute();
         }catch (\Exception $e){
             return $e->getMessage();
         }
-    }
-
-    /**
-     * Create a new instance and save it in the database
-     *
-     * @param array $fields
-     * @throws \ReflectionException
-     */
-    public function create($fields = [])
-    {
-        $instance = static::instantiate($fields);
-
-        return $instance->save();
     }
 
     /**
@@ -222,6 +227,20 @@ class Katana extends Connexion
         }
 
         return $model;
+    }
+
+    /**
+     * Create a new instance and save it in the database
+     *
+     * @param array $fields
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function create($fields = [])
+    {
+        $instance = static::instantiate($fields);
+
+        return $instance->save();
     }
 
     /**
