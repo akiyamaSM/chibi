@@ -52,7 +52,7 @@ You can pass data from controllers to the view via the view method
 
 ```
 
-The views are in the View folder with a chibi.php extenstion.
+The views are in the View folder with a kolores.php extenstion.
 
 A simple templete engin is provided.
 
@@ -119,5 +119,14 @@ return [
 ];
 ```
 
-# Simple ORM
-The Kolores framework is using [Francesco Bianco](https://github.com/francescobianco)'s ORM([moldable](https://github.com/javanile/moldable)), take a look on it to know how to use it.
+# Katana ORM
+The Kolores framework is using its simple Katana ORM, simple and easy to use, you don't have to make a lot of effor to handle your Models. for the time being it supports:
+
+- Model::find($id); // get the model or null
+- Model::findOrFail($id); // get the model or ModelNotFoundException is thrown
+- $model_instance->property = 'new Value'; // set the value
+- $model_instance->property; // get the value
+- $model_instance->update(); // make persist the changes
+- $model_instance->save(); // create a new instance if not exist, otherwise update it
+- $model_instance->delete(); // remove the model
+- Model::destory($ids); // you can pass an id or array of ids to destroy

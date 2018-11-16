@@ -3,7 +3,7 @@
 use App\Post;
 use Kolores\App;
 
-$router->get('/user', 'App\Controllers\HomeController@views')->allow('YearIsCurrent')->named('customers');
+$router->get('/user', 'App\Controllers\HomeController@views')->named('customers');
 $router->get('/configs', 'App\Controllers\HomeController@testConfig');
 $router->get('/test', function() {
     $om = App::getInstance()->getContainer()->om;
