@@ -28,7 +28,9 @@ $router->get('/testa', function() {
 
 
 $router->get('/katana', function () {
-    var_dump(\App\Friend::test());
+    $me = new \App\Friend();
+    //$me = \App\Friend::find(2);
+    $me->delete();
     die;
     $new_Friend = new \App\Friend();
     $new_Friend->blabla = "inanielhoussain@gmail.com";
