@@ -3,13 +3,12 @@
 
 namespace Kolores\Model;
 
-use Kolores\Model\Exceptions\ModelNotFoundException;
 use Kolores\Model\Traits\CanUseColumns;
-use PDO;
+use Kolores\Model\Traits\Queryable;
 
 class Katana extends Connexion
 {
-    use CanUseColumns;
+    use CanUseColumns, Queryable;
 
     static $table = null;
 
@@ -48,38 +47,6 @@ class Katana extends Connexion
         }
 
         return strtolower(get_class_name(static::class)). 's';
-    }
-
-    /**
-     * Find By ID
-     *
-     * @param $id
-     * @return mixed
-     * @throws \ReflectionException
-     */
-    public static function find($id)
-    {
-        parent::connect();
-
-        $table = static::guessTableName();
-
-        $idKey = self::getIdKey();
-
-        $query = static::$connexion->prepare("SELECT * FROM {$table} WHERE {$idKey}=:id");
-
-        $query->bindParam(":id", $id, PDO::PARAM_INT);
-
-        $query->execute();
-
-        $results = $query->fetchAll(PDO::FETCH_ASSOC);
-
-        if(count($results) == 0){
-            return null;
-        }
-
-        return new static(
-            $results[0]
-        );
     }
 
     /**
@@ -207,26 +174,6 @@ class Katana extends Connexion
         return new static(
             $fields
         );
-    }
-
-    /**
-     * Find a Model or thrown an exception
-     *
-     * @param $id
-     * @return mixed
-     * @throws ModelNotFoundException
-     * @throws \ReflectionException
-     */
-    public static function findOrFail($id)
-    {
-        $model = static::find($id);
-
-        if(is_null($model)){
-            $class = get_class_name(static::class);
-            throw new ModelNotFoundException("Record of the model {$class} not found");
-        }
-
-        return $model;
     }
 
     /**
