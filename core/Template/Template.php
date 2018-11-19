@@ -3,6 +3,7 @@
 namespace Kolores\Template;
 
 use Kolores\Template\Compilers\ConditionCompiler;
+use Kolores\Template\Compilers\CSRFCompiler;
 use Kolores\Template\Compilers\PrintCompiler;
 use Kolores\Template\Compilers\LoopCompiler;
 
@@ -19,6 +20,7 @@ class Template {
         ConditionCompiler::class,
         LoopCompiler::class,
         PrintCompiler::class,
+        CSRFCompiler::class,
     ];
 
     /**
