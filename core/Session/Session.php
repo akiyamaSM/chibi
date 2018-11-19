@@ -28,7 +28,7 @@ class Session
      * @param $whenNull
      * @return mixed
      */
-    public static function get($key, $whenNull)
+    public static function get($key, $whenNull = null)
     {
         if(isset($_SESSION[$key])){
             return $_SESSION[$key];
