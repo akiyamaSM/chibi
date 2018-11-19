@@ -7,10 +7,16 @@ class Request
 
     protected $fields = [];
 
+    protected $method;
+
     public function __construct()
     {
         if (!isset($_REQUEST)) {
             return;
+        }
+
+        if($_SERVER['REQUEST_METHOD']){
+            $this->method = $_SERVER['REQUEST_METHOD'];
         }
 
         array_walk($_REQUEST, function($value, $key) {
@@ -62,5 +68,35 @@ class Request
     public function has($key)
     {
         return isset($this->fields[$key]);
+    }
+
+    /**
+     * Check if its post
+     *
+     * @return bool
+     */
+    public function isPost()
+    {
+        return strtoupper($this->method) === 'POST';
+    }
+
+    /**
+     * Check if its post
+     *
+     * @return bool
+     */
+    public function isGET()
+    {
+        return strtoupper($this->method) === 'GET';
+    }
+
+    /**
+     * Get Method type
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return strtoupper($this->method);
     }
 }

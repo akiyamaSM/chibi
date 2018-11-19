@@ -95,13 +95,12 @@ class App
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
         // Get Hurdles that run on every request
         $hurdles = $this->getHurdles();
-
         foreach ($hurdles as $hurdle) {
             $instance = $om->resolve($hurdle);
             if (!$instance->filter($request, $response)) {
                 if ($instance instanceof ShouldRedirect) {
-                    // do some Magic in here
-                    break ;
+                    header('Location:  '.  $instance->redirectTo());
+                    break;
                 }
                 throw new \Exception("You don't have the rights to enter here", 1);
             }
@@ -112,8 +111,8 @@ class App
             $specificInstance = $om->resolve($specific);
             if(!$specificInstance->filter($request, $response)){
                 if($specificInstance instanceof ShouldRedirect){
-                    $specificInstance->redirectTo();
-                    return ;
+                    header('Location:  '.  $instance->redirectTo());
+                    break;
                 }
                 throw new \Exception("You don't have the rights to enter here", 1);
             }

@@ -25,6 +25,6 @@ class YearIsCurrent implements Wall, ShouldRedirect{
      */
     public function redirectTo()
     {
-        return redirect(route('test'));
+        return route('not_ok_age');
     }
 }
