@@ -116,7 +116,7 @@ Well its easy, Just fill the register file in the App\Hurdles Folder
 ```php
 return [
 	'Csrf' => Kolores\Hurdle\CSRFTokenable::class,
-	App\Hurdles\YearIsCurrent::class,
+	'YearIsCurrent' => App\Hurdles\YearIsCurrent::class,
 ];
 ```
 
