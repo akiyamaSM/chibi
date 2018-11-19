@@ -1,6 +1,7 @@
 <?php
 
 use Kolores\App;
+use Kolores\Request;
 
 $router->get('/user', 'App\Controllers\HomeController@views')->named('customers');
 
@@ -23,5 +24,14 @@ $router->get('/hola/{name}', function($name, $h) {
 })->named('Hola');
 
 $router->get('/katana', function () {
-    dump(\App\Friend::all());
+    return view('token');
+    //dump(\App\Friend::all());
 });
+
+$router->post('/katana', function (Request $request) {
+    dump($request);
+})->named('test_csrf');
+
+$router->get('/ageNotOk', function (){
+    return "Age NOT OK";
+})->named('not_ok_age');

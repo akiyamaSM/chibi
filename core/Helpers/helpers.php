@@ -130,3 +130,14 @@ if (!function_exists('get_class_name')) {
         return (new ReflectionClass($class))->getShortName();
     }
 }
+
+if (!function_exists('get_crsf_token')) {
+    /**
+     * Get the generated token
+     *
+     * @return string
+     */
+    function get_crsf_token() {
+        return "1234fff";
+    }
+}
