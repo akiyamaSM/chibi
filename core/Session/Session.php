@@ -25,10 +25,15 @@ class Session
      * Get the value of a session entry
      *
      * @param $key
+     * @param $whenNull
      * @return mixed
      */
-    public static function get($key)
+    public static function get($key, $whenNull)
     {
-        return $_SESSION[$key];
+        if(isset($_SESSION[$key])){
+            return $_SESSION[$key];
+        }
+
+        return $whenNull;
     }
 }

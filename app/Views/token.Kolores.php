@@ -4,3 +4,10 @@
     @csrf_field
     <input type="submit">
 </form>
+
+<form action=" <?php echo route('test_csrf') ?>" method="POST">
+    <label for="name">Last Name</label>
+    <input type="text" name="last_name" />
+    @csrf_field
+    <input type="submit">
+</form>
