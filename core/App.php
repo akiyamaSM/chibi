@@ -84,44 +84,26 @@ class App
      */
     public function run()
     {
+        session_start();
         $router = $this->container->router;
         $request = $this->container->request;
         $response = $this->container->response;
         $om = $this->container->om;
-        /* @var $om Kolores\ObjectManager\ObjectManager */
         $om->resolve(\Kolores\ConfigManager::class);
         $config = $this->container->config;
 
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
+
         // Get Hurdles that run on every request
-        $hurdles = $this->getHurdles();
-        foreach ($hurdles as $hurdle) {
-            $instance = $om->resolve($hurdle);
-            if (!$instance->filter($request, $response)) {
-                if ($instance instanceof ShouldRedirect) {
-                    header('Location:  '.  $instance->redirectTo());
-                    break;
-                }
-                throw new \Exception("You don't have the rights to enter here", 1);
-            }
-        }
+        $this->runHurdles($this->getHurdles(), $request, $response, $om);
+
         // run specific Hurdles
-        $specificHurdles = $router->getHurdlesByPath();
-        foreach($specificHurdles as $specific){
-            $specificInstance = $om->resolve($specific);
-            if(!$specificInstance->filter($request, $response)){
-                if($specificInstance instanceof ShouldRedirect){
-                    header('Location:  '.  $instance->redirectTo());
-                    break;
-                }
-                throw new \Exception("You don't have the rights to enter here", 1);
-            }
-        }
+        $this->runHurdles($router->getHurdlesByPath(), $request, $response, $om);
 
         $res =$router->getResponse();
         $response = $res['response'];
         $params = $res['parames'];
-        return $this->respond($this->process($response, $params));
+        $this->respond($this->process($response, $params));
     }
 
     /**
@@ -139,6 +121,31 @@ class App
         $run->register();
     }
 
+
+    /**
+     * Run hurdles
+     *
+     * @param $hurdles
+     * @param $request
+     * @param $response
+     * @param $om
+     * @throws \Exception
+     */
+    protected function runHurdles($hurdles, $request, $response, $om)
+    {
+        foreach($hurdles as $specific){
+            $specificInstance = $om->resolve($specific);
+            if(!$specificInstance->filter($request, $response)){
+                if($specificInstance instanceof ShouldRedirect){
+                    header('Location:  '.  $instance->redirectTo());
+                    break;
+                }
+                throw new \Exception("You don't have the rights to enter here", 1);
+            }
+        }
+
+    }
+
     /**
      * Process the Handler
      *
@@ -147,11 +154,12 @@ class App
      * @return mixed
      * @throws ControllerNotFound
      * @throws ControllersMethodNotFound
+     * @throws Exceptions\ClassIsNotInstantiableException
+     * @throws \ReflectionException
      */
     public function process($callable, $parames = [])
     {
         $om = $this->getContainer()->om;
-        /* @var $om Kolores\ObjectManager\ObjectManager */
         $parames_all = $parames;
         $om = AppObjectManager::getInstance();
         if (is_callable($callable)) {

@@ -138,6 +138,6 @@ if (!function_exists('get_crsf_token')) {
      * @return string
      */
     function get_crsf_token() {
-        return "1234fff";
+        return \Kolores\Session\Session::get('csrf_token');
     }
 }

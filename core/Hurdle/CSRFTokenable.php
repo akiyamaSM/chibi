@@ -10,6 +10,7 @@ class CSRFTokenable implements Wall
 {
 
     /**
+     * Filter the Form inputs
      *
      * @param Request $request
      * @param Response $Response
@@ -18,11 +19,16 @@ class CSRFTokenable implements Wall
      */
     public function filter(Request $request, Response $Response)
     {
-        if($request->isPost() && ($token = $request->has('csrf_token'))){
+        if(!$request->isPost()){
+            return true;
+        }
+
+        if($request->has('csrf_token') && ($token = $request->csrf_token)){
             if( get_crsf_token() === $token){
                 return true;
             }
         }
+
         throw new \Exception("TokenMismatchException");
     }
 }
