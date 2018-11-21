@@ -5,6 +5,7 @@ namespace Kolores\Model;
 
 use Kolores\Model\Traits\CanUseColumns;
 use Kolores\Model\Traits\Queryable;
+use ReflectionClass;
 
 class Katana extends Connexion
 {
@@ -40,13 +41,14 @@ class Katana extends Connexion
      * @return null|string
      * @throws \ReflectionException
      */
-    public static function guessTableName()
+    protected static function guessTableName()
     {
-        if( !is_null(static::$table)){
-            return static::$table;
-        }
+        $ref = new ReflectionClass(static::class);
 
-        return strtolower(get_class_name(static::class)). 's';
+        if(isset($ref->getDefaultProperties()['table'])){
+            return $ref->getDefaultProperties()['table'];
+        }
+        return strtolower($ref->getShortName()). 's';
     }
 
     /**
