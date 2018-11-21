@@ -18,6 +18,7 @@ trait RouteParser
      *
      * @param $uri
      * @param $handler
+     * @return self
      */
     public function get($uri, $handler)
     {

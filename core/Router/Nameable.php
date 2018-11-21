@@ -2,6 +2,9 @@
 
 namespace Kolores\Router;
 
+use Kolores\Exceptions\RouteNameArgumentInvalidException;
+use Kolores\Exceptions\RouteNameDoesntExistException;
+
 trait Nameable
 {
 
