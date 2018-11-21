@@ -24,8 +24,9 @@ $router->get('/hola/{name}', function($name, $h) {
 })->named('Hola');
 
 $router->get('/katana', function () {
+    dump(\App\Friend::all());
+    die();
     return view('token');
-    //dump(\App\Friend::all());
 });
 
 $router->post('/katana', function (Request $request) {
