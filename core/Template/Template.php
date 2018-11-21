@@ -6,6 +6,7 @@ use Kolores\Template\Compilers\ConditionCompiler;
 use Kolores\Template\Compilers\CSRFCompiler;
 use Kolores\Template\Compilers\PrintCompiler;
 use Kolores\Template\Compilers\LoopCompiler;
+use Kolores\Template\Compilers\RouteCompiler;
 
 class Template {
     use DoesntUseUnassignedVars;
@@ -21,6 +22,7 @@ class Template {
         LoopCompiler::class,
         PrintCompiler::class,
         CSRFCompiler::class,
+        RouteCompiler::class,
     ];
 
     /**

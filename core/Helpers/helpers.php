@@ -28,6 +28,7 @@ if (!function_exists('view')) {
      *
      * @param $view
      * @param array $variables
+     * @return bool
      * @throws ViewNotFoundException
      */
     function view($view, $variables = [])
@@ -38,6 +39,7 @@ if (!function_exists('view')) {
         }
         $template = new Template($path);
         $template->fill($variables)->compile()->render();
+        return true;
     }
 }
 
