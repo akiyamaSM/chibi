@@ -1,4 +1,22 @@
 {
+  "name": "akiyamaSM/chibi",
+  "description": "The Chibi Framework.",
+  "keywords": ["framework", "Chibi", "PHP"],
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/akiyamaSM/chibi/issues",
+    "source": "https://github.com/akiyamaSM/chibi/issues"
+  },
+  "authors": [
+    {
+      "name": "El Houssain INANI",
+      "email": "inanielhoussain@gmail.com"
+    },
+    {
+      "name": "Anas El Alami",
+      "email": "anaselalamikh@gmail.com"
+    }
+  ],
   "autoload": {
       "files": [
         "core/Helpers/helpers.php"
@@ -17,7 +35,9 @@
   "require": {
     "filp/whoops": "^2.1",
     "vlucas/phpdotenv": "~1.0",
-    "symfony/var-dumper": "3.*"
+    "symfony/var-dumper": "3.*",
+    "nesbot/carbon": "^1.26.3"
+
   },
   "require-dev" :{
     "chibi/console": "*"
