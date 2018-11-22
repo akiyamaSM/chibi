@@ -4,7 +4,7 @@
 namespace Kolores\Validation\Rules;
 
 
-class Min implements Checkable
+class Min extends AbstractRule implements Checkable
 {
     protected $min;
 
@@ -22,8 +22,22 @@ class Min implements Checkable
     function isValid($value = null)
     {
         if(strlen($value) >= $this->min){
+
             return true;
         }
+
+        $this->errorFound();
+
         return false;
+    }
+
+    /**
+     * Get error message
+     *
+     * @return string
+     */
+    public function getError()
+    {
+        return "Value must be greater than {$this->min}";
     }
 }
