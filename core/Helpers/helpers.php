@@ -143,3 +143,14 @@ if (!function_exists('get_crsf_token')) {
         return \Kolores\Session\Session::get('csrf_token');
     }
 }
+
+if (!function_exists('base_path')) {
+    /**
+     * get app base path
+     * @param  string $path get given path
+     * @return string       [description]
+     */
+    function base_path($path = '') {
+        return dirname(dirname(__dir__)).($path == ''?'': '/'.$path);
+    }
+}

@@ -115,9 +115,25 @@ Well its easy, Just fill the register file in the App\Hurdles Folder
 
 ```php
 return [
-	App\Hurdles\YearIsCurrent::class,
+	'Csrf' => Kolores\Hurdle\CSRFTokenable::class,
+	'YearIsCurrent' => App\Hurdles\YearIsCurrent::class,
 ];
 ```
+
+## CSRF Token
+
+A CSRFTokenable Hurdle will be run at each POST request to protect you from Cross-Site Request Forgery attacks, you only need to include the @csrf_field in the form, otherwise an Exception will be thrown.
+
+```php
+
+<form action=" <?php echo route('test_csrf') ?>" method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="name" />
+    @csrf_field
+    <input type="submit">
+</form>
+```
+
 
 # Katana ORM
 The Kolores framework is using its simple Katana ORM, simple and easy to use, you don't have to make a lot of effor to handle your Models. for the time being it supports:

@@ -18,28 +18,28 @@
     }
   ],
   "autoload": {
-      "files": [
-        "core/Helpers/helpers.php"
-      ],
-      "psr-4": {
-        "App\\": "app/",
-        "Kolores\\": "core/"
-      }
+    "files": [
+      "core/Helpers/helpers.php"
+    ],
+    "psr-4": {
+      "App\\": "app/",
+      "Kolores\\": "core/"
+    }
   },
   "repositories": [
-      {
-          "type": "path",
-          "url": "packages/chibi/console"
-      }
+    {
+      "type": "path",
+      "url": "packages/yumi/console"
+    }
   ],
   "require": {
     "filp/whoops": "^2.1",
     "vlucas/phpdotenv": "~1.0",
     "symfony/var-dumper": "3.*",
-    "nesbot/carbon": "^1.26.3"
-
+    "nesbot/carbon": "^1.26.3",
+    "symfony/var-dumper": "4.*"
   },
   "require-dev" :{
-    "yumi/console": "*"
+    "yumi/console":"*"
   }
 }
