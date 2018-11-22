@@ -65,4 +65,9 @@ class Rule{
 
         return true;
     }
+
+    public function getConstraints()
+    {
+        return $this->constraints;
+    }
 }

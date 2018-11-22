@@ -4,7 +4,7 @@
 namespace Kolores\Validation\Rules;
 
 
-class Number implements Checkable
+class Number extends AbstractRule implements Checkable
 {
 
     /**
@@ -15,6 +15,17 @@ class Number implements Checkable
      */
     function isValid($value = null)
     {
-        return is_numeric($value);
+       if(is_numeric($value)){
+           return true;
+       }
+
+       $this->errorFound();
+
+       return false;
+    }
+
+    function getError()
+    {
+        return "this field must be numeric";
     }
 }

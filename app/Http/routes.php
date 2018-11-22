@@ -34,18 +34,21 @@ $router->get('/hola/{name}', function($name, $h) {
 $router->get('/katana', function () {
     $data = [
         'name' => 'Inani',
-        'age' => 20
+        'age' => "gfg"
     ];
 
     $validator = new Validator($data);
 
     $validator
         ->addRule(
-        (new Rule('name'))->required()->max(10)->min(5)
+        (
+            new Rule('name'))->required()->max(10)->min(9)
         )
-        ->addRule((new Rule('age'))->required()->number());
+        ->addRule(
+            (new Rule('age'))->required()->number()
+        );
 
-    dump($validator->check());
+    dump($validator->check(), $validator->getErrors());
 })->named('test_csrf');
 
 $router->get('/ageNotOk', function (){

@@ -4,7 +4,7 @@
 namespace Kolores\Validation\Rules;
 
 
-class Max implements Checkable
+class Max extends AbstractRule implements Checkable
 {
     protected $max;
 
@@ -20,8 +20,17 @@ class Max implements Checkable
     function isValid($value = null)
     {
         if(strlen($value) > $this->max){
+            $this->errorFound();
             return false;
         }
         return true;
+    }
+
+    /**
+     * The message error
+     */
+    function getError()
+    {
+        return "this field must be less than {$this->max}";
     }
 }
