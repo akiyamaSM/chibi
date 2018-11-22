@@ -2,6 +2,8 @@
 
 use Kolores\App;
 use Kolores\Request;
+use Kolores\Validation\Rule;
+use Kolores\Validation\Validator;
 
 $router->get('/user', 'App\Controllers\HomeController@views')->named('customers');
 
@@ -23,14 +25,27 @@ $router->get('/hola/{name}', function($name, $h) {
     ]);
 })->named('Hola');
 
-$router->get('/katana', function () {
+/*$router->get('/katana', function () {
     dump(\App\Friend::all());
     die();
     return view('token');
-});
+});*/
 
-$router->post('/katana', function (Request $request) {
-    dump($request);
+$router->get('/katana', function () {
+    $data = [
+        'name' => 'Inani',
+        'age' => 20
+    ];
+
+    $validator = new Validator($data);
+
+    $validator
+        ->addRule(
+        (new Rule('name'))->required()->max(10)->min(5)
+        )
+        ->addRule((new Rule('age'))->required()->number());
+
+    dump($validator->check());
 })->named('test_csrf');
 
 $router->get('/ageNotOk', function (){
