@@ -35,11 +35,10 @@
   "require": {
     "filp/whoops": "^2.1",
     "vlucas/phpdotenv": "~1.0",
-    "symfony/var-dumper": "3.*",
     "nesbot/carbon": "^1.26.3",
     "symfony/var-dumper": "4.*"
   },
   "require-dev" :{
-    "yumi/console":"*"
+    "yumi/console":"dev-master"
   }
 }

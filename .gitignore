@@ -4,4 +4,4 @@ vendor/
 .DS_Store
 app/etc/db.php
 node_modules/
-
+packages/
