@@ -137,7 +137,7 @@ class App
             $specificInstance = $om->resolve($specific);
             if(!$specificInstance->filter($request, $response)){
                 if($specificInstance instanceof ShouldRedirect){
-                    header('Location:  '.  $instance->redirectTo());
+                    header('Location:  '.  $specificInstance->redirectTo());
                     break;
                 }
                 throw new \Exception("You don't have the rights to enter here", 1);
