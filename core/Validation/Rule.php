@@ -4,6 +4,7 @@
 namespace Kolores\Validation;
 
 
+use Kolores\Validation\Rules\CustomConstraint;
 use Kolores\Validation\Rules\Max;
 use Kolores\Validation\Rules\Min;
 use Kolores\Validation\Rules\Number;
@@ -55,6 +56,12 @@ class Rule{
         return $this;
     }
 
+    public function inject(CustomConstraint $customConstraint)
+    {
+        $this->constraints[] = $customConstraint;
+
+        return $this;
+    }
     public function validate($value)
     {
         foreach ($this->constraints as $constraint){
