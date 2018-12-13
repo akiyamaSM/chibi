@@ -1,5 +1,6 @@
 <?php
 
+use App\Constraints\UserName;
 use Kolores\App;
 use Kolores\Request;
 use Kolores\Validation\Rule;
@@ -34,7 +35,8 @@ $router->get('/hola/{name}', function($name, $h) {
 $router->get('/katana', function () {
     $data = [
         'name' => 'Inani',
-        'age' => "gfg"
+        'age' => 20,
+        'username' => 'Houssa_in'
     ];
 
     $validator = new Validator($data);
@@ -42,10 +44,12 @@ $router->get('/katana', function () {
     $validator
         ->addRule(
         (
-            new Rule('name'))->required()->max(10)->min(9)
+            new Rule('name'))->required()->max(10)->min(2)
         )
         ->addRule(
             (new Rule('age'))->required()->number()
+        )->addRule(
+            (new Rule('username'))->inject( new UserName())
         );
 
     dump($validator->check(), $validator->getErrors());

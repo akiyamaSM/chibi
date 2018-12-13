@@ -25,7 +25,8 @@ trait DoesntUseUnassignedVars {
      *
      * @return array
      */
-    protected function getTemplateVars() {
+    protected function getTemplateVars()
+    {
         $matches = [];
         preg_match_all('/{{\s*(\$(.*?))\s*}}/', $this->contents,$matches);
         return isset($matches[2]) ? $matches[2] : [];
@@ -37,7 +38,8 @@ trait DoesntUseUnassignedVars {
      * @param $value
      * @return bool
      */
-    protected function checkUnassignedVariables(&$value) {
+    protected function checkUnassignedVariables(&$value)
+    {
         $diff = array_diff($this->getTemplateVars(),array_keys($this->vars));
         if (count($diff) > 0)  {
             $value = array_values($diff)[0];
