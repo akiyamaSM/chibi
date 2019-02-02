@@ -2,6 +2,7 @@
 
 namespace Chibi;
 
+use Chibi\Auth\Auth;
 use Chibi\Exceptions\ControllersMethodNotFound;
 use Chibi\Exceptions\ControllerNotFound;
 use Whoops\Handler\JsonResponseHandler;
@@ -42,6 +43,9 @@ class App
             },
             'om' => function () {
                 return AppObjectManager::getInstance();
+            },
+            'auth' => function () {
+                return Auth::getInstance();
             }
         ));
         $this->registerApp();
@@ -84,7 +88,6 @@ class App
      */
     public function run()
     {
-        session_start();
         $router = $this->container->router;
         $request = $this->container->request;
         $response = $this->container->response;

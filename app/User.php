@@ -3,9 +3,19 @@
 
 namespace App;
 
-use Chibi\Model\Katana;
+use Chibi\Auth\Authenticated;
 
-class Post extends Katana
+class User extends Authenticated
 {
-    static $table = 'posts';
+    static $table = 'users';
+
+    /**
+     * The guard name
+     *
+     * @return string
+     */
+    function guard(): string
+    {
+        return 'users';
+    }
 }

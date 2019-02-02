@@ -2,6 +2,7 @@
 
 use App\Constraints\UserName;
 use Chibi\App;
+use Chibi\Auth\Auth;
 use Chibi\Request;
 use Chibi\Validation\Rule;
 use Chibi\Validation\Validator;
@@ -11,6 +12,15 @@ $router->get('/user', 'App\Controllers\HomeController@views')->named('customers'
 $router->get('/configs', 'App\Controllers\HomeController@testConfig');
 
 $router->get('/test', function() {
+    Auth::against('users')->loginWith(1);
+    dd(Auth::against('users')->user());
+    dd(
+        $_SESSION
+    );
+
+    $toLogin = \App\User::find(1);
+    dump($toLogin->forceLogging()->check());
+    dump(App::getInstance()->getContainer()->auth);
     $om = App::getInstance()->getContainer()->om;
     /* @var $om Chibi\ObjectManager\ObjectManager */
     $dispatcher = $om->resolve(\Chibi\Events\Dispatcher::class);

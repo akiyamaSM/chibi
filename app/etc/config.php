@@ -5,6 +5,6 @@ return [
 	"database" => [
 		'username' => 'root',
 		'password' => 'root',
-		'db_name' => 'Chibi',
+		'db_name' => 'chibi',
 	]
 ];
