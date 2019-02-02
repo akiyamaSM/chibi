@@ -146,3 +146,47 @@ The Kolores framework is using its simple Katana ORM, simple and easy to use, yo
 - $model_instance->save(); // create a new instance if not exist, otherwise update it
 - $model_instance->delete(); // remove the model
 - Model::destory($ids); // you can pass an id or array of ids to destroy
+
+# Authentication system out of the box
+
+With Kolores framework you will do practicaly nothing to build a system of authentication.
+
+## Set up the Model
+
+Your Katana model should extend the Authenticated class where you should set up the name of the guard.
+
+```php
+
+
+namespace App;
+
+use Chibi\Auth\Authenticated;
+
+class User extends Authenticated
+{
+    static $table = 'users';
+
+    /**
+     * The guard name
+     *
+     * @return string
+     */
+    function guard(): string
+    {
+        return 'users';
+    }
+}
+
+```
+## Connexion
+
+You can use the following methods:
+- $user->forceLogging(); // To force the selected user to login 
+- $user->logout(); // to logout
+- $user->check(); // check if the current user is logged in
+- Auth::against('users')->loginWith(1); // force to log specific use against a guard
+- Auth::against('users')->user(); // get the Katana instance of the connected user or null
+- Auth::logOut(); // logout the connected user
+- Auth::against('users')->canLogin($username, $password, $extra); // check if the user can be logged in
+
+### Hurdles
