@@ -109,22 +109,22 @@ class Router
      * Compare the current Uri against an other one
      *
      * @param array $current
-     * @param array $registred
+     * @param array $registered
      * @return bool
      */
-    public function hasParameters(array $current, array $registred)
+    public function hasParameters(array $current, array $registered)
     {
-        $parames = [];
+        $params = [];
         for ($index = 0; $index < count($current); $index++) {
-            if (!preg_match('/^{(.*.)}$/', $registred[$index], $matches)) {
-                if (!($current[$index] === $registred[$index])) {
+            if (!preg_match('/^{(.*.)}$/', $registered[$index], $matches)) {
+                if (!($current[$index] === $registered[$index])) {
                     return false;
                 }
             } else {
-                $parames[$matches[1]] = $current[$index];
+                $params[$matches[1]] = $current[$index];
             }
         }
-        $this->parames = $parames;
+        $this->parames = $params;
         return true;
     }
 }

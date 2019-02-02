@@ -135,7 +135,7 @@ class Container implements ArrayAccess
      *
      * @param string $className
      * @param array $args
-     * @return className|object
+     * @return object
      * @throws ClassIsNotInstantiableException
      * @throws \ReflectionException
      */

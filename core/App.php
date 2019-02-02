@@ -3,6 +3,7 @@
 namespace Chibi;
 
 use Chibi\Auth\Auth;
+use Chibi\ConfigManager;
 use Chibi\Exceptions\ControllersMethodNotFound;
 use Chibi\Exceptions\ControllerNotFound;
 use Whoops\Handler\JsonResponseHandler;
@@ -92,7 +93,7 @@ class App
         $request = $this->container->request;
         $response = $this->container->response;
         $om = $this->container->om;
-        $om->resolve(\Chibi\ConfigManager::class);
+        $om->resolve(ConfigManager::class);
         $config = $this->container->config;
 
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
@@ -137,6 +138,7 @@ class App
     protected function runHurdles($hurdles, $request, $response, $om)
     {
         foreach($hurdles as $specific){
+            // Should see how to resolve it
             $specificInstance = $om->resolve($specific);
             if(!$specificInstance->filter($request, $response)){
                 if($specificInstance instanceof ShouldRedirect){
@@ -153,18 +155,16 @@ class App
      * Process the Handler
      *
      * @param $callable
-     * @param array $parames
+     * @param array $parames_all
      * @return mixed
      * @throws ControllerNotFound
      * @throws ControllersMethodNotFound
      * @throws Exceptions\ClassIsNotInstantiableException
      * @throws \ReflectionException
      */
-    public function process($callable, $parames = [])
+    public function process($callable, $parames_all = [])
     {
         $om = $this->getContainer()->om;
-        $parames_all = $parames;
-        $om = AppObjectManager::getInstance();
         if (is_callable($callable)) {
             return call_user_func_array($callable,
                 $this->getContainer()->resolveMethod('', $callable, $parames_all)

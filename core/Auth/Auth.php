@@ -212,4 +212,16 @@ class Auth
     {
         Session::forget('auth');
     }
+
+    /**
+     * Check if the current user is not connected
+     *
+     * @return bool
+     */
+    public static function guest()
+    {
+        return is_null(
+            Session::get('auth', null)
+        );
+    }
 }

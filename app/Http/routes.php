@@ -11,6 +11,14 @@ $router->get('/user', 'App\Controllers\HomeController@views')->named('customers'
 
 $router->get('/configs', 'App\Controllers\HomeController@testConfig');
 
+$router->get('/guest', function (){
+    dd('Good');
+})->allow("Guest");
+
+$router->get('/', function (){
+    return 'Sorry You are connected';
+})->named('home');
+
 $router->get('/test', function() {
 
     dd(Auth::against('users')->canLogin('inanielhoussain@gmail.com', '123456', function ($user){
