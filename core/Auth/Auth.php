@@ -100,6 +100,52 @@ class Auth
         return $instance;
     }
 
+    /**
+     * Check if the user can login
+     *
+     * @param $username
+     * @param $password
+     * @param null $extra
+     * @return bool
+     */
+    public static function canLogin($username, $password, $extra = null)
+    {
+        $instance = static::getInstance()->havingGuard();
+
+        // look for the username first(which should be unique)
+
+        $user = call_user_func_array([$instance, 'where'], [
+            [
+                'email' => $username,
+            ]
+        ]);
+
+        if(is_null($user) === 0){
+            return false;
+        }
+
+        // compare with the password
+        $hashedPassword = call_user_func_array([$instance, 'hash'], [$password]);
+
+        if(!static::IsSamePassword($user->getPassword(), $hashedPassword)){
+            return false;
+        }
+        if(!is_null($extra) && is_callable($extra)){
+            return $extra($user);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $one
+     * @param $two
+     * @return bool
+     */
+    public static function IsSamePassword($one, $two)
+    {
+        return $one === $two;
+    }
 
     /**
      * Get the authenticated user
@@ -114,6 +160,8 @@ class Auth
             $auth->connectedId
         );
     }
+
+
 
     /**
      * Get the connected Id
@@ -160,7 +208,7 @@ class Auth
      * Logout the connected user
      *
      */
-    public function logOut()
+    public static function logOut()
     {
         Session::forget('auth');
     }

@@ -12,14 +12,17 @@ $router->get('/user', 'App\Controllers\HomeController@views')->named('customers'
 $router->get('/configs', 'App\Controllers\HomeController@testConfig');
 
 $router->get('/test', function() {
-    Auth::against('users')->loginWith(1);
-    dd(Auth::against('users')->user());
-    dd(
-        $_SESSION
-    );
 
-    $toLogin = \App\User::find(1);
-    dump($toLogin->forceLogging()->check());
+    dd(Auth::against('users')->canLogin('inanielhoussain@gmail.com', '123456', function ($user){
+        return $user->state == 1;
+    }));
+    die();
+    //Auth::against('users')->loginWith(1); // force login
+
+    Auth::against('users')->user(); // Get the connected user
+
+
+
     dump(App::getInstance()->getContainer()->auth);
     $om = App::getInstance()->getContainer()->om;
     /* @var $om Chibi\ObjectManager\ObjectManager */

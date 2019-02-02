@@ -9,6 +9,19 @@ abstract class Authenticated extends Katana
 {
 
     abstract function guard(): string ;
+
+    abstract static function hash($password): string ;
+
+    /**
+     * Get the hashed password
+     *
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
     /**
      * Force the login for some user
      *

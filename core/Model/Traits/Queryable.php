@@ -5,6 +5,7 @@ namespace Chibi\Model\Traits;
 
 
 use Chibi\Model\Exceptions\ModelNotFoundException;
+use Chibi\Model\Katana;
 use ReflectionException;
 use PDO;
 
@@ -63,6 +64,43 @@ trait Queryable
         return $model;
     }
 
+    /**
+     * Where Query
+     *
+     * @param array $mapping
+     * @return Katana|null
+     */
+    public static function where(array $mapping)
+    {
+        parent::connect();
+
+        $keys = array_keys($mapping);
+
+        $conditions = [];
+
+        array_walk($keys, function ($key) use (&$conditions){
+           $conditions[] = "{$key} = :{$key}";
+        });
+
+        $table = static::guessTableName();
+
+        $query = static::$connexion->prepare("SELECT * FROM {$table} WHERE ". implode(' AND ', $conditions));
+
+
+        foreach ($mapping as $key => &$value){
+            $query->bindParam(":$key", $value);
+        }
+
+        $query->execute();
+
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        if(count($results) == 0){
+            return null;
+        }
+
+        return new static($results[0]);
+    }
 
     public static function all()
     {

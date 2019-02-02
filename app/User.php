@@ -18,4 +18,16 @@ class User extends Authenticated
     {
         return 'users';
     }
+
+    /**
+     * The hashed password to be used
+     *
+     * @param $password
+     * @return string
+     */
+    public static function  hash($password): string
+    {
+        return md5($password);
+    }
+
 }
