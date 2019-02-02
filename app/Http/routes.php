@@ -1,10 +1,10 @@
 <?php
 
 use App\Constraints\UserName;
-use Kolores\App;
-use Kolores\Request;
-use Kolores\Validation\Rule;
-use Kolores\Validation\Validator;
+use Chibi\App;
+use Chibi\Request;
+use Chibi\Validation\Rule;
+use Chibi\Validation\Validator;
 
 $router->get('/user', 'App\Controllers\HomeController@views')->named('customers');
 
@@ -12,8 +12,8 @@ $router->get('/configs', 'App\Controllers\HomeController@testConfig');
 
 $router->get('/test', function() {
     $om = App::getInstance()->getContainer()->om;
-    /* @var $om Kolores\ObjectManager\ObjectManager */
-    $dispatcher = $om->resolve(\Kolores\Events\Dispatcher::class);
+    /* @var $om Chibi\ObjectManager\ObjectManager */
+    $dispatcher = $om->resolve(\Chibi\Events\Dispatcher::class);
     $name = "Houssain";
     $dispatcher->addListeners("EntredLinkEvent", $om->resolve(\App\Listeners\SayHello::class));
     $dispatcher->addListeners("EntredLinkEvent", $om->resolve(\App\Listeners\SaveMeAsUser::class));

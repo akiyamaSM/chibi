@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use Kolores\Request;
-use Kolores\Response;
-use Kolores\Controller\Controller;
+use Chibi\Request;
+use Chibi\Response;
+use Chibi\Controller\Controller;
 
 class HomeController extends Controller
 {
@@ -33,7 +33,7 @@ class HomeController extends Controller
 
     public function testConfig()
     {
-        $config = \Kolores\App::getInstance()->getContainer()->config;
+        $config = \Chibi\App::getInstance()->getContainer()->config;
         bdump($config);
     }
 }

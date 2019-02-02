@@ -2,9 +2,9 @@
 
 namespace App\Hurdles;
 
-use Kolores\Hurdle\Wall;
-use Kolores\Request;
-use Kolores\Response;
+use Chibi\Hurdle\Wall;
+use Chibi\Request;
+use Chibi\Response;
 
 class AgeGreaterThan implements Wall{
 

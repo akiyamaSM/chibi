@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kolores\Validation\Rules;
+namespace Chibi\Validation\Rules;
 
 
 class Number extends AbstractRule implements Checkable

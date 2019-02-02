@@ -1,5 +1,5 @@
 {
-  "name": "akiyamaSM/chibi",
+  "name": "inani/chibi",
   "description": "The Chibi Framework.",
   "keywords": ["framework", "Chibi", "PHP"],
   "license": "MIT",
@@ -23,7 +23,7 @@
     ],
     "psr-4": {
       "App\\": "app/",
-      "Kolores\\": "core/"
+      "Chibi\\": "core/"
     }
   },
   "repositories": [

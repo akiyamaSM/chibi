@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kolores\Model\Traits;
+namespace Chibi\Model\Traits;
 
 use Exception;
 

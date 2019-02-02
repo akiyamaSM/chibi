@@ -2,5 +2,5 @@
 
 return [
 	//'YearIsCurrent' => App\Hurdles\YearIsCurrent::class,
-    'Csrf' => Kolores\Hurdle\CSRFTokenable::class
+    'Csrf' => Chibi\Hurdle\CSRFTokenable::class
 ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolores\Config;
+namespace Chibi\Config;
 
 class Config implements \ArrayAccess
 {

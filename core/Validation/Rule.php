@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Kolores\Validation;
+namespace Chibi\Validation;
 
 
-use Kolores\Validation\Rules\CustomConstraint;
-use Kolores\Validation\Rules\Max;
-use Kolores\Validation\Rules\Min;
-use Kolores\Validation\Rules\Number;
-use Kolores\Validation\Rules\Required;
+use Chibi\Validation\Rules\CustomConstraint;
+use Chibi\Validation\Rules\Max;
+use Chibi\Validation\Rules\Min;
+use Chibi\Validation\Rules\Number;
+use Chibi\Validation\Rules\Required;
 
 class Rule{
 

@@ -2,10 +2,10 @@
 
 namespace App\Hurdles;
 
-use Kolores\Hurdle\ShouldRedirect;
-use Kolores\Hurdle\Wall;
-use Kolores\Request;
-use Kolores\Response;
+use Chibi\Hurdle\ShouldRedirect;
+use Chibi\Hurdle\Wall;
+use Chibi\Request;
+use Chibi\Response;
 
 class YearIsCurrent implements Wall, ShouldRedirect{
 

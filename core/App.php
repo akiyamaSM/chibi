@@ -1,13 +1,13 @@
 <?php
 
-namespace Kolores;
+namespace Chibi;
 
-use Kolores\Exceptions\ControllersMethodNotFound;
-use Kolores\Exceptions\ControllerNotFound;
+use Chibi\Exceptions\ControllersMethodNotFound;
+use Chibi\Exceptions\ControllerNotFound;
 use Whoops\Handler\JsonResponseHandler;
 use Whoops\Handler\PrettyPageHandler;
-use Kolores\Hurdle\ShouldRedirect;
-use Kolores\Router\Router;
+use Chibi\Hurdle\ShouldRedirect;
+use Chibi\Router\Router;
 
 class App
 {
@@ -89,7 +89,7 @@ class App
         $request = $this->container->request;
         $response = $this->container->response;
         $om = $this->container->om;
-        $om->resolve(\Kolores\ConfigManager::class);
+        $om->resolve(\Chibi\ConfigManager::class);
         $config = $this->container->config;
 
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kolores;
+namespace Chibi;
 
-use Kolores\Exceptions\ClassIsNotInstantiableException;
+use Chibi\Exceptions\ClassIsNotInstantiableException;
 use Psr\Log\InvalidArgumentException;
 use ReflectionFunction;
 use ReflectionMethod;

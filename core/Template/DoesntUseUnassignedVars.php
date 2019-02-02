@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kolores\Template;
+namespace Chibi\Template;
 
 
 trait DoesntUseUnassignedVars {

@@ -4,5 +4,5 @@ return [
 	'username' => 'user',
 	'password' => 'secret',
 	'port' => 3306,
-	'dbname' => 'kolores'
+	'dbname' => 'Chibi'
 ];

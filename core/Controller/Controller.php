@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolores\Controller;
+namespace Chibi\Controller;
 
 class Controller
 {

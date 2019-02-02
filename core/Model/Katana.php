@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Kolores\Model;
+namespace Chibi\Model;
 
-use Kolores\Model\Traits\CanUseColumns;
-use Kolores\Model\Traits\Queryable;
+use Chibi\Model\Traits\CanUseColumns;
+use Chibi\Model\Traits\Queryable;
 use ReflectionClass;
 
 class Katana extends Connexion

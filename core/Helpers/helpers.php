@@ -1,8 +1,8 @@
 <?php
 
-use Kolores\Exceptions\ViewNotFoundException;
-use Kolores\Template\Template;
-use Kolores\App;
+use Chibi\Exceptions\ViewNotFoundException;
+use Chibi\Template\Template;
+use Chibi\App;
 
 if (!function_exists('route')) {
 
@@ -32,7 +32,7 @@ if (!function_exists('view')) {
      */
     function view($view, $variables = [])
     {
-        $path = "app/Views/{$view}.Kolores.php";
+        $path = "app/Views/{$view}.Chibi.php";
         if (!(file_exists($path))) {
             throw new ViewNotFoundException("The {$view} view is not found");
         }
@@ -138,7 +138,7 @@ if (!function_exists('get_crsf_token')) {
      * @return string
      */
     function get_crsf_token() {
-        return \Kolores\Session\Session::get('csrf_token');
+        return \Chibi\Session\Session::get('csrf_token');
     }
 }
 

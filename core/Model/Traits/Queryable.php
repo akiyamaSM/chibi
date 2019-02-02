@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Kolores\Model\Traits;
+namespace Chibi\Model\Traits;
 
 
-use Kolores\Model\Exceptions\ModelNotFoundException;
+use Chibi\Model\Exceptions\ModelNotFoundException;
 use ReflectionException;
 use PDO;
 

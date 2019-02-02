@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kolores\Validation\Rules;
+namespace Chibi\Validation\Rules;
 
 
 abstract class CustomConstraint extends AbstractRule implements Checkable

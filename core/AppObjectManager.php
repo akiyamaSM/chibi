@@ -1,8 +1,8 @@
 <?php
 
-namespace Kolores;
+namespace Chibi;
 
-use Kolores\ObjectManager\Factory;
+use Chibi\ObjectManager\Factory;
 use Whoops\Run;
 
 class AppObjectManager extends ObjectManager\ObjectManager

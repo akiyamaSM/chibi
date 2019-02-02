@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolores\ObjectManager;
+namespace Chibi\ObjectManager;
 
 class Factory implements FactoryInterface
 {
@@ -15,7 +15,7 @@ class Factory implements FactoryInterface
     public function create($className, array $args = [])
     {
         try {
-            $om = \Kolores\AppObjectManager::getInstance();
+            $om = \Chibi\AppObjectManager::getInstance();
             $classConstructor = new \ReflectionMethod($className, '__construct');
             $params = $classConstructor->getParameters();
             if (count($params) > 0) {

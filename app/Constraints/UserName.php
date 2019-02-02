@@ -4,7 +4,7 @@
 namespace App\Constraints;
 
 
-use Kolores\Validation\Rules\CustomConstraint;
+use Chibi\Validation\Rules\CustomConstraint;
 
 class UserName extends CustomConstraint
 {

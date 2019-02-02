@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kolores\Template\Compilers;
+namespace Chibi\Template\Compilers;
 
 
 interface Compilable {

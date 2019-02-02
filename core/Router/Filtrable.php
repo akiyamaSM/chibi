@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolores\Router;
+namespace Chibi\Router;
 
 use BadMethodCallException;
 

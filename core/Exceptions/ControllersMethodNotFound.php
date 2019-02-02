@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolores\Exceptions;
+namespace Chibi\Exceptions;
 
 class ControllersMethodNotFound extends \Exception
 {

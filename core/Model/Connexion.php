@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kolores\Model;
+namespace Chibi\Model;
 
 use PDO;
 

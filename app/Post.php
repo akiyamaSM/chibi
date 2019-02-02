@@ -3,7 +3,7 @@
 
 namespace App;
 
-use Kolores\Model\Katana;
+use Chibi\Model\Katana;
 
 class Post extends Katana
 {

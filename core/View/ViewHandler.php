@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolores\View;
+namespace Chibi\View;
 
 class ViewHandler
 {

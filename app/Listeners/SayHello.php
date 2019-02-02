@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use Kolores\Events\Event;
-use Kolores\Events\Listener;
+use Chibi\Events\Event;
+use Chibi\Events\Listener;
 
 class SayHello extends Listener
 {

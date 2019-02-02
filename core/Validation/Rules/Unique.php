@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kolores\Validation\Rules;
+namespace Chibi\Validation\Rules;
 
 
 class Min extends AbstractRule implements Checkable

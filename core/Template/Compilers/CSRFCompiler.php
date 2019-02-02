@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolores\Template\Compilers;
+namespace Chibi\Template\Compilers;
 
 
 class CSRFCompiler implements Compilable {
@@ -23,10 +23,10 @@ class CSRFCompiler implements Compilable {
      */
     public function compile($content)
     {
-        $token = \Kolores\Session\Session::get('csrf_token', null);
+        $token = \Chibi\Session\Session::get('csrf_token', null);
 
         if(is_null($token)){
-            $token = \Kolores\Session\Session::put('csrf_token', substr(
+            $token = \Chibi\Session\Session::put('csrf_token', substr(
                     base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 32)
             );
         }

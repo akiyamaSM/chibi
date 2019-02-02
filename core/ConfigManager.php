@@ -1,8 +1,8 @@
 <?php
 
-namespace Kolores;
+namespace Chibi;
 
-use Kolores\Config\Config;
+use Chibi\Config\Config;
 
 class ConfigManager 
 {

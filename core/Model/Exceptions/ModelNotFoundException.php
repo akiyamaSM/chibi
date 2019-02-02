@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kolores\Model\Exceptions;
+namespace Chibi\Model\Exceptions;
 
 use Exception;
 

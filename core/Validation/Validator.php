@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kolores\Validation;
+namespace Chibi\Validation;
 
 class Validator
 {

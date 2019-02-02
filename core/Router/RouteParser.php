@@ -1,9 +1,9 @@
 <?php
 
-namespace Kolores\Router;
+namespace Chibi\Router;
 
 use BadMethodCallException;
-use Kolores\Controller\Controller;
+use Chibi\Controller\Controller;
 use ReflectionClass;
 
 trait RouteParser

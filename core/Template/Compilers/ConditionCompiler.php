@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolores\Template\Compilers;
+namespace Chibi\Template\Compilers;
 
 
 class ConditionCompiler implements Compilable {

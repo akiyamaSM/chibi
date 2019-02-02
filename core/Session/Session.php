@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kolores\Session;
+namespace Chibi\Session;
 
 
 class Session
