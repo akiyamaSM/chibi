@@ -12,12 +12,11 @@ $router->get('/user', 'App\Controllers\HomeController@views')->named('customers'
 $router->get('/configs', 'App\Controllers\HomeController@testConfig');
 
 $router->get('/guest', function (){
-    dd('Good');
-})->allow("Guest");
+})->allow("YearIsCurrent");
 
 $router->get('/', function (){
     return 'Sorry You are connected';
-})->named('home');
+})->allow('Guest')->named('home');
 
 $router->get('/test', function() {
 

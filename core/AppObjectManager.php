@@ -3,9 +3,9 @@
 namespace Chibi;
 
 use Chibi\ObjectManager\Factory;
-use Whoops\Run;
+use Chibi\ObjectManager\ObjectManager;
 
-class AppObjectManager extends ObjectManager\ObjectManager
+class AppObjectManager extends ObjectManager
 {
     /**
      * @var ObjectManager
@@ -20,7 +20,7 @@ class AppObjectManager extends ObjectManager\ObjectManager
     public static function getInstance()
     {
         if (!self::$instance instanceof AppObjectManager) {
-            $factory =  new ObjectManager\Factory();
+            $factory =  new Factory();
             self::setInstance(new AppObjectManager($factory));           
         }
         return self::$instance;

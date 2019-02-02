@@ -9,8 +9,7 @@ use Chibi\Response;
 
 class YearIsCurrent implements Wall, ShouldRedirect{
 
-	public function filter(Request $request, Response $response){
-
+	public function filter(Request $request, Response $response, ...$name){
 		if($request->has('year') && $request->only('year') == 2018){
 			return true;
 		}

@@ -10,6 +10,22 @@ trait Filtrable
 
 
     /**
+     * Parse the Alias
+     *
+     * @param $alias
+     * @return array
+     */
+    protected function parseHurdleName($alias)
+    {
+        $parts = explode(':', $alias);
+
+        return [
+            $parts[0],
+            isset($parts[1]) ? explode(',', $parts[1]) : []
+        ];
+    }
+
+    /**
      * Name a route
      *
      * @param $alias
@@ -20,6 +36,7 @@ trait Filtrable
     public function allow($alias)
     {
         try{
+            list($alias, $params) = $this->parseHurdleName($alias);
             $className = $this->getAliasFromConfig($alias);
             if (is_null($className)) {
                 throw new \Exception("No Hurdle with the Alias of {$alias} exists");
@@ -27,6 +44,7 @@ trait Filtrable
             if ($this->isUriParsed()) {
                 $className = is_array($className) ? $className : [$className];
                 $this->filters[$this->parsedUri] = $className;
+                $this->filters[$this->parsedUri]['params'] = $params;
                 return $this;
             }
 

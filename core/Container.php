@@ -139,7 +139,7 @@ class Container implements ArrayAccess
      * @throws ClassIsNotInstantiableException
      * @throws \ReflectionException
      */
-    protected function constructIt($className, array $args = [])
+    public function constructIt($className, array $args = [])
     {
         $reflector = new ReflectionClass($className);
 

@@ -99,10 +99,10 @@ class App
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
 
         // Get Hurdles that run on every request
-        $this->runHurdles($this->getHurdles(), $request, $response, $om);
+        //$this->runHurdles($this->getHurdles(), $request, $response, $om);
 
         // run specific Hurdles
-        $this->runHurdles($router->getHurdlesByPath(), $request, $response, $om);
+        $this->runCustomHurdle($router->getHurdlesByPath(), $request, $response);
 
         $res =$router->getResponse();
         $response = $res['response'];
@@ -139,7 +139,16 @@ class App
     {
         foreach($hurdles as $specific){
             // Should see how to resolve it
-            $specificInstance = $om->resolve($specific);
+
+            $specificInstance = app()->container->resolve($specific);
+
+
+            dd($specific);
+            dd(
+                app()->container->resolveMethod(
+                    $specific, 'filter', []
+                )
+            );
             if(!$specificInstance->filter($request, $response)){
                 if($specificInstance instanceof ShouldRedirect){
                     header('Location:  '.  $specificInstance->redirectTo());
@@ -150,6 +159,31 @@ class App
         }
 
     }
+
+    /**
+     * Run hurdles
+     *
+     * @param $specific
+     * @param $request
+     * @param $response
+     * @throws \Exception
+     */
+    protected function runCustomHurdle($specific, $request, $response)
+    {
+
+        $specificInstance = app()->container->resolve($specific[0]);
+
+        if(!app()->container->resolveMethod($specific[0], 'filter', $specific['params'])){
+            if($specificInstance instanceof ShouldRedirect){
+                header('Location:  '.  $specificInstance->redirectTo());
+                return;
+            }
+            throw new \Exception("You don't have the rights to enter here", 1);
+        }
+
+    }
+
+
 
     /**
      * Process the Handler
