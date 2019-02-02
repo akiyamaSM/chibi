@@ -1,8 +1,8 @@
-# Kolores
-Kolores is a mini PHP framework to work on small projects, containing the following elements.
+# Chibi
+Chibi is a mini PHP framework to work on small projects, containing the following elements.
 
 # Routing
-With Kolores its really easy to make your routes
+With Chibi its really easy to make your routes
 
 ## Route to Controller
 ```php
@@ -29,7 +29,7 @@ $router->post('/customers', function(Request $request, Response $respone){
 
 # Controllers
 
-Every Controller used in the app should extends the Kolores\Controller\Controller Controller.
+Every Controller used in the app should extends the Chibi\Controller\Controller Controller.
 
 # Views
 You can pass data from controllers to the view via the view method
@@ -52,7 +52,7 @@ You can pass data from controllers to the view via the view method
 
 ```
 
-The views are in the View folder with a kolores.php extenstion.
+The views are in the View folder with a Chibi.php extenstion.
 
 A simple templete engin is provided.
 
@@ -89,9 +89,9 @@ A hurdle Object should implement the Wall Interface
 
 namespace App\Hurdles;
 
-use Kolores\Hurdle\Wall;
-use Kolores\Request;
-use Kolores\Response;
+use Chibi\Hurdle\Wall;
+use Chibi\Request;
+use Chibi\Response;
 
 class YearIsCurrent implements Wall{
 
@@ -115,7 +115,7 @@ Well its easy, Just fill the register file in the App\Hurdles Folder
 
 ```php
 return [
-	'Csrf' => Kolores\Hurdle\CSRFTokenable::class,
+	'Csrf' => Chibi\Hurdle\CSRFTokenable::class,
 	'YearIsCurrent' => App\Hurdles\YearIsCurrent::class,
 ];
 ```
@@ -136,7 +136,7 @@ A CSRFTokenable Hurdle will be run at each POST request to protect you from Cros
 
 
 # Katana ORM
-The Kolores framework is using its simple Katana ORM, simple and easy to use, you don't have to make a lot of effor to handle your Models. for the time being it supports:
+The Chibi framework is using its simple Katana ORM, simple and easy to use, you don't have to make a lot of effor to handle your Models. for the time being it supports:
 
 - Model::find($id); // get the model or null
 - Model::findOrFail($id); // get the model or ModelNotFoundException is thrown
@@ -149,7 +149,7 @@ The Kolores framework is using its simple Katana ORM, simple and easy to use, yo
 
 # Authentication system out of the box
 
-With Kolores framework you will do practicaly nothing to build a system of authentication.
+With Chibi framework you will do practicaly nothing to build a system of authentication.
 
 ## Set up the Model
 
@@ -190,3 +190,35 @@ You can use the following methods:
 - Auth::against('users')->canLogin($username, $password, $extra); // check if the user can be logged in
 
 ### Hurdles
+Chibi framework ships with some useful hurdles that will help you to protect your routes depending on the situation
+
+#### GUEST
+
+```php
+
+$route->get('/onlyGuests', function(){
+    return 'only Guests can enter';
+})->allow('Guest');
+
+```
+
+#### Auth
+
+```php
+
+$route->get('/onlyAuth', function(){
+    return 'only Guests can enter';
+})->allow('Auth');
+
+```
+
+You can pass the name of the guard as an option to check against it
+
+
+```php
+
+$route->get('/onlyAdmins', function(){
+    return 'only Guests can enter';
+})->allow('Auth:admins');
+
+``` 

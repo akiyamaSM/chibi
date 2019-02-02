@@ -1,3 +1,0 @@
-[2018-08-15 14:59:53] name.INFO: (getRow)      "SHOW TABLES LIKE 'Customer'" [] []
-[2018-08-15 14:59:55] name.INFO: (getResults)  "DESC `Customer`" [] []
-[2018-08-15 15:00:00] name.INFO: (getResults)  "SELECT * FROM Customer AS Customer       " [] []
