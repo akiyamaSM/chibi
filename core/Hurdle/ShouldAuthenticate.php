@@ -7,7 +7,7 @@ use Chibi\Auth\Auth;
 use Chibi\Request;
 use Chibi\Response;
 
-class ShouldAuthenticate implements Wall, ShouldRedirect
+abstract class ShouldAuthenticate implements Wall, ShouldRedirect
 {
 
     /**
@@ -32,16 +32,6 @@ class ShouldAuthenticate implements Wall, ShouldRedirect
         }
 
         return true;
-    }
-
-    /**
-     * Redirect to a page
-     *
-     * @return mixed
-     */
-    public function redirectTo()
-    {
-        return route('home');
     }
 
     /**
