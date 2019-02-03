@@ -99,10 +99,10 @@ class App
         $router->setPath(isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: '/');
 
         // Get Hurdles that run on every request
-        //$this->runHurdles($this->getHurdles(), $request, $response, $om);
+        $this->runHurdles($this->getHurdles(), $request, $response, $om);
 
         // run specific Hurdles
-        $this->runCustomHurdle($router->getHurdlesByPath(), $request, $response);
+        $this->runCustomHurdle($router->getHurdlesByPath());
 
         $res =$router->getResponse();
         $response = $res['response'];
@@ -138,17 +138,7 @@ class App
     protected function runHurdles($hurdles, $request, $response, $om)
     {
         foreach($hurdles as $specific){
-            // Should see how to resolve it
-
             $specificInstance = app()->container->resolve($specific);
-
-
-            dd($specific);
-            dd(
-                app()->container->resolveMethod(
-                    $specific, 'filter', []
-                )
-            );
             if(!$specificInstance->filter($request, $response)){
                 if($specificInstance instanceof ShouldRedirect){
                     header('Location:  '.  $specificInstance->redirectTo());
@@ -164,18 +154,23 @@ class App
      * Run hurdles
      *
      * @param $specific
-     * @param $request
-     * @param $response
      * @throws \Exception
      */
-    protected function runCustomHurdle($specific, $request, $response)
+    protected function runCustomHurdle($specific)
     {
+        if(count($specific) === 0){
+            return;
+        }
 
         $specificInstance = app()->container->resolve($specific[0]);
 
-        if(!app()->container->resolveMethod($specific[0], 'filter', $specific['params'])){
+        $extra  = count($specific['params']) === 0 ? [null] : $specific['params'];
+
+        $params = app()->container->resolveMethod($specific[0], 'filter', $extra);
+
+        if(!call_user_func_array([$specificInstance, 'filter'], $params)){
             if($specificInstance instanceof ShouldRedirect){
-                header('Location:  '.  $specificInstance->redirectTo());
+                //header('Location:  '.  $specificInstance->redirectTo());
                 return;
             }
             throw new \Exception("You don't have the rights to enter here", 1);

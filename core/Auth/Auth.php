@@ -3,7 +3,6 @@
 namespace Chibi\Auth;
 
 
-use App\User;
 use Chibi\Session\Session;
 
 class Auth
@@ -14,6 +13,8 @@ class Auth
 
     protected $connectedId = null;
 
+    protected $guards = [];
+
     /**
      * Auth constructor.
      *
@@ -22,6 +23,8 @@ class Auth
     private function __construct($name)
     {
         $this->guard = $name;
+
+        $this->guards = require_once('config/auth.php');
     }
 
     /**
@@ -52,11 +55,15 @@ class Auth
     /**
      * Generate the auth instance
      *
-     * @param string $name
+     * @param null $name
      * @return Auth|null
      */
-    public static function getInstance($name = 'user')
+    public static function getInstance($name = null)
     {
+        if(is_null($name)){
+            $name = static::getDefault();
+        }
+
         if($auth = Session::get('auth')){
             if(!is_null($auth->getConnectedId()) && $auth->getGuardName() === $name){
                 return $auth;
@@ -178,7 +185,8 @@ class Auth
      *
      * @return null
      */
-    public function getGuardName(){
+    public function getGuardName()
+    {
         return $this->guard;
     }
 
@@ -190,7 +198,9 @@ class Auth
      */
     protected function havingGuard()
     {
-        return User::class;
+        return $this->guards[
+            $this->guard
+        ];
     }
 
     /**
@@ -199,8 +209,11 @@ class Auth
      * @param $name
      * @return Auth|null
      */
-    public static function against($name)
+    public static function against($name = null)
     {
+        if(is_null($name)){
+            $name = static::getDefault();
+        }
         return static::getInstance($name);
     }
 
@@ -224,4 +237,17 @@ class Auth
             Session::get('auth', null)
         );
     }
+
+    /**
+     * Get default name of guard
+     *
+     * @return string|null
+     */
+    public static function getDefault()
+    {
+        $guards = include('config/auth.php');
+        
+        return !is_array($guards) || count($guards) == 0 ? null : array_keys($guards)[0];
+    }
+
 }

@@ -15,8 +15,16 @@ $router->get('/guest', function (){
 })->allow("YearIsCurrent");
 
 $router->get('/', function (){
-    return 'Sorry You are connected';
-})->allow('Guest')->named('home');
+    return 'Only Not connected users';
+})->allow('Guest')->named('home_guest');
+
+$router->get('/c', function (){
+    return 'Only Connected can enter';
+})->allow('Auth')->named('home_online');
+
+$router->get('/home', function (){
+    return 'Its home!';
+})->named('home');
 
 $router->get('/test', function() {
 
