@@ -20,7 +20,7 @@ $router->get('/', function (){
 
 $router->get('/c', function (){
     return 'Only Connected can enter';
-})->allow('Auth')->named('home_online');
+})->allow('Auth:users')->named('home_online');
 
 $router->get('/home', function (){
     return 'Its home!';

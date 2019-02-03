@@ -26,11 +26,12 @@ class ShouldAuthenticate implements Wall, ShouldRedirect
 
         $name = $this->defaultIfNull($guard);
 
-        if(Auth::against($name)->user()){
-            return true;
+
+        if(is_null(Auth::against($name)->user())){
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -58,6 +59,6 @@ class ShouldAuthenticate implements Wall, ShouldRedirect
             return count($guards) == 0 ? null : array_keys($guards)[0];
         }
 
-        return $name;
+        return $name[0];
     }
 }

@@ -170,7 +170,7 @@ class App
 
         if(!call_user_func_array([$specificInstance, 'filter'], $params)){
             if($specificInstance instanceof ShouldRedirect){
-                //header('Location:  '.  $specificInstance->redirectTo());
+                header('Location:  '.  $specificInstance->redirectTo());
                 return;
             }
             throw new \Exception("You don't have the rights to enter here", 1);

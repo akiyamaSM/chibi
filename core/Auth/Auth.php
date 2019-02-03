@@ -246,7 +246,7 @@ class Auth
     public static function getDefault()
     {
         $guards = include('config/auth.php');
-        
+
         return !is_array($guards) || count($guards) == 0 ? null : array_keys($guards)[0];
     }
 
