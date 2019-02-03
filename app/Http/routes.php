@@ -86,3 +86,8 @@ $router->get('/katana', function () {
 $router->get('/ageNotOk', function (){
     return "Age NOT OK";
 })->named('not_ok_age');
+
+// Scaffolding Authentication
+
+$router->get('/auth/login', 'App\Controllers\AuthController@login')->allow('Guest')->named('auth.login');
+$router->post('/auth/login', 'App\Controllers\AuthController@postLogin')->allow('Guest')->named('auth.login.post');

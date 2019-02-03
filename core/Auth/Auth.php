@@ -141,7 +141,7 @@ class Auth
             return $extra($user);
         }
 
-        return true;
+        return $user->getIdValue();
     }
 
     /**

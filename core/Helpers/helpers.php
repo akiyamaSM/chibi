@@ -32,7 +32,9 @@ if (!function_exists('view')) {
      */
     function view($view, $variables = [])
     {
-        $path = "app/Views/{$view}.Chibi.php";
+        $view = str_replace('.', '/', $view);
+
+        $path = "app/Views/{$view}.chibi.php";
         if (!(file_exists($path))) {
             throw new ViewNotFoundException("The {$view} view is not found");
         }
@@ -47,10 +49,19 @@ if (!function_exists('redirect')) {
      * Redirect to a specific path
      *
      * @param $path
+     * @param array $vars
      */
-    function redirect($path)
+    function redirect($path, $vars = [])
     {
-        header("Location: " . base_url() . "/{$path}");
+        if(count($vars) !== 0){
+            $formatted = [];
+
+            foreach ($vars as $key => $value){
+                $formatted[] = "{$key}={$value}";
+            }
+            $path = $path . "?" . implode('&', $formatted);
+        }
+        header("Location:   {$path}");
     }
 }
 
