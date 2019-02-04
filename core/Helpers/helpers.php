@@ -55,14 +55,11 @@ if (!function_exists('redirect')) {
     function redirect($path, $vars = [])
     {
         if(count($vars) !== 0){
-            $formatted = [];
-
             foreach ($vars as $key => $value){
-                $formatted[] = "{$key}={$value}";
+                flash($key, $value);
             }
-            $path = $path . "?" . implode('&', $formatted);
         }
-        header("Location:   {$path}");
+        header("Location: {$path}");
     }
 }
 

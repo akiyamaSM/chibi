@@ -36,7 +36,9 @@ class AuthController extends Controller
         {
             //Auth::loginWith($id);
 
-            return redirect(route('home'));
+            return redirect(route('home'), [
+                'success' => 'logged Successfuly'
+            ]);
         }
 
         flash('error', 'Some error is found');

@@ -23,6 +23,9 @@ $router->get('/c', function (){
 })->allow('Auth:users')->named('home_online');
 
 $router->get('/home', function (){
+    if($message = flash('success')){
+        echo $message;
+    }
     return 'Its home!';
 })->named('home');
 
