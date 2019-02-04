@@ -74,8 +74,7 @@ $router->get('/katana', function () {
 
     $validator
         ->addRule(
-        (
-            new Rule('name'))->required()->max(10)->min(2)
+            (new Rule('name'))->required()->max(10)->min(2)
         )
         ->addRule(
             (new Rule('age'))->required()->number()

@@ -6,6 +6,7 @@ namespace App\Controllers;
 use Chibi\Auth\Auth;
 use Chibi\Controller\Controller;
 use Chibi\Request;
+use Chibi\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -30,6 +31,19 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
+        $validator = $this
+            ->validate($request->except('csrf_token'))
+            ->addRule(
+                ( new Rule('username'))->required()
+            )->addRule(
+                ( new Rule('password'))->required()
+            );
+
+        if(!$validator->check()){
+            flash('error', 'Fields are required');
+
+            return redirect(route('auth.login'));
+        }
         // Validate form
         if($id = Auth::against('users')->canLogin($request->username, $request->password))
         {
@@ -54,7 +68,7 @@ class AuthController extends Controller
         Auth::logOut();
 
         flash('success', 'Logged out successfully');
-        
+
         return redirect(route('home'));
     }
 }

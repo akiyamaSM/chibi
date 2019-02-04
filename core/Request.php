@@ -45,6 +45,31 @@ class Request
         return $this->fields[$key];
     }
 
+
+    /**
+     * Return the array minus a specific keys
+     * @param $keys
+     * @return array
+     */
+    public function except($keys)
+    {
+        return $this->except_keys(
+            func_get_args()
+        );
+    }
+
+    /**
+     * Perform the exception
+     *
+     * @param array $keys
+     * @return array
+     */
+    protected function except_keys(array $keys)
+    {
+        return array_filter($this->fields, function ($value, $index) use ($keys) {
+            return !in_array($index, $keys);
+        }, ARRAY_FILTER_USE_BOTH);
+    }
     /**
      * Get
      *
