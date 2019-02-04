@@ -31,18 +31,30 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         // Validate form
-
         if($id = Auth::against('users')->canLogin($request->username, $request->password))
         {
-            //Auth::loginWith($id);
+            Auth::loginWith($id);
 
             return redirect(route('home'), [
-                'success' => 'logged Successfuly'
+                'success' => 'logged Ssuccessfully'
             ]);
         }
 
-        flash('error', 'Some error is found');
+        flash('error', 'Bad Credentials');
 
         return redirect(route('auth.login'));
+    }
+
+    /**
+     * Logout the connected user
+     *
+     */
+    public function logout()
+    {
+        Auth::logOut();
+
+        flash('success', 'Logged out successfully');
+        
+        return redirect(route('home'));
     }
 }
