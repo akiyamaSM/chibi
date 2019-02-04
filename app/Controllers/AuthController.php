@@ -38,8 +38,9 @@ class AuthController extends Controller
 
             return redirect(route('home'));
         }
-        return redirect(route('auth.login'),[
-            'error' => 'Not found'
-        ]);
+
+        flash('error', 'Some error is found');
+
+        return redirect(route('auth.login'));
     }
 }

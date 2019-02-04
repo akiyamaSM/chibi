@@ -4,6 +4,7 @@ namespace Chibi\Template;
 
 use Chibi\Template\Compilers\ConditionCompiler;
 use Chibi\Template\Compilers\CSRFCompiler;
+use Chibi\Template\Compilers\FunctionCompiler;
 use Chibi\Template\Compilers\PrintCompiler;
 use Chibi\Template\Compilers\LoopCompiler;
 use Chibi\Template\Compilers\RouteCompiler;
@@ -23,6 +24,7 @@ class Template {
         PrintCompiler::class,
         CSRFCompiler::class,
         RouteCompiler::class,
+        FunctionCompiler::class
     ];
 
     /**

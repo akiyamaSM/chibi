@@ -9,7 +9,10 @@
 </head>
 <body>
     <h1>Hello World</h1>
-    <form action="<?php echo route('auth.login.post') ?>" method="POST">
+    @if( $error = flash('error') )
+        <h1>{{ $error }}</h1>
+    @done
+    <form action="@@route('auth.login.post')" method="POST">
         @csrf_field
         <div class="row">
             <label for="username">Email</label>

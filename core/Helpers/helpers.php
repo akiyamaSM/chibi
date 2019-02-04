@@ -1,6 +1,7 @@
 <?php
 
 use Chibi\Exceptions\ViewNotFoundException;
+use Chibi\Session\Flash;
 use Chibi\Template\Template;
 use Chibi\App;
 
@@ -161,5 +162,34 @@ if (!function_exists('base_path')) {
      */
     function base_path($path = '') {
         return dirname(dirname(__dir__)).($path == ''?'': '/'.$path);
+    }
+}
+
+if (!function_exists('flash')) {
+
+    /**
+     * Get the flash
+     *
+     * @param $key
+     * @param null $value
+     * @return bool|mixed|null
+     */
+    function flash($key, $value = null)
+    {
+        if(!is_null($value)){
+
+            Flash::put($key, $value);
+
+            return true;
+        }
+
+        if($value = Flash::get($key))
+        {
+            Flash::forget($key);
+
+            return $value;
+        }
+
+        return null;
     }
 }
