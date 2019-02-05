@@ -66,7 +66,7 @@ trait Filtrable
     }
 
     public function getAliasFromConfig($alias) {
-        $config = include('config/alias.php');
+        $config = include( BASE_PATH .DS .'config/alias.php');
         return isset($config['hurdles'][$alias])? $config['hurdles'][$alias] : null;
     }
 }

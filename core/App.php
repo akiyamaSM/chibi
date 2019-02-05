@@ -236,6 +236,6 @@ class App
      * Get hurdles
      */
     protected function getHurdles(){
-        return require('app/Hurdles/register.php');
+        return require(BASE_PATH. DS .'app/Hurdles/register.php');
     }
 }

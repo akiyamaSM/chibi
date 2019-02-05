@@ -35,7 +35,7 @@ if (!function_exists('view')) {
     {
         $view = str_replace('.', '/', $view);
 
-        $path = "app/Views/{$view}.chibi.php";
+        $path = BASE_PATH . DS ."app/Views/{$view}.chibi.php";
         if (!(file_exists($path))) {
             throw new ViewNotFoundException("The {$view} view is not found");
         }

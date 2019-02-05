@@ -15,7 +15,7 @@ $router->get('/guest', function (){
 })->allow("YearIsCurrent");
 
 $router->get('/', function (){
-    return 'Only Not connected users';
+    return view('master');
 })->allow('Guest')->named('home_guest');
 
 $router->get('/c', function (){
