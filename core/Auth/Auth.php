@@ -24,7 +24,7 @@ class Auth
     {
         $this->guard = $name;
 
-        $this->guards = require_once('config/auth.php');
+        $this->guards = require_once(BASE_PATH . DS .  'config/auth.php');
     }
 
     /**
@@ -245,7 +245,7 @@ class Auth
      */
     public static function getDefault()
     {
-        $guards = include('config/auth.php');
+        $guards = include(BASE_PATH . DS . 'config/auth.php');
 
         return !is_array($guards) || count($guards) == 0 ? null : array_keys($guards)[0];
     }

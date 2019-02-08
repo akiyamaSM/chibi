@@ -44,7 +44,7 @@ abstract class ShouldAuthenticate implements Wall, ShouldRedirect
     {
         if(is_null($name)){
 
-            $guards = include('config/auth.php');
+            $guards = include(BASE_PATH . DS . 'config/auth.php');
 
             return count($guards) == 0 ? null : array_keys($guards)[0];
         }
