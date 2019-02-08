@@ -1,6 +1,6 @@
 <?php
 
-namespace App\;
+namespace App;
 
 use Chibi\Model\Katana;
 
