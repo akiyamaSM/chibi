@@ -1,5 +1,4 @@
 <?php
-
 require '../bases.php';
 
 require  BASE_PATH . DS . 'vendor'. DS .'autoload.php';
