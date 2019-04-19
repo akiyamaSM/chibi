@@ -9,15 +9,15 @@
     <title>Login page</title>
 </head>
 <body class="bg-blue container mx-auto">
-    @if( $error = flash('error') )
-        <span>{{ $error }}</span>
-    @done
     <div class="flex h-screen items-center justify-center">
-        <form action="@@route('auth.login.post')" method="POST" class="w-3/5 bg-blue-light flex flex-col items-center py-16">
+        <form action="@@route('auth.login.post')" method="POST" class="w-3/5 bg-white rounded-lg flex flex-col items-center py-16" >
             @csrf_field
-            <input class="mb-4 px-6 py-3 rounded-lg text-grey-dark" id="username" type="text" name="username" placeholder="email@example.com">
-            <input class="px-6 py-3 rounded-lg text-grey-dark"  id="password" type="password" name="password" placeholder="*********">
-            <input class="px-6 py-3 rounded-lg" type="submit" value="Sign In">
+            @if( $error = flash('error') )
+                <span class="text-red-light text-xs p-2">{{ $error }}</span>
+            @done
+            <input class="mb-4 px-6 py-3 border border-solid border-grey text-grey-dark" id="username" type="text" name="username" placeholder="email@example.com">
+            <input class="mb-4 px-6 py-3 border border-solid border-grey text-grey-dark"  id="password" type="password" name="password" placeholder="*********">
+            <input class="px-6 py-3 bg-blue hover:bg-blue-light text-white uppercase text-sm" type="submit" value="Sign In">
         </form>
     </div>
 </body>
