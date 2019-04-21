@@ -19,7 +19,7 @@
   ],
   "autoload": {
     "files": [
-      "core/Helpers/helpers.php"
+      "src/core/Helpers/helpers.php"
     ],
     "psr-4": {
       "Chibi\\": "src/core/"
@@ -28,7 +28,7 @@
   "repositories": [
     {
       "type": "path",
-      "url": "packages/yumi/console"
+      "url": "src/packages/yumi/console"
     }
   ],
   "require": {
