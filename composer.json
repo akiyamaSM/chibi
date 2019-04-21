@@ -39,5 +39,6 @@
   },
   "require-dev" :{
     "yumi/console":"dev-master"
-  }
+  },
+  "minimum-stability": "stable"
 }
