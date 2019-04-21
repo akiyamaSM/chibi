@@ -1,8 +1,0 @@
-<?php 
-return [
-	'host' => 'localhost',
-	'username' => 'user',
-	'password' => 'secret',
-	'port' => 3306,
-	'dbname' => 'Chibi'
-];
