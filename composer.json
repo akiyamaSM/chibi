@@ -22,7 +22,7 @@
       "core/Helpers/helpers.php"
     ],
     "psr-4": {
-      "Chibi\\": "core/"
+      "Chibi\\": "src/core/"
     }
   },
   "repositories": [
