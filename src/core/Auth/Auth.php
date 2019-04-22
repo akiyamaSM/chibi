@@ -127,7 +127,7 @@ class Auth
             ]
         ]);
 
-        if(is_null($user) === 0){
+        if(is_null($user)){
             return false;
         }
 
