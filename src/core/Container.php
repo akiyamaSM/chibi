@@ -12,12 +12,12 @@ use ArrayAccess;
 class Container implements ArrayAccess
 {
     /**
-     * @var array 
+     * @var array
      */
     protected $items = [];
 
     /**
-     * @var array 
+     * @var array
      */
     protected $cache = [];
 
@@ -65,6 +65,17 @@ class Container implements ArrayAccess
         $this->items[$offset] = $value;
     }
 
+    /**
+     *  Bind a new object in the container
+     *
+     * @param $key
+     * @param $closure
+     */
+    public function bind($key, $closure)
+    {
+        $this->offsetSet($key, $closure);
+    }
+    
     /**
      * Unset the offset
      *
