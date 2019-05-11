@@ -6,7 +6,7 @@ With Chibi its really easy to make your routes
 
 ## Route to Controller
 ```php
-$router->get('/users, 'App\Controllers\HomeController@views');
+$router->get('/users', 'App\Controllers\HomeController@views');
 ```
 ## Route to closure
 ```php
@@ -16,7 +16,7 @@ $router->post('/user/{user}/{name}', function($user, $name){
 ```
 ## A Response & Request instances are allways passed for you out of the box you just need to type hint it
 ```php
-$router->post('/customers', function(Request $request, Response $respone){
+$router->post('/customers', function(Request $request, Response $respone) {
 
     $name = $request->only('name');
     
@@ -63,18 +63,18 @@ A simple templete engin is provided.
 <?php $var = 30 ?> 
 
 @when( $age <= 10 )
-		You are a kid
+	You are a kid
 @or( $age > 10 )
-		You are growing!
+	You are growing!
 @done
 
 
 @foreach($array as $arr)
-		<h1>	{{ $arr }} </h1>
+	<h1>{{ $arr }}</h1>
 @endforeach
 
 
-<h3> {{ $var }}</h3>
+<h3>{{ $var }}</h3>
 
 
 ```
@@ -95,9 +95,9 @@ use Chibi\Response;
 
 class YearIsCurrent implements Wall{
 
-	public function filter(Request $request, Response $response){
+	public function filter(Request $request, Response $response) {
 
-		if($request->has('year') && $request->only('year') == 2018){
+		if($request->has('year') && $request->only('year') == 2018) {
 			return true;
 		}
 
@@ -196,7 +196,7 @@ Chibi framework ships with some useful hurdles that will help you to protect you
 
 ```php
 
-$route->get('/onlyGuests', function(){
+$route->get('/onlyGuests', function() {
     return 'only Guests can enter';
 })->allow('Guest');
 
@@ -206,7 +206,7 @@ $route->get('/onlyGuests', function(){
 
 ```php
 
-$route->get('/onlyAuth', function(){
+$route->get('/onlyAuth', function() {
     return 'only Guests can enter';
 })->allow('Auth');
 
@@ -217,7 +217,7 @@ You can pass the name of the guard as an option to check against it
 
 ```php
 
-$route->get('/onlyAdmins', function(){
+$route->get('/onlyAdmins', function() {
     return 'only Guests can enter';
 })->allow('Auth:admins');
 
